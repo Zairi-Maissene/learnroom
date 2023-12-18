@@ -1,4 +1,6 @@
+import { inject } from '@angular/core';
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'learnroom-frontend-angular';
+  private modalService = inject(NgbModal);
+
+  open() {
+  }
 }
