@@ -12,18 +12,13 @@ import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AppComponent,
-    TaskDetailsComponent,
-    AssignementDetailsComponent,
-    CourseDetailsComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-top-right'
