@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 })
 export class AssignementService {
   assignement: any = {
+    id:1,
+    name: "Maths exercice 2",
     points:20,
     deadline: new Date(),
     course:
@@ -14,10 +16,12 @@ export class AssignementService {
       {name: "Mme. Dupont",
         email: ""},
     responseAssignments: [],
+    content:"assignment systèmes temps réel",
 
   }
   assignements:any[]=[
     {
+    name: "Maths exercice 2",
     points:20,
     deadline: new Date(),
     course:
@@ -103,4 +107,6 @@ export class AssignementService {
   submitInAssignement(data:any):any {
 
   }
+  editAssignement(id:string,data:any):any {}
+  deleteAssignement(id:string):any {}
 }
