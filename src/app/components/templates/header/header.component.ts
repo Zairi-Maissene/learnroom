@@ -26,6 +26,6 @@ export class HeaderComponent {
   getItem(key: string): any {
     // Implement your logic to retrieve user data based on the key
     // For example, you might use a service to fetch user data
-    return { user: true }; // Replace this with your actual user data
+    return { user: true };
   }
 }
