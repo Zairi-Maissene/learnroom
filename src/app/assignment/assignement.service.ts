@@ -1,6 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Student} from "../app.service";
+
+export type Assignement = {
+  id: string,
+  name: string,
+  content: string,
+  deadline: string,
+  points: number,
+  course: any,
+  responseAssignments: ResponseAssignement[]
+}
+export type ResponseAssignement = {
+  id: string,
+  content: string,
+  score: number,
+  assignment: Assignement,
+  student: Student
+}
+export type CreateAssignement = {
+  name: string,
+  content: string,
+  deadline: string,
+  points: number
+}
+export type UpdateAssignement = Partial<CreateAssignement>
 
 @Injectable({
   providedIn: 'root'
