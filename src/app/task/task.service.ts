@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Course} from "../course/course.service";
-import {Student} from "../app.service";
 import {ApiService} from "../../helpers/helpers";
+import {Student} from "../auth/auth.service";
 
 export type Task = {
   id: string,

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Student, Teacher} from "../app.service";
 import {ApiService} from "../../helpers/helpers";
+import {Student, Teacher} from "../auth/auth.service";
 
 export type Classroom = {
   id: string,

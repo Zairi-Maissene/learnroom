@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Student, Teacher} from "../app.service";
 import {ApiService} from "../../helpers/helpers";
 import {Observable} from "rxjs";
+import {Student, Teacher} from "../auth/auth.service";
 
 export type Assignement = {
   id: string,
