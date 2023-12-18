@@ -6,10 +6,100 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AssignementService {
+  assignement: any = {
+    points:20,
+    deadline: new Date(),
+    course:
+      {name: "Maths",
+        teacher:
+          {name: "Mme. Dupont",
+            email: ""}
+      },
+    responseAssignments: [],
 
-  constructor(private http: HttpClient) {}
+  }
+  assignements:any[]=[
+    {
+    points:20,
+    deadline: new Date(),
+    course:
+      {name: "Maths",
+        teacher:
+          {name: "Mme. Dupont",
+            email: ""}
+      },
+    responseAssignments: [],
 
-  getAssignments(id: string): Observable<any> {
-    return this.http.get<any>(`/api/assignment/${id}`);
+  },
+    {
+      points:20,
+      deadline: new Date(),
+      course:
+        {name: "Maths",
+          teacher:
+            {name: "Mme. Dupont",
+              email: ""}
+        },
+      responseAssignments: [],
+
+    },
+    {
+      points:20,
+      deadline: new Date(),
+      course:
+        {name: "Maths",
+          teacher:
+            {name: "Mme. Dupont",
+              email: ""}
+        },
+      responseAssignments: [],
+
+    },
+    {
+      points:20,
+      deadline: new Date(),
+      course:
+        {name: "Maths",
+          teacher:
+            {name: "Mme. Dupont",
+              email: ""}
+        },
+      responseAssignments: [],
+
+    },
+    {
+      points:20,
+      deadline: new Date(),
+      course:
+        {name: "Maths",
+          teacher:
+            {name: "Mme. Dupont",
+              email: ""}
+        },
+      responseAssignments: [],
+
+    },
+    {
+      points:20,
+      deadline: new Date(),
+      course:
+        {name: "Maths",
+          teacher:
+            {name: "Mme. Dupont",
+              email: ""}
+        },
+      responseAssignments: [],
+
+    },
+
+  ]
+
+  //constructor(private http: HttpClient) {}
+  constructor() {}
+  getAssignments(id: string):any[] {
+    return this.assignements;
+  }
+  getAssignement(id: string):any {
+    return this.assignement;
   }
 }
