@@ -7,13 +7,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaskDetailsComponent } from './task/task-details/task-details.component';
 import { AssignementDetailsComponent } from './assignment/assignement-details/assignement-details.component';
 import { CourseDetailsComponent } from './course/course-details/course-details.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskDetailsComponent,
     AssignementDetailsComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
