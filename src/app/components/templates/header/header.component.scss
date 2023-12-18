@@ -34,26 +34,24 @@
     display: flex;
   }
 
-  .sign-in,
-  .sign-out,
-  .sign-up {
-    margin-right: 15px;
-    background-color: transparent;
-    border: 1px solid grey;
-    border-radius: 20px;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-weight:  500;
-    color: grey;
-  }
-
-  .sign-up {
-    color: #fff;
-    background-color: #12b7bd;
-    border: none;
-  }
 }
 
 .header-separator {
   height: 75px;
 }
+
+.divider {
+  height: 30px;
+  margin: 0 10px;
+  border-right: 3.5px solid #20b2aa;
+}
+
+.role {
+  font-size: 20px;
+  font-weight: bolder;
+  color: #2D3748;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   isLoggedIn: boolean = false;
+  @Input() isOpen: boolean = false;
 
   navigateToPreview(): void {
     // Add logic for navigating to the preview page
@@ -21,4 +22,10 @@ export class HeaderComponent {
 
   signOut(): void {
     this.isLoggedIn=false;  }
+
+  getItem(key: string): any {
+    // Implement your logic to retrieve user data based on the key
+    // For example, you might use a service to fetch user data
+    return { user: true }; // Replace this with your actual user data
+  }
 }

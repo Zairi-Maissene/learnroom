@@ -1,23 +1,27 @@
 <div>
   <header class="header-container">
     <div class="hstack-container" (click)="navigateToPreview()">
-
-
       <img src="/assets/logo.png" alt="logo" class="logo" />
       <h2 class="title">LearnRoom</h2>
+      <!-- Assuming the component class has a method or property to determine user role -->
+      <div *ngIf="isLoggedIn" class="divider"></div>
+
+      <p class="role" *ngIf="isLoggedIn && getItem('user').user; else studentBlock">Teacher</p>
+
+      <ng-template #studentBlock>
+        <p class="role" *ngIf="isLoggedIn">Student</p>
+      </ng-template>
+
     </div>
 
     <div class="button-container">
-      <button class="btn sign-in"  *ngIf="!isLoggedIn" (click)="signIn()">
+      <button class="button"  *ngIf="!isLoggedIn" (click)="signIn()">Sign In</button>
 
-      Sign In</button>
-      <button class="btn sign-up" *ngIf="!isLoggedIn" (click)="signUp()">
+      <button class="button green-button" *ngIf="!isLoggedIn" (click)="signUp()">Sign Up</button>
 
-      Sign Up</button>
-      <button class="btn sign-out" *ngIf="isLoggedIn" (click)="signOut()">
-
-        Sign Out</button>
+      <button class="button" *ngIf="isLoggedIn" (click)="signOut()">Sign Out</button>
     </div>
   </header>
   <div class="header-separator"></div>
+
 </div>
