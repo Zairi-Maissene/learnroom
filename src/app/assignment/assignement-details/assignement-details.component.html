@@ -1,1 +1,48 @@
-<p>assignement-details works!</p>
+
+<div style="min-height: 89vh;">
+
+  <div style="flex-direction: column; margin: 0px 100px;">
+    <div style="display: flex; flex-direction: row;">
+      <div style="width: 99%;">
+        <h3 style="font-weight: 600; font-size: 24px;">{{ assignment.name }}</h3>
+        <p style="font-size: 15px; font-weight: lighter;">
+          {{ assignment.teacher.name }} &#9679; {{ assignment.deadline }}
+        </p>
+        <div style="height: 10px;"></div>
+        <p style="font-size: 16px; font-weight: normal;">{{ assignment.points ?? 100 }} points</p>
+      </div>
+
+    </div>
+
+    <hr style="width: 100%; margin-top: 4px; border-color: #A6A6A6; border-width: 0.75px;" />
+
+    <div style="width: 100%;">
+      <pre style="white-space: pre-wrap;">{{ assignment.content }}</pre>
+    </div>
+    <ng-container *ngIf="true">
+      <br />
+      <form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
+
+        <label for="description">Description: </label>
+        <input id="description" type="text" formControlName="description">
+
+      </form>
+
+      <button type="submit" [disabled]="!assignmentForm.valid">Submit</button>
+
+
+
+    </ng-container>
+
+    <ng-container *ngIf="true">
+      <div *ngFor="let e of assignment.responseAssignments">
+
+      </div>
+    </ng-container>
+
+
+
+  </div>
+
+
+</div>

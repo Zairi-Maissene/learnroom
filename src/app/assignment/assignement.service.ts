@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -10,11 +9,10 @@ export class AssignementService {
     points:20,
     deadline: new Date(),
     course:
-      {name: "Maths",
-        teacher:
-          {name: "Mme. Dupont",
-            email: ""}
-      },
+      {name: "Maths"},
+    teacher:
+      {name: "Mme. Dupont",
+        email: ""},
     responseAssignments: [],
 
   }
@@ -101,5 +99,8 @@ export class AssignementService {
   }
   getAssignement(id: string):any {
     return this.assignement;
+  }
+  submitInAssignement(data:any):any {
+
   }
 }

@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaskDetailsComponent } from './task/task-details/task-details.component';
 import { AssignementDetailsComponent } from './assignment/assignement-details/assignement-details.component';
 import { CourseDetailsComponent } from './course/course-details/course-details.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CourseDetailsComponent } from './course/course-details/course-details.c
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
