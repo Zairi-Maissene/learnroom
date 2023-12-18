@@ -2,3 +2,27 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+.button{
+  margin-right: 15px;
+  background-color: transparent;
+  border: 1px solid grey;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight:  500;
+  color: grey;
+}
+.green-button{
+  color: #fff;
+  background-color: #12b7bd;
+  border: none;
+}
+
+.coral-button{
+  color: #fff;
+  background-color: #FF796E;
+  border: none;
+}
+
+
