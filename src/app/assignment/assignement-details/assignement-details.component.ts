@@ -4,9 +4,9 @@ import {AssignementService} from "../assignement.service";
 @Component({
   selector: 'app-assignement-details',
   templateUrl: './assignement-details.component.html',
-  styleUrls: ['./assignement-details.component.sass']
+  styleUrls: ['./assignement-details.component.scss']
 })
-export class AssignementDetailsComponent implements OnInit {
+export class AssignementDetailsComponent {
   private assignement:any = {}
 
   constructor(private assignementService: AssignementService)
