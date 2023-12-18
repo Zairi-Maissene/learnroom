@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClassroomModalComponent } from './classroom-modal.component';
+import { ClassroomFormComponent } from './classroom-form..component';
 
 describe('ClassroomModalTsComponent', () => {
-  let component: ClassroomModalComponent;
-  let fixture: ComponentFixture<ClassroomModalComponent>;
+  let component: ClassroomFormComponent;
+  let fixture: ComponentFixture<ClassroomFormComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ClassroomModalComponent]
+      declarations: [ClassroomFormComponent]
     });
-    fixture = TestBed.createComponent(ClassroomModalComponent);
+    fixture = TestBed.createComponent(ClassroomFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,3 +1,5 @@
+import { ViewChild } from '@angular/core';
+import { Input } from '@angular/core';
 import { Component, inject, TemplateRef } from '@angular/core';
 
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,7 +12,11 @@ import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstra
 })
 export class AppModalComponent {
   private modalService = inject(NgbModal);
-  open(content: TemplateRef<any>) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
+  @Input() title: string | undefined;
+  @ViewChild('content') content: TemplateRef<any> | undefined ; // Define the template reference variable
+
+
+  open() {
+    this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title' })
   }
 }
