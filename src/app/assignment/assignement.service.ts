@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Student} from "../app.service";
+import {Student, Teacher} from "../app.service";
+import {ApiService} from "../../helpers/helpers";
+import {map, Observable, of, throwError} from "rxjs";
+import {catchError} from "rxjs/operators";
 
 export type Assignement = {
   id: string,
@@ -9,6 +12,7 @@ export type Assignement = {
   points: number,
   course: any,
   responseAssignments: ResponseAssignement[]
+  teacher:Teacher
 }
 export type ResponseAssignement = {
   id: string,
@@ -25,108 +29,46 @@ export type CreateAssignement = {
 }
 export type UpdateAssignement = Partial<CreateAssignement>
 
+export type UpdateResponseAssignement = {
+  content: string
+}
+
+export type ValidateResponseAssignement = {
+  score: number
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AssignementService {
-  assignement: any = {
-    id:1,
-    name: "Maths exercice 2",
-    points:20,
-    deadline: new Date(),
-    course:
-      {name: "Maths"},
-    teacher:
-      {name: "Mme. Dupont",
-        email: ""},
-    responseAssignments: [],
-    content:"assignment systèmes temps réel",
+  constructor(private api:ApiService<Assignement>) { }
+  // Assignment
+  addAssignement(course_id:string,assignement: CreateAssignement) {
+    return this.api.post(`/assignment/${course_id}`, assignement)
+  }
+  getAssignment(id: string): Observable<Assignement> {
+    return this.api.get(`/assignment/${id}`)
 
   }
-  assignements:any[]=[
-    {
-    name: "Maths exercice 2",
-    points:20,
-    deadline: new Date(),
-    course:
-      {name: "Maths",
-        teacher:
-          {name: "Mme. Dupont",
-            email: ""}
-      },
-    responseAssignments: [],
-
-  },
-    {
-      points:20,
-      deadline: new Date(),
-      course:
-        {name: "Maths",
-          teacher:
-            {name: "Mme. Dupont",
-              email: ""}
-        },
-      responseAssignments: [],
-
-    },
-    {
-      points:20,
-      deadline: new Date(),
-      course:
-        {name: "Maths",
-          teacher:
-            {name: "Mme. Dupont",
-              email: ""}
-        },
-      responseAssignments: [],
-
-    },
-    {
-      points:20,
-      deadline: new Date(),
-      course:
-        {name: "Maths",
-          teacher:
-            {name: "Mme. Dupont",
-              email: ""}
-        },
-      responseAssignments: [],
-
-    },
-    {
-      points:20,
-      deadline: new Date(),
-      course:
-        {name: "Maths",
-          teacher:
-            {name: "Mme. Dupont",
-              email: ""}
-        },
-      responseAssignments: [],
-
-    },
-    {
-      points:20,
-      deadline: new Date(),
-      course:
-        {name: "Maths",
-          teacher:
-            {name: "Mme. Dupont",
-              email: ""}
-        },
-      responseAssignments: [],
-
-    },
-
-  ]
-
-  //constructor(private http: HttpClient) {}
-  constructor() {}
-  getAssignments(id: string):any[] {
-    return this.assignements;
+  updateAssignment(id: string, assignement: UpdateAssignement) {
+    return this.api.patch(`/assignment/${id}`, assignement)
   }
-  getAssignement(id: string):any {
-    return this.assignement;
+  deleteAssignment(id: string) {
+    return this.api.remove(`/assignment/${id}`)
+  }
+
+  // ResponseAssignment
+
+  getResponseAssignment(assignment_id:string,student_id:string) {
+    return this.api.get(`/response_assignment/${assignment_id}/${student_id}`)
+  }
+
+  updateResponseAssignment(id:string,response:UpdateResponseAssignement) {
+    return this.api.patch(`/response_assignment/${id}`,response)
+  }
+
+  validateResponseAssignment(id:string,response:ValidateResponseAssignement) {
+    return this.api.patch(`/response_assignment/validate/${id}`,response)
   }
   submitInAssignement(data:any):any {
 
