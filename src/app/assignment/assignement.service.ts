@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import {Student, Teacher} from "../app.service";
+import {Injectable} from '@angular/core';
 import {ApiService} from "../../helpers/helpers";
-import {map, Observable, of, throwError} from "rxjs";
-import {catchError} from "rxjs/operators";
+import {Observable} from "rxjs";
+import {Student, Teacher} from "../auth/auth.service";
 
 export type Assignement = {
   id: string,
@@ -70,9 +69,4 @@ export class AssignementService {
   validateResponseAssignment(id:string,response:ValidateResponseAssignement) {
     return this.api.patch(`/response_assignment/validate/${id}`,response)
   }
-  submitInAssignement(data:any):any {
-
-  }
-  editAssignement(id:string,data:any):any {}
-  deleteAssignement(id:string):any {}
 }

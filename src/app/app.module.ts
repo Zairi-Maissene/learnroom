@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {NgModule} from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ReactiveFormsModule} from "@angular/forms";
 import {ToastrModule} from "ngx-toastr";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './components/templates/footer/footer.component';
@@ -12,12 +12,17 @@ import {CommonModule} from "@angular/common";
 import {AssignmentModule} from "./assignment/assignment.module";
 import {TaskModule} from "./task/task.module";
 import {CourseModule} from "./course/course.module";
+import {HttpClientModule} from "@angular/common/http";
+import {ErrorModalComponent} from "./modals/error-modal/error-modal.component";
+import {StudentFormComponent} from "./modals/student-form/student-form.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     HeaderComponent,
+    ErrorModalComponent,
+    StudentFormComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +30,7 @@ import {CourseModule} from "./course/course.module";
     BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-top-right'
@@ -35,8 +41,6 @@ import {CourseModule} from "./course/course.module";
     CourseModule
   ],
   providers: [],
-  exports: [
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

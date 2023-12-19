@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Assignement, AssignementService} from "../assignement.service";
-import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
 
@@ -37,7 +37,7 @@ export class AssignementDetailsComponent implements OnInit {
     return {}
   }
   onSubmit: any = () => {
-     this.assignementService.submitInAssignement(this.submitAssignmentForm.value)
+     this.assignementService.updateResponseAssignment(this.assignmentId,this.submitAssignmentForm.value)
   }
 
   protected readonly Date = Date;
@@ -46,11 +46,11 @@ export class AssignementDetailsComponent implements OnInit {
     this.moreBtn=!this.moreBtn;
   }
   submitEditAssignment(){
-    this.assignementService.editAssignement(this.submitAssignmentForm.value,this.assignmentId)
+    this.assignementService.updateAssignment(this.assignmentId,this.submitAssignmentForm.value)
     this.toggleEditMode()
   }
   deleteAssignment(){
-    this.assignementService.deleteAssignement(this.assignmentId)
+    this.assignementService.deleteAssignment(this.assignmentId)
   }
   toggleEditMode(){
     this.editMode=!this.editMode;
