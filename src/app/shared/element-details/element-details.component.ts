@@ -1,11 +1,11 @@
-import {Component, Input} from '@angular/core';
-import {Observable} from "rxjs";
-import {FormControl, FormGroup} from "@angular/forms";
+import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-element-details',
   templateUrl: './element-details.component.html',
-  styleUrls: ['./element-details.component.scss']
+  styleUrls: ['./element-details.component.scss'],
 })
 export class ElementDetailsComponent {
   @Input() user: any;
@@ -17,11 +17,7 @@ export class ElementDetailsComponent {
   @Input() editElementForm: FormGroup = new FormGroup({
     points: new FormControl(),
     deadline: new FormControl(),
-    content: new FormControl()
-
+    content: new FormControl(),
   });
-  constructor() {
-  }
-
-
+  constructor() {}
 }

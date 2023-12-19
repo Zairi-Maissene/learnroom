@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {TaskDetailsComponent} from "./components/task-details/task-details.component";
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
 
-const routes: Routes = [
-  { path: ':id', component: TaskDetailsComponent }
-
-];
+const routes: Routes = [{ path: ':id', component: TaskDetailsComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

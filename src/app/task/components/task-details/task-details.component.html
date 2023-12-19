@@ -1,10 +1,22 @@
-<div [ngStyle]="{'display':'flex','flex-direction': 'column', 'justify-content':'center','align-items':'center','margin':'50px 0px'}">
-
-  <div [ngStyle]="{'width':'80%'}">
-    <app-element-details [user]="user" [element$]="task$"  [editMode]="editMode" [submitEditElement]="submitEditTask"  [deleteElement]="deleteTask" [editElementForm]="editTaskForm"></app-element-details>
+<div
+  [ngStyle]="{
+    display: 'flex',
+    'flex-direction': 'column',
+    'justify-content': 'center',
+    'align-items': 'center',
+    margin: '50px 0px'
+  }"
+>
+  <div [ngStyle]="{ width: '80%' }">
+    <app-element-details
+      [user]="user"
+      [element$]="task$"
+      [editMode]="editMode"
+      [submitEditElement]="submitEditTask"
+      [deleteElement]="deleteTask"
+      [editElementForm]="editTaskForm"
+    ></app-element-details>
   </div>
 
-  <ng-container *ngIf="true">
-  </ng-container>
-
+  <ng-container *ngIf="true"> </ng-container>
 </div>

@@ -1,5 +1,5 @@
 <div>
-  <header class="header-container">
+  <header *ngIf="showHeader" class="header-container">
     <div class="hstack-container" (click)="navigateToPreview()">
       <img src="/assets/logo.png" alt="logo" class="logo" />
       <h2 class="title">LearnRoom</h2>

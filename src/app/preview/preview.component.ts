@@ -41,7 +41,7 @@ export class PreviewComponent {
   ];
   startSignup(): void {
     localStorage.removeItem('user');
-    this.router.navigate(['/signup']);
+    this.router.navigate(['auth/register']);
   }
   goToPreview(): void {
     this.router.navigate(['/preview']);

@@ -1,5 +1,5 @@
-import {Component, inject, Input} from '@angular/core';
-import {Router} from "@angular/router";
+import { Component, inject, Input } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,18 +10,31 @@ export class HeaderComponent {
   router = inject(Router);
   isLoggedIn: boolean = false;
   @Input() isOpen: boolean = false;
+  showHeader: boolean = true;
 
+  constructor() {}
+
+  ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.showHeader = !['/auth/login', '/auth/register'].includes(
+          event.url,
+        );
+      }
+    });
+  }
   navigateToPreview(): void {
     this.router.navigate(['']);
   }
 
   signIn(): void {
     this.isLoggedIn = true;
-    this.router.navigate(['login']);
+    this.router.navigate(['auth/login']);
   }
 
   signUp(): void {
     this.isLoggedIn = true;
+    this.router.navigate(['auth/register']);
   }
 
   signOut(): void {

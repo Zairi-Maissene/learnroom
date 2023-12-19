@@ -1,24 +1,47 @@
-<div [ngStyle]="{'display':'flex','flex-direction': 'column', 'justify-content':'center','align-items':'center','margin':'50px 0px'}">
-
-  <div [ngStyle]="{'width':'80%'}">
-    <app-element-details [user]="user" [element$]="assignment$"  [editMode]="editMode" [submitEditElement]="submitEditAssignment"  [deleteElement]="deleteAssignment" [editElementForm]="editAssignmentForm"></app-element-details>
+<div
+  [ngStyle]="{
+    display: 'flex',
+    'flex-direction': 'column',
+    'justify-content': 'center',
+    'align-items': 'center',
+    margin: '50px 0px'
+  }"
+>
+  <div [ngStyle]="{ width: '80%' }">
+    <app-element-details
+      [user]="user"
+      [element$]="assignment$"
+      [editMode]="editMode"
+      [submitEditElement]="submitEditAssignment"
+      [deleteElement]="deleteAssignment"
+      [editElementForm]="editAssignmentForm"
+    ></app-element-details>
   </div>
-    <ng-container *ngIf="user.role === 'student'">
-      <br />
-      <form
-        [ngStyle]="{'flex-direction': 'column','display':'flex','gap':'10px'}"
-        [formGroup]="submitAssignmentForm" (ngSubmit)="onSubmit()">
-        <label for="description">Description: </label>
-        <textarea [ngStyle]="{'border-radius':'10px'}" id="description" type="text" formControlName="description"></textarea>
-        <div [ngStyle]="{'display':'flex','justify-content':'center'}">
-          <button [ngStyle]="{'border-radius':'10px'}" type="submit" [disabled]="!submitAssignmentForm.valid">Submit</button>
+  <ng-container *ngIf="user.role === 'student'">
+    <br />
+    <form
+      [ngStyle]="{ 'flex-direction': 'column', display: 'flex', gap: '10px' }"
+      [formGroup]="submitAssignmentForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <label for="description">Description: </label>
+      <textarea
+        [ngStyle]="{ 'border-radius': '10px' }"
+        id="description"
+        type="text"
+        formControlName="description"
+      ></textarea>
+      <div [ngStyle]="{ display: 'flex', 'justify-content': 'center' }">
+        <button
+          [ngStyle]="{ 'border-radius': '10px' }"
+          type="submit"
+          [disabled]="!submitAssignmentForm.valid"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </ng-container>
 
-        </div>
-
-      </form>
-    </ng-container>
-
-    <ng-container *ngIf="true">
-    </ng-container>
-
+  <ng-container *ngIf="true"> </ng-container>
 </div>
