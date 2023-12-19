@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
-import {Task, TaskService} from "../task.service";
+import {Task, TaskService} from "../../task.service";
 @Component({
   selector: 'app-task-details',
   templateUrl: './task-details.component.html',

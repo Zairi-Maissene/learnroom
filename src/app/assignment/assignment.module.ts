@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import {AssignmentRoutingModule} from "./assignment-routing.module";
-import {AssignementDetailsComponent} from "./assignement-details/assignement-details.component";
+import {AssignementDetailsComponent} from "./components/assignement-details/assignement-details.component";
 import {CommonModule} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
 import { AssignmentListComponent } from './components/assignment-list/assignment-list.component';

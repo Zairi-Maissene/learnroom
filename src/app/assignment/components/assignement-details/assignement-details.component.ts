@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Assignement, AssignementService} from "../assignement.service";
+import {Assignement, AssignementService} from "../../assignement.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs";
