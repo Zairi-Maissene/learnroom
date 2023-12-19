@@ -47,13 +47,12 @@ export class AssignementDetailsComponent implements OnInit {
   }
   submitEditAssignment(){
     this.assignementService.updateAssignment(this.assignmentId,this.submitAssignmentForm.value)
-    this.toggleEditMode()
   }
   deleteAssignment(){
     this.assignementService.deleteAssignment(this.assignmentId)
   }
-  toggleEditMode(){
-    this.editMode=!this.editMode;
+  toggleEditMode(mode:boolean){
+    this.editMode=mode;
   }
 
   protected readonly JSON = JSON;

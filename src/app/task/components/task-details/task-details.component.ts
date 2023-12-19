@@ -8,10 +8,11 @@ import {Task, TaskService} from "../../task.service";
   templateUrl: './task-details.component.html',
   styleUrls: ['./task-details.component.scss']
 })
-export class TaskDetailsComponent {
-  user: any = {role:"teacher"}
+export class TaskDetailsComponent implements OnInit{
+  user: any = {role:"student"}
   taskId: string="";
   task$: Observable<Task> = new Observable<Task>();
+  is$: Observable<any> = new Observable<any>();
   editTaskForm: FormGroup = new FormGroup({
     //  points: new FormControl(this.assignment.points),
     // deadline: new FormControl(this.assignment.deadline),
@@ -25,22 +26,36 @@ export class TaskDetailsComponent {
 
   ngOnInit(): void {
     this.taskId = this.route.snapshot.params['id'];
+    this.task$ = this.taskServie.getTask(this.taskId);
+    this.is$= this.taskServie.getResponseTask(this.taskId,"b15f92cb-4cfa-483f-8796-dc9d263318ae")
+
 
   }
   getUser: any = () => {
     return {}
   }
   onSubmit: any = () => {
+  //  this.taskServie.updateTask(this.taskId,this.submit.value)
+
   }
 
   submitEditTask(){
-    this.toggleEditMode()
+    this.taskServie.updateTask(this.taskId,this.editTaskForm.value)
   }
   deleteTask(){
+    this.taskServie.deleteTask(this.taskId)
   }
-  toggleEditMode(){
-    this.editMode=!this.editMode;
+  toggleEditMode(mode:boolean){
+    this.editMode=mode;
   }
-
+  taskIsCompleted()
+  {
+    return true
+    //return this.taskServie.getResponseTask(this.taskId,"b15f92cb-4cfa-483f-8796-dc9d263318ae")
+  }
+  submitTask(){
+    this.taskServie.toggleResponseTask(this.taskId)
+  }
   protected readonly JSON = JSON;
+  protected readonly console = console;
 }

@@ -1,7 +1,17 @@
 <div [ngStyle]="{'display':'flex','flex-direction': 'column', 'justify-content':'center','align-items':'center','margin':'50px 0px'}">
 
   <div [ngStyle]="{'width':'80%'}">
-    <app-element-details [user]="user" [element$]="assignment$"  [editMode]="editMode" [submitEditElement]="submitEditAssignment"  [deleteElement]="deleteAssignment" [editElementForm]="editAssignmentForm"></app-element-details>
+    <app-element-details
+            (editModeChange)="toggleEditMode($event)"
+            [elementType]="'assignment'"
+            [user]="user" [element$]="assignment$"
+            [editMode]="editMode"
+            [submitEditElement]="submitEditAssignment"
+            [deleteElement]="deleteAssignment"
+            [editElementForm]="editAssignmentForm"
+    >
+
+    </app-element-details>
   </div>
     <ng-container *ngIf="user.role === 'student'">
       <br />

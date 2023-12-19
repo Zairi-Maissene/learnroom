@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Observable} from "rxjs";
 import {FormControl, FormGroup} from "@angular/forms";
 
@@ -10,8 +10,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 export class ElementDetailsComponent {
   @Input() user: any;
   @Input() element$: Observable<any> = new Observable<any>();
+  @Input() elementType: string = "";
   @Input() editMode: boolean = false;
-  @Input() toggleEditMode: any;
   @Input() submitEditElement: any;
   @Input() deleteElement: any;
   @Input() editElementForm: FormGroup = new FormGroup({
@@ -20,6 +20,12 @@ export class ElementDetailsComponent {
     content: new FormControl()
 
   });
+  @Output() editModeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() editElementFormChange: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+    this.editModeChange.emit(this.editMode);
+  }
   constructor() {
   }
 

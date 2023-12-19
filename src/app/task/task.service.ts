@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Course} from "../course/course.service";
 import {ApiService} from "../../helpers/helpers";
 import {Student} from "../auth/auth.service";
+import {Observable} from "rxjs";
 
 export type Task = {
   id: string,
@@ -33,17 +34,17 @@ export class TaskService {
   addTask(course_id:string,task: CreateTask) {
     return this.api.post(`/task/${course_id}`, task)
   }
-  getTask(id: string) {
+  getTask(id: string): Observable<Task> {
     return this.api.get(`/task/${id}`)
   }
-  updateTask(id: string, task: UpdateTask) {
+  updateTask(id: string, task: UpdateTask) :Observable<Task> {
     return this.api.patch(`/task/${id}`, task)
   }
   deleteTask(id: string) {
     return this.api.remove(`/task/${id}`)
   }
   // ResponseTask
-  getResponseTask(task_id:string,student_id:string) {
+  getResponseTask(task_id:string,student_id:string):Observable<any> {
     return this.api.get(`/response_task/${task_id}/${student_id}`)
   }
   toggleResponseTask(id:string) {
