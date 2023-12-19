@@ -1,6 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from '../../helpers/helpers';
-import { Student, Teacher } from '../auth/auth.service';
+import {Injectable} from '@angular/core';
+import {ApiService} from '../../helpers/helpers';
+import {Student, Teacher, User} from '../auth/auth.service';
+import {Course} from "../course/course.service";
+import {Task} from "../task/task.service";
+import {Assignement} from "../assignment/assignement.service";
 
 export type Classroom = {
   id: string;
@@ -20,16 +23,16 @@ export type UpdateClassroom = Partial<CreateClassroom>;
   providedIn: 'root',
 })
 export class ClassroomService {
-  constructor(private api: ApiService<Classroom>) {}
+  constructor(private api: ApiService ) {}
   // Classroom
   addClassroom(classroom: CreateClassroom) {
-    return this.api.post(`/classroom`, classroom);
+    return this.api.post<Classroom>(`/classroom`, classroom);
   }
   getClassroom(id: string) {
-    return this.api.get(`/classroom/${id}`);
+    return this.api.get<Classroom>(`/classroom/${id}`);
   }
   updateClassroom(id: string, classroom: UpdateClassroom) {
-    return this.api.patch(`/classroom/${id}`, classroom);
+    return this.api.patch<Classroom>(`/classroom/${id}`, classroom);
   }
   deleteClassroom(id: string) {
     return this.api.remove(`/classroom/${id}`);
@@ -37,21 +40,21 @@ export class ClassroomService {
 
   // Course
   getCourses(classroom_id: string) {
-    return this.api.get(`/classroom/course/${classroom_id}`);
+    return this.api.get<Course[]>(`/classroom/course/${classroom_id}`);
   }
   // Task
   getTasks(classroom_id: string) {
-    return this.api.get(`/classroom/task/${classroom_id}`);
+    return this.api.get<Task[]>(`/classroom/task/${classroom_id}`);
   }
   // Assignment
   getAssignments(classroom_id: string) {
-    return this.api.get(`/classroom/assignment/${classroom_id}`);
+    return this.api.get<Assignement[]>(`/classroom/assignment/${classroom_id}`);
   }
   // User
   getUsers(classroom_id: string) {
-    return this.api.get(`/classroom/users/${classroom_id}`);
+    return this.api.get<User[]>(`/classroom/users/${classroom_id}`);
   }
-  addUser(classroom_id: string, email: string) {
-    return this.api.patch(`/classroom/${classroom_id}/${email}`, {});
+  addStudent(classroom_id: string, email: string) {
+    return this.api.patch<Student>(`/classroom/${classroom_id}/${email}`, {});
   }
 }

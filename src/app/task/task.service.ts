@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Course } from '../course/course.service';
-import { ApiService } from '../../helpers/helpers';
-import { Student } from '../auth/auth.service';
+import {Injectable} from '@angular/core';
+import {Course} from '../course/course.service';
+import {ApiService} from '../../helpers/helpers';
+import {Student} from '../auth/auth.service';
 
 export type Task = {
   id: string;
@@ -27,24 +27,24 @@ export type UpdateTask = Partial<CreateTask>;
   providedIn: 'root',
 })
 export class TaskService {
-  constructor(private api: ApiService<Task>) {}
+  constructor(private api: ApiService) {}
 
   // Task
   addTask(course_id: string, task: CreateTask) {
-    return this.api.post(`/task/${course_id}`, task);
+    return this.api.post<Task>(`/task/${course_id}`, task);
   }
   getTask(id: string) {
-    return this.api.get(`/task/${id}`);
+    return this.api.get<Task>(`/task/${id}`);
   }
   updateTask(id: string, task: UpdateTask) {
-    return this.api.patch(`/task/${id}`, task);
+    return this.api.patch<Task>(`/task/${id}`, task);
   }
   deleteTask(id: string) {
     return this.api.remove(`/task/${id}`);
   }
   // ResponseTask
   getResponseTask(task_id: string, student_id: string) {
-    return this.api.get(`/response_task/${task_id}/${student_id}`);
+    return this.api.get<ResponseTask>(`/response_task/${task_id}/${student_id}`);
   }
   toggleResponseTask(id: string) {
     return this.api.patch(`/response_task/${id}`, {});

@@ -1,7 +1,10 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from '../../helpers/helpers';
-import { Classroom } from '../classroom/classroom.service';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ApiService} from '../../helpers/helpers';
+import {Classroom} from '../classroom/classroom.service';
+import {BehaviorSubject, map, Observable, tap} from 'rxjs';
+import {Course} from "../course/course.service";
+import {Task} from "../task/task.service";
+import {Assignement} from "../assignment/assignement.service";
 
 export type SignIn = {
   email: string;
@@ -17,6 +20,7 @@ export type Teacher = {
   name: string;
   avatar_color: string;
   classes: Classroom[];
+  user: boolean;
 };
 export type Student = {
   id: string;
@@ -26,6 +30,7 @@ export type Student = {
   classes: Classroom[];
   responseTasks: any[];
   responseAssignments: any[];
+  user: boolean;
 };
 export type User = Teacher | Student;
 @Injectable({
@@ -35,7 +40,7 @@ export class AuthService {
   private userSubject: BehaviorSubject<User | null>;
   user$: Observable<User | null>;
   isAuthenticated$: Observable<boolean>;
-  constructor(private api: ApiService<Student | Teacher>) {
+  constructor(private api: ApiService) {
     this.userSubject = new BehaviorSubject(
       JSON.parse(localStorage.getItem('user')!),
     );
@@ -44,7 +49,7 @@ export class AuthService {
   }
 
   signIn(data: SignIn) {
-    return this.api.post(`/auth/signin`, data).pipe(
+    return this.api.post<User>(`/user/signin`, data).pipe(
       tap((res: any) => {
         if (this.isUserData(res)) {
           const token = {
@@ -58,11 +63,11 @@ export class AuthService {
     );
   }
   signUp(data: SignUp) {
-    return this.api.post(`/auth/signup`, data);
+    return this.api.post<User>(`/user/signup`, data);
   }
 
   getUserData(id: string, isTeacher: boolean) {
-    return this.api.get(`/auth/user/${id}/${isTeacher}`);
+    return this.api.get<{courses:Course[],tasks:Task[],assignments:Assignement[]}>(`/user/${id}/${isTeacher}`);
   }
 
   private isUserData(data: any): data is User {
