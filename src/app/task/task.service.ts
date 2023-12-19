@@ -21,4 +21,8 @@ export type ResponseTask = {
 })
 export class TaskService {
   constructor() { }
+
+  getTask():any{
+
+  }
 }

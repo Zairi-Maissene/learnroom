@@ -1,54 +1,8 @@
 <div [ngStyle]="{'display':'flex','flex-direction': 'column', 'justify-content':'center','align-items':'center','margin':'50px 0px'}">
 
-
   <div [ngStyle]="{'width':'80%'}">
-    <div [ngStyle]="{'display':'flex','justify-content':'space-between','width':'100%'}">
-      <h3 [ngStyle]="{'font-weight': '600', 'font-size': '24px'}">{{ (assignment$ | async)?.name }}</h3>
-      <div *ngIf="user.role === 'teacher'">
-        <div ngbDropdown class="d-inline-block">
-          <button type="button" class="btn" ngbDropdownToggle [ngStyle]="{'padding':'5px 10px','border':'1px solid grey','border-radius':'10px','cursor':'pointer'}" (click)="toggleBtn()" >
-          </button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button (click)="toggleEditMode()" ngbDropdownItem>Edit</button>
-            <button (click)="deleteAssignment()" ngbDropdownItem>Delete</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <h1 [ngStyle]="{'font-size': '18px',color:'gray' }">
-      {{ (assignment$ | async)?.teacher?.name }}    </h1>
-
-    <ng-container *ngIf="user.role === 'teacher' && editMode">
-
-      <form
-        [ngStyle]="{'flex-direction': 'column','display':'flex','gap':'10px'}"
-        [formGroup]="editAssignmentForm" (ngSubmit)="submitEditAssignment()">
-        <input [ngStyle]="{'border-radius':'10px','width':'130px' , padding:'5px 10px'}" id="deadline" type="date" formControlName="deadline" />
-        <div>
-          <input placeholder="Points"  [ngStyle]="{'border-radius':'10px','width':'130px' , padding:'5px 10px'}" id="points" type="number" formControlName="points" />
-        </div>
-        <hr [ngStyle]="{'width': '100%', 'margin-top': '4px', 'border-color': '#A6A6A6', 'border-width': '0.75px'}" />
-        <textarea placeholder="Content"  [rows]= "1" [ngStyle]="{'border-radius':'10px','width':'130px' , padding:'5px 10px'}"  id="content" type="text" formControlName="content" ></textarea>
-        <div [ngStyle]="{gap:'10px','display':'flex','justify-content':'center'}">
-          <button (click)="toggleEditMode()" [ngStyle]="{'border-radius':'10px'}" type="button" >Cancel</button>
-          <button [ngStyle]="{'border-radius':'10px'}" type="submit" [disabled]="!editAssignmentForm.valid">Submit</button>
-        </div>
-      </form>
-
-    </ng-container>
-
-    <ng-container *ngIf="!editMode">
-      <li [ngStyle]="{'font-size': '16px'}">
-        {{ (assignment$ | async)?.deadline  | date: 'dd-MM-yyyy' }}  </li>
-      <li [ngStyle]="{'font-size': '16px','font-weight': '600'}">{{ (assignment$ | async)?.points ?? 100 }} points</li>
-      <hr [ngStyle]="{'width': '100%', 'margin-top': '4px', 'border-color': '#A6A6A6', 'border-width': '0.75px'}" />
-      <pre [ngStyle]="{'white-space': 'pre-wrap',color:'gray'}">{{ (assignment$ | async)?.content }}</pre>
-
-    </ng-container>
-
-
+    <app-element-details [user]="user" [element$]="assignment$"  [editMode]="editMode" [submitEditElement]="submitEditAssignment"  [deleteElement]="deleteAssignment" [editElementForm]="editAssignmentForm"></app-element-details>
+  </div>
     <ng-container *ngIf="user.role === 'student'">
       <br />
       <form
@@ -66,6 +20,5 @@
 
     <ng-container *ngIf="true">
     </ng-container>
-  </div>
 
 </div>
