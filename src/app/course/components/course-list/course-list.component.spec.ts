@@ -8,7 +8,7 @@ describe('CourseListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseListComponent]
+      declarations: [CourseListComponent],
     });
     fixture = TestBed.createComponent(CourseListComponent);
     component = fixture.componentInstance;

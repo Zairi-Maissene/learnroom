@@ -11,7 +11,7 @@
     <label>Content</label>
     <textarea formControlName="content" class="form-control"></textarea>
     <div *ngIf="validateField('content', 'required')" class="text-danger">
-     Content is required
+      Content is required
     </div>
   </div>
 
@@ -32,8 +32,16 @@
   </div>
 
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="assignmentForm.invalid">Submit</button>
-    <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="onSubmit()"
+      [disabled]="assignmentForm.invalid"
+    >
+      Submit
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="onClose()">
+      Cancel
+    </button>
   </div>
 </form>
-

@@ -1,6 +1,10 @@
 <!-- classroom.component.html -->
 <div class="container mt-4">
-  <img src="assets/images/finance.jpg" alt="Classroom Image" class="img-fluid" />
+  <img
+    src="assets/images/finance.jpg"
+    alt="Classroom Image"
+    class="img-fluid"
+  />
 
   <div class="d-flex justify-content-between align-items-center mt-3">
     <h3 class="text-primary">Classroom Name</h3>
@@ -9,7 +13,7 @@
 
   <div class="font-weight-light font-size-18 mt-2">Classroom Description</div>
 
-  <hr class="my-4">
+  <hr class="my-4" />
   <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
     <li [ngbNavItem]="1">
       <button ngbNavLink>Courses</button>
@@ -27,21 +31,17 @@
       <button ngbNavLink>Assignments</button>
       <ng-template ngbNavContent>
         <p>
-        <app-assignment-list></app-assignment-list>
+          <app-assignment-list></app-assignment-list>
         </p>
       </ng-template>
     </li>
     <li [ngbNavItem]="4">
       <button ngbNavLink>Students</button>
       <ng-template ngbNavContent>
-        <p>
-          ......
-        </p>
+        <p>......</p>
       </ng-template>
     </li>
   </ul>
 
   <div [ngbNavOutlet]="nav" class="mt-2"></div>
-
-
 </div>

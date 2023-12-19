@@ -5,14 +5,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorModalComponent } from './modals/error-modal/error-modal.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ErrorService {
   error: string = '';
-  modalService = inject(NgbModal)
-  constructor() { }
+  modalService = inject(NgbModal);
+  constructor() {}
   showError(error: string) {
-    this.error= error
-    this.modalService.open(ErrorModalComponent, { ariaLabelledBy: 'modal-basic-title' })
+    this.error = error;
+    this.modalService.open(ErrorModalComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+    });
   }
 }

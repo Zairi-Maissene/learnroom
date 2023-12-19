@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-classroom-id',
   templateUrl: './classroom-id.component.html',
 })
-export class ClassroomIdComponent{
+export class ClassroomIdComponent {
   @Input() values = { id: '' };
   classroomForm: FormGroup;
 
@@ -16,7 +16,5 @@ export class ClassroomIdComponent{
     });
   }
 
-  onSubmit() {
-  }
+  onSubmit() {}
 }
-

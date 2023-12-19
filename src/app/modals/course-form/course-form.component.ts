@@ -11,7 +11,10 @@ export class CourseFormComponent {
   @Input() values = { name: '', content: '' };
   courseForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private modal: NgbActiveModal) {
+  constructor(
+    private fb: FormBuilder,
+    private modal: NgbActiveModal,
+  ) {
     this.courseForm = this.fb.group({
       name: [this.values.name, [Validators.required]],
       content: [this.values.content, [Validators.required]],
@@ -28,6 +31,6 @@ export class CourseFormComponent {
     }
   }
   onClose() {
-    this.modal.dismiss()
+    this.modal.dismiss();
   }
 }

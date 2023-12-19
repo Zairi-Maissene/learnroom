@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -6,15 +7,17 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  router = inject(Router);
   isLoggedIn: boolean = false;
   @Input() isOpen: boolean = false;
 
   navigateToPreview(): void {
-    // Add logic for navigating to the preview page
+    this.router.navigate(['']);
   }
 
   signIn(): void {
     this.isLoggedIn = true;
+    this.router.navigate(['login']);
   }
 
   signUp(): void {
