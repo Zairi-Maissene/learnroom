@@ -1,7 +1,10 @@
 <!-- task-list.component.html -->
 <div *ngIf="tasks.length > 0; else emptyState">
   <div *ngFor="let task of tasks">
-    <app-task_assignment-card [path]="'/tasks/' + task.id" [task]="task"></app-task_assignment-card>
+    <app-task_assignment-card
+      [path]="'/tasks/' + task.id"
+      [task]="task"
+    ></app-task_assignment-card>
   </div>
 </div>
 <ng-template #emptyState>

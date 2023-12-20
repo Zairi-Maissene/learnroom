@@ -10,9 +10,20 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class StudentFormComponent {
   studentForm: FormGroup;
 
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {
+  constructor(
+    public activeModal: NgbActiveModal,
+    private fb: FormBuilder,
+  ) {
     this.studentForm = this.fb.group({
-      email: ['', [Validators.required, Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/)]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+          ),
+        ],
+      ],
     });
   }
 

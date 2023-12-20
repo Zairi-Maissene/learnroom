@@ -8,7 +8,7 @@ describe('ClassroomModalTsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ClassroomFormComponent]
+      declarations: [ClassroomFormComponent],
     });
     fixture = TestBed.createComponent(ClassroomFormComponent);
     component = fixture.componentInstance;

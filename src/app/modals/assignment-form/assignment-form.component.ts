@@ -7,10 +7,18 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './assignment-form.component.html',
 })
 export class AssignmentFormComponent {
-  @Input() values = { name: '', content: '', points: undefined, deadline: undefined };
+  @Input() values = {
+    name: '',
+    content: '',
+    points: undefined,
+    deadline: undefined,
+  };
   assignmentForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private activeModal: NgbActiveModal) {
+  constructor(
+    private fb: FormBuilder,
+    private activeModal: NgbActiveModal,
+  ) {
     this.assignmentForm = this.fb.group({
       name: [this.values.name, [Validators.required]],
       content: [this.values.content, [Validators.required]],
@@ -30,7 +38,6 @@ export class AssignmentFormComponent {
     }
   }
   onClose() {
-    this.activeModal.dismiss()
+    this.activeModal.dismiss();
   }
 }
-

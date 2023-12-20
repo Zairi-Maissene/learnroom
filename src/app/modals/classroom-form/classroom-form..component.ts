@@ -8,15 +8,18 @@ import { ErrorService } from '../../error.service';
 @Component({
   selector: 'app-classroom-form',
   templateUrl: './classroom-form.component.html',
-  styleUrls: ['./classroom-form.component.scss']
+  styleUrls: ['./classroom-form.component.scss'],
 })
 export class ClassroomFormComponent {
   @Input() values = { name: '', description: '' };
 
   classroomForm: FormGroup;
-  errorService = inject(ErrorService)
+  errorService = inject(ErrorService);
 
-  constructor(private fb: FormBuilder, private modal: NgbActiveModal) {
+  constructor(
+    private fb: FormBuilder,
+    private modal: NgbActiveModal,
+  ) {
     this.classroomForm = this.fb.group({
       name: [this.values.name, Validators.required],
       description: [this.values.description, Validators.required],
@@ -34,6 +37,6 @@ export class ClassroomFormComponent {
   }
   onClose() {
     // Handle close modal logic here
-    this.modal.dismiss()
+    this.modal.dismiss();
   }
 }

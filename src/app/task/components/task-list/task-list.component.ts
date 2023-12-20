@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.scss']
+  styleUrls: ['./task-list.component.scss'],
 })
-export class TaskListComponent implements OnInit{
+export class TaskListComponent implements OnInit {
   tasks: any = []; // Fictive data, replace with your actual data
 
   ngOnInit(): void {
@@ -20,5 +20,4 @@ export class TaskListComponent implements OnInit{
       // Add more tasks as needed
     ];
   }
-
 }

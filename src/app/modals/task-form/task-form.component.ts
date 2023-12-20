@@ -10,7 +10,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class TaskFormComponent {
   taskForm: FormGroup;
 
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {
+  constructor(
+    public activeModal: NgbActiveModal,
+    private fb: FormBuilder,
+  ) {
     this.taskForm = this.fb.group({
       name: ['', Validators.required],
       content: ['', Validators.required],

@@ -1,23 +1,23 @@
-import { ViewChild } from '@angular/core';
-import { TemplateRef } from '@angular/core';
 import { inject } from '@angular/core';
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AssignementService } from './assignment/assignement.service';
-import { AppModalComponent } from './modals/app-modal/app-modal.component';
-import { AssignmentFormComponent } from './modals/assignment-form/assignment-form.component';
 import { ClassroomFormComponent } from './modals/classroom-form/classroom-form..component';
-import { CourseFormComponent } from './modals/course-form/course-form.component';
-import { StudentFormComponent } from './modals/student-form/student-form.component';
-import { TaskFormComponent } from './modals/task-form/task-form.component';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  title = 'learnRoom-frontend-angular';
   modalService = inject(NgbModal);
+  isLoggedIn$: Observable<boolean>;
+  authService = inject(AuthService);
+  constructor() {
+    this.isLoggedIn$ = this.authService.isAuthenticated$;
+  }
   openModal() {
     this.modalService.open(ClassroomFormComponent);
   }
