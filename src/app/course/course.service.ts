@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Classroom} from '../classroom/classroom.service';
-import {Assignement} from '../assignment/assignement.service';
-import {Task} from '../task/task.service';
-import {ApiService} from '../../helpers/helpers';
+import { Injectable } from '@angular/core';
+import { Classroom } from '../classroom/classroom.service';
+import { Assignement } from '../assignment/assignement.service';
+import { Task } from '../task/task.service';
+import { ApiService } from '../../helpers/helpers';
 
 export type Course = {
   id: string;

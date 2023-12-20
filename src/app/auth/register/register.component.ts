@@ -1,8 +1,8 @@
-import {Component, inject} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {Router} from '@angular/router';
-import {tap} from 'rxjs';
-import {AuthService, SignUp} from '../auth.service';
+import { Component, inject } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs';
+import { AuthService, SignUp } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,7 @@ export class RegisterComponent {
   onSubmit(form: NgForm) {
     if (form.value !== null && form.value !== undefined) {
       this.formData = { ...this.formData, ...form.value };
-      console.log(this.formData.user as boolean)
+      console.log(this.formData.user as boolean);
       this.authService
         .signUp({
           email: this.formData.email as string,
@@ -29,7 +29,7 @@ export class RegisterComponent {
         } as SignUp)
         .pipe(
           tap(async (authenticated) => {
-            await this.router.navigate(['auth','login']);
+            await this.router.navigate(['auth', 'login']);
           }),
         )
         .subscribe();

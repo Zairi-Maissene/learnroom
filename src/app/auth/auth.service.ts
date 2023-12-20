@@ -1,10 +1,11 @@
-import {Injectable} from '@angular/core';
-import {ApiService} from '../../helpers/helpers';
-import {Classroom} from '../classroom/classroom.service';
-import {BehaviorSubject, map, Observable, tap} from 'rxjs';
-import {Course} from "../course/course.service";
-import {Task} from "../task/task.service";
-import {Assignement} from "../assignment/assignement.service";
+import { inject, Injectable } from '@angular/core';
+import { ApiService } from '../../helpers/helpers';
+import { Classroom } from '../classroom/classroom.service';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { Course } from '../course/course.service';
+import { Task } from '../task/task.service';
+import { Assignement } from '../assignment/assignement.service';
+import { Router } from '@angular/router';
 
 export type SignIn = {
   email: string;
@@ -37,15 +38,16 @@ export type User = Teacher | Student;
   providedIn: 'root',
 })
 export class AuthService {
-  private userSubject: BehaviorSubject<User | null>;
-  user$: Observable<User | null>;
   isAuthenticated$: Observable<boolean>;
+  user = new BehaviorSubject<User | null>(null);
+
   constructor(private api: ApiService) {
-    this.userSubject = new BehaviorSubject(
-      JSON.parse(localStorage.getItem('user')!),
+    const user = localStorage.getItem('user');
+    this.isAuthenticated$ = this.user.pipe(
+      map((res) => {
+        return res != null;
+      }),
     );
-    this.user$ = this.userSubject.asObservable();
-    this.isAuthenticated$ = this.userSubject.pipe(map((res) => res != null));
   }
 
   signIn(data: SignIn) {
@@ -57,8 +59,10 @@ export class AuthService {
             email: data.email,
           };
           localStorage.setItem('user', JSON.stringify(res));
-          this.userSubject.next(res);
+          this.user.next(res);
         }
+        console.log(this.user);
+        console.log('auuuth', this.isAuthenticated$);
       }),
     );
   }
@@ -67,10 +71,19 @@ export class AuthService {
   }
 
   getUserData(id: string, isTeacher: boolean) {
-    return this.api.get<{courses:Course[],tasks:Task[],assignments:Assignement[]}>(`/user/${id}/${isTeacher}`);
+    return this.api.get<{
+      courses: Course[];
+      tasks: Task[];
+      assignments: Assignement[];
+    }>(`/user/${id}/${isTeacher}`);
   }
 
   private isUserData(data: any): data is User {
     return typeof data === 'object' && 'id' in data;
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    this.user.next(null);
   }
 }

@@ -26,7 +26,7 @@ export class LoginComponent {
       .signIn({ email: this.email, password: this.password })
       .pipe(
         tap(async (authenticated) => {
-          alert(authenticated);
+          console.log('login', authenticated);
           if (authenticated) {
             await this.router.navigate(['/classroom']);
           }

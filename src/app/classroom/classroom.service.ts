@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {ApiService} from '../../helpers/helpers';
-import {Student, Teacher, User} from '../auth/auth.service';
-import {Course} from "../course/course.service";
-import {Task} from "../task/task.service";
-import {Assignement} from "../assignment/assignement.service";
+import { Injectable } from '@angular/core';
+import { ApiService } from '../../helpers/helpers';
+import { Student, Teacher, User } from '../auth/auth.service';
+import { Course } from '../course/course.service';
+import { Task } from '../task/task.service';
+import { Assignement } from '../assignment/assignement.service';
 
 export type Classroom = {
   id: string;
@@ -23,7 +23,7 @@ export type UpdateClassroom = Partial<CreateClassroom>;
   providedIn: 'root',
 })
 export class ClassroomService {
-  constructor(private api: ApiService ) {}
+  constructor(private api: ApiService) {}
   // Classroom
   addClassroom(classroom: CreateClassroom) {
     return this.api.post<Classroom>(`/classroom`, classroom);
