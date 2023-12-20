@@ -28,7 +28,7 @@ export type UpdateTask = Partial<CreateTask>
   providedIn: 'root'
 })
 export class TaskService {
-  constructor(private api:ApiService<Task>) { }
+  constructor(private api:ApiService) { }
 
   // Task
   addTask(course_id:string,task: CreateTask) {
