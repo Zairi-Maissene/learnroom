@@ -3,7 +3,7 @@
   <div [ngStyle]="{'width':'80%'}">
     <app-element-details
             (editModeChange)="toggleEditMode($event)"
-            [elementType]="'task'" [user]="user" [element$]="task$"  [editMode]="editMode" [submitEditElement]="submitEditTask"  [deleteElement]="deleteTask" [editElementForm]="editTaskForm"></app-element-details>
+            [elementType]="'task'" [user]="user" [element$]="task$"  [editMode]="editMode"  [deleteElement]="deleteTask" ></app-element-details>
   </div>
   <ng-container *ngIf="user.role == 'student'">
     <ng-container *ngIf="!taskIsCompleted()">

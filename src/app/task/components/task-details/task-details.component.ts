@@ -13,12 +13,6 @@ export class TaskDetailsComponent implements OnInit{
   taskId: string="";
   task$: Observable<Task> = new Observable<Task>();
   is$: Observable<any> = new Observable<any>();
-  editTaskForm: FormGroup = new FormGroup({
-    //  points: new FormControl(this.assignment.points),
-    // deadline: new FormControl(this.assignment.deadline),
-    // content: new FormControl(this.assignment.content)
-
-  });
   editMode:boolean=false;
 
   constructor(private route: ActivatedRoute,private formBuilder: FormBuilder,private taskServie: TaskService)
@@ -40,7 +34,6 @@ export class TaskDetailsComponent implements OnInit{
   }
 
   submitEditTask(){
-    this.taskServie.updateTask(this.taskId,this.editTaskForm.value)
   }
   deleteTask(){
     this.taskServie.deleteTask(this.taskId)

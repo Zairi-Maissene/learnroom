@@ -12,16 +12,9 @@ export class ElementDetailsComponent {
   @Input() element$: Observable<any> = new Observable<any>();
   @Input() elementType: string = "";
   @Input() editMode: boolean = false;
-  @Input() submitEditElement: any;
   @Input() deleteElement: any;
-  @Input() editElementForm: FormGroup = new FormGroup({
-    points: new FormControl(),
-    deadline: new FormControl(),
-    content: new FormControl()
 
-  });
   @Output() editModeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() editElementFormChange: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
   toggleEditMode() {
     this.editMode = !this.editMode;
     this.editModeChange.emit(this.editMode);

@@ -6,12 +6,8 @@
             [elementType]="'assignment'"
             [user]="user" [element$]="assignment$"
             [editMode]="editMode"
-            [submitEditElement]="submitEditAssignment"
             [deleteElement]="deleteAssignment"
-            [editElementForm]="editAssignmentForm"
-    >
-
-    </app-element-details>
+    > </app-element-details>
   </div>
     <ng-container *ngIf="user.role === 'student'">
       <br />
@@ -27,8 +23,31 @@
 
       </form>
     </ng-container>
+    <ng-container *ngIf="responseAssignment.length > 0">
+       <div  *ngFor="let response of responseAssignment; let i = index" [ngStyle]="{'gap':'10px',width:'100%','align-items':'center',display:'flex','flex-direction':'column'}">
 
-    <ng-container *ngIf="true">
-    </ng-container>
+         <div [ngStyle]="{'border-radius':'10px',border:'1px black solid',padding:'5px 10px',width:'80%','margin-bottom':'10px'}" >
+        <h4>Student Name</h4>
+        <span>{{response?.content}}</span>
+        <div [ngStyle]="{display:'flex',gap:'5px','flex-direction':'column','align-items':'flex-end'}">
+          <div>
+            <span>Score:</span>
+            <input type="number" placeholder='points'
+                   [ngModel]="response?.score"
+                   (input)="onScoreChange($event, i)"
+                   [ngStyle]="{'border-radius':'10px',width:'80px','margin-left':'5px',padding:'0px 5px'}" />
+          </div>
+          <button [ngStyle]="{width:'100px',}"
+                  (click)="submitResponseAssignment(response.id)"
+          > Validate </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </ng-container>
+  {{responseAssignment | json}}
 
 </div>
