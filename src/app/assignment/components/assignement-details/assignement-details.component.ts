@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
   styleUrls: ['./assignement-details.component.scss']
 })
 export class AssignementDetailsComponent implements OnInit {
-  user: any = {role:"teacher"}
+  user: any = {role:"student"}
   assignmentId: string="";
   assignment$: Observable<Assignement> = new Observable<Assignement>();
   responseAssignment:ResponseAssignement[]=[]
@@ -66,5 +66,4 @@ export class AssignementDetailsComponent implements OnInit {
     this.responseAssignment = updatedResponse
   }
 
-  protected readonly JSON = JSON;
 }
