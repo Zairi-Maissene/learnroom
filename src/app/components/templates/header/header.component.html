@@ -8,7 +8,10 @@
 
       <p
         class="role"
-        *ngIf="(isLoggedIn$ | async) && getItem('user').user; else studentBlock"
+        *ngIf="
+          (isLoggedIn$ | async) && localStorage.getItem('isTeacher');
+          else studentBlock
+        "
       >
         Teacher
       </p>

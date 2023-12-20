@@ -38,31 +38,27 @@ export type User = Teacher | Student;
   providedIn: 'root',
 })
 export class AuthService {
+  private userSubject: BehaviorSubject<User | null>;
+  user$: Observable<User | null>;
   isAuthenticated$: Observable<boolean>;
-  user = new BehaviorSubject<User | null>(null);
-
   constructor(private api: ApiService) {
-    const user = localStorage.getItem('user');
-    this.isAuthenticated$ = this.user.pipe(
-      map((res) => {
-        return res != null;
-      }),
+    this.userSubject = new BehaviorSubject(
+      JSON.parse(localStorage.getItem('user')!),
     );
+    this.user$ = this.userSubject.asObservable();
+    this.isAuthenticated$ = this.userSubject.pipe(map((res) => res != null));
   }
 
   signIn(data: SignIn) {
     return this.api.post<User>(`/user/signin`, data).pipe(
       tap((res: any) => {
         if (this.isUserData(res)) {
-          const token = {
-            token: res.id,
-            email: data.email,
-          };
           localStorage.setItem('user', JSON.stringify(res));
-          this.user.next(res);
+          if (res.user) {
+            localStorage.setItem('isTeacher', JSON.stringify(res.user));
+          }
+          this.userSubject.next(res);
         }
-        console.log(this.user);
-        console.log('auuuth', this.isAuthenticated$);
       }),
     );
   }
@@ -83,7 +79,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('user');
-    this.user.next(null);
+    localStorage.clear();
+    this.userSubject.next(null);
   }
 }

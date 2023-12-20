@@ -19,7 +19,7 @@ export class RegisterComponent {
   onSubmit(form: NgForm) {
     if (form.value !== null && form.value !== undefined) {
       this.formData = { ...this.formData, ...form.value };
-      console.log(this.formData.user as boolean);
+
       this.authService
         .signUp({
           email: this.formData.email as string,

@@ -14,6 +14,7 @@ export class HeaderComponent {
   showHeader: boolean = true;
   authService = inject(AuthService);
   isLoggedIn$: Observable<boolean>;
+  isTeacher = localStorage.getItem('isTeacher') ?? null;
   constructor() {
     this.isLoggedIn$ = this.authService.isAuthenticated$;
   }
@@ -26,8 +27,6 @@ export class HeaderComponent {
           urlWithoutQueryParams.startsWith('/auth/login') ||
           urlWithoutQueryParams.startsWith('/auth/register')
         );
-
-        console.log('show header', event.url);
       }
     });
   }
@@ -48,9 +47,5 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
-  getItem(key: string): any {
-    // Implement your logic to retrieve user data based on the key
-    // For example, you might use a service to fetch user data
-    return { user: true };
-  }
+  protected readonly localStorage = localStorage;
 }
