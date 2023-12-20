@@ -20,9 +20,9 @@ export class LoginInterceptor implements HttpInterceptor {
     // const token = localStorage.getItem('user')
     // if (token) {
     //   const cloneReq = request.clone(
-    //     {
-    //       params: new HttpParams().set('access_token', token)
-    //     }
+    //     { setHeaders: {
+    //     Authorization: `Bearer ${token}`
+    //   }}
     //   )
     //   return next.handle(cloneReq);
     // } else {

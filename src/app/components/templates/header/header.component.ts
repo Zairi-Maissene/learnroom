@@ -1,5 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from '../../../auth/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -8,17 +10,22 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class HeaderComponent {
   router = inject(Router);
-  isLoggedIn: boolean = false;
   @Input() isOpen: boolean = false;
   showHeader: boolean = true;
-
-  constructor() {}
-
+  authService = inject(AuthService);
+  isLoggedIn$: Observable<boolean>;
+  isTeacher = localStorage.getItem('isTeacher') ?? null;
+  constructor() {
+    this.isLoggedIn$ = this.authService.isAuthenticated$;
+  }
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.showHeader = !['/auth/login', '/auth/register'].includes(
-          event.url,
+        const urlWithoutQueryParams = event.url.split('?')[0]; // Get URL without query parameters
+
+        this.showHeader = !(
+          urlWithoutQueryParams.startsWith('/auth/login') ||
+          urlWithoutQueryParams.startsWith('/auth/register')
         );
       }
     });
@@ -28,22 +35,17 @@ export class HeaderComponent {
   }
 
   signIn(): void {
-    this.isLoggedIn = true;
     this.router.navigate(['auth/login']);
   }
 
   signUp(): void {
-    this.isLoggedIn = true;
     this.router.navigate(['auth/register']);
   }
 
   signOut(): void {
-    this.isLoggedIn = false;
+    this.router.navigate(['']);
+    this.authService.logout();
   }
 
-  getItem(key: string): any {
-    // Implement your logic to retrieve user data based on the key
-    // For example, you might use a service to fetch user data
-    return { user: true };
-  }
+  protected readonly localStorage = localStorage;
 }

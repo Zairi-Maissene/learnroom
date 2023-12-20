@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {ApiService} from '../../helpers/helpers';
-import {Observable} from 'rxjs';
-import {Student, Teacher} from '../auth/auth.service';
+import { Injectable } from '@angular/core';
+import { ApiService } from '../../helpers/helpers';
+import { Observable } from 'rxjs';
+import { Student, Teacher } from '../auth/auth.service';
 
 export type Assignement = {
   id: string;
@@ -57,18 +57,26 @@ export class AssignementService {
 
   // ResponseAssignment
 
-  getResponseAssignment(assignment_id: string, student_id: string) {
-    return this.api.get<ResponseAssignement>(`/response_assignment/${assignment_id}/${student_id}`);
+  getResponseAssignment(assignment_id: string, student_id: string): Observable<ResponseAssignement>  {
+    return this.api.get<ResponseAssignement>(
+      `/response-assignment/${assignment_id}/${student_id}`,
+    );
   }
 
   updateResponseAssignment(id: string, response: UpdateResponseAssignement) {
-    return this.api.patch<ResponseAssignement>(`/response_assignment/${id}`, response);
+    return this.api.patch<ResponseAssignement>(
+      `/response-assignment/${id}`,
+      response,
+    );
   }
 
   validateResponseAssignment(
     id: string,
     response: ValidateResponseAssignement,
   ) {
-    return this.api.patch<ResponseAssignement>(`/response_assignment/validate/${id}`, response);
+    return this.api.patch<ResponseAssignement>(
+      `/response-assignment/validate/${id}`,
+      response,
+    );
   }
 }

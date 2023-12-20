@@ -15,6 +15,8 @@ import { StudentFormComponent } from './modals/student-form/student-form.compone
 import { FormsModule } from '@angular/forms';
 import { TextButtonComponent } from './components/text-button/text-button.component';
 import { PreviewComponent } from './preview/preview.component';
+import { authGuard } from './guards/auth.guard';
+import { loginInterceptorProvider } from './interceptors/login.interceptor';
 @NgModule({
   declarations: [
     AppComponent,

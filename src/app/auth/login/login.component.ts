@@ -21,12 +21,11 @@ export class LoginComponent {
   onSubmit(loginForm: NgForm) {
     this.email = loginForm.value.email;
     this.password = loginForm.value.password;
-    console.log('form', loginForm.value);
+
     this.authService
       .signIn({ email: this.email, password: this.password })
       .pipe(
         tap(async (authenticated) => {
-          alert(authenticated);
           if (authenticated) {
             await this.router.navigate(['/classroom']);
           }

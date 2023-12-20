@@ -1,4 +1,4 @@
-<div [ngStyle]="{'display':'flex','flex-direction': 'column', 'justify-content':'center','align-items':'center','margin':'50px 0px'}">
+<div *ngIf="(assignment$ | async) " [ngStyle]="{'display':'flex','flex-direction': 'column', 'justify-content':'center','align-items':'center','margin':'50px 0px'}">
 
   <div [ngStyle]="{'width':'80%'}">
     <app-element-details
@@ -9,14 +9,18 @@
             [deleteElement]="deleteAssignment"
     > </app-element-details>
   </div>
-    <ng-container *ngIf="(assignment$ | async) && user.role === 'student'">
+    <ng-container *ngIf=" user.role === 'student'">
       <br />
       <form
         [ngStyle]="{'flex-direction': 'column','display':'flex','gap':'10px',width:'80%'}"
-        [formGroup]="submitAssignmentForm" (ngSubmit)="onSubmit()">
+        [formGroup]="submitAssignmentForm"
+        (ngSubmit)="onSubmit()">
         <label for="description">Description: </label>
-        <textarea [ngStyle]="{'border-radius':'10px'}" id="description" type="text" formControlName="description"></textarea>
+        <textarea  [ngStyle]="{'border-radius':'10px'}" id="description" type="text" formControlName="description"></textarea>
         <div [ngStyle]="{'display':'flex','justify-content':'center'}">
+          <div *ngIf="submitAssignmentForm.errors?.['minlength']">
+            Name must be at least 4 characters long.
+          </div>
           <button [ngStyle]="{'border-radius':'10px'}" type="submit" [disabled]="!submitAssignmentForm.valid">Submit</button>
 
         </div>
@@ -24,8 +28,8 @@
       </form>
     </ng-container>
 
-    <ng-container *ngIf=" responseAssignment.length > 0 && (assignment$ | async) && user.role === 'teacher' ">
-       <div  *ngFor="let response of responseAssignment; let i = index" [ngStyle]="{'gap':'10px',width:'100%','align-items':'center',display:'flex','flex-direction':'column'}">
+    <ng-container *ngIf=" responsesAssignment.length > 0 && user.role === 'teacher' ">
+       <div  *ngFor="let response of responsesAssignment; let i = index" [ngStyle]="{'gap':'10px',width:'100%','align-items':'center',display:'flex','flex-direction':'column'}">
 
          <div [ngStyle]="{'border-radius':'10px',border:'1px black solid',padding:'5px 10px',width:'80%','margin-bottom':'10px'}" >
         <h4>Student Name</h4>
@@ -48,5 +52,9 @@
 
     </div>
   </ng-container>
+    <ng-container *ngIf="isAssignmentSubmited && user.role == 'student' " >
+
+    </ng-container>
+
 
 </div>
