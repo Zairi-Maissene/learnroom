@@ -1,6 +1,8 @@
+import { Input } from '@angular/core';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ClassroomService } from '../../classroom/classroom.service';
 
 @Component({
   selector: 'app-student-form',
@@ -9,10 +11,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class StudentFormComponent {
   studentForm: FormGroup;
+  @Input() classroomId: string = '';
 
   constructor(
     public activeModal: NgbActiveModal,
     private fb: FormBuilder,
+    private classroomService: ClassroomService,
   ) {
     this.studentForm = this.fb.group({
       email: [
@@ -29,9 +33,7 @@ export class StudentFormComponent {
 
   onSubmit() {
     if (this.studentForm.valid) {
-      const email = this.studentForm.value.email;
-      console.log('Enrolling student with email:', email);
-      this.activeModal.close();
+      this.classroomService.addStudent(this.classroomId, this.studentForm.value.email)
     }
   }
   validateField(field: string, code: string) {
