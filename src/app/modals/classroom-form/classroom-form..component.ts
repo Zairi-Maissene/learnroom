@@ -3,6 +3,11 @@ import { inject } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
+import { Classroom } from '../../classroom/classroom.service';
+import { ClassroomService } from '../../classroom/classroom.service';
 import { ErrorService } from '../../error.service';
 
 @Component({
@@ -15,6 +20,9 @@ export class ClassroomFormComponent {
 
   classroomForm: FormGroup;
   errorService = inject(ErrorService);
+  classroomService = inject(ClassroomService);
+  authService = inject(AuthService);
+  userId: string | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -24,11 +32,17 @@ export class ClassroomFormComponent {
       name: [this.values.name, Validators.required],
       description: [this.values.description, Validators.required],
     });
+    this.authService.user$.subscribe((user) => {
+     this.userId = user?.id;
+    });
   }
 
   onSubmit() {
     // Handle form submission logic here
     const formValues = this.classroomForm.value;
+    if (this.classroomForm.valid && this.userId) {
+      this.classroomService.addClassroom(formValues, this.userId)
+    }
     // Call the handleSubmit function or perform your desired actions
   }
   validateField(field: string, code: string) {

@@ -25,8 +25,8 @@ export type UpdateClassroom = Partial<CreateClassroom>;
 export class ClassroomService {
   constructor(private api: ApiService) {}
   // Classroom
-  addClassroom(classroom: CreateClassroom) {
-    return this.api.post<Classroom>(`/classroom`, classroom);
+  addClassroom(classroom: CreateClassroom, id: string) {
+    return this.api.post<Classroom>(`/classroom/${id}`, classroom).subscribe();
   }
   getClassroom(id: string) {
     return this.api.get<Classroom>(`/classroom/${id}`);
@@ -55,6 +55,6 @@ export class ClassroomService {
     return this.api.get<User[]>(`/classroom/users/${classroom_id}`);
   }
   addStudent(classroom_id: string, email: string) {
-    return this.api.patch<Student>(`/classroom/${classroom_id}/${email}`, {});
+    return this.api.patch<Student>(`/classroom/${classroom_id}/${email}`, {}).subscribe();
   }
 }

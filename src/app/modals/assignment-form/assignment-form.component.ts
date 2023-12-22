@@ -1,6 +1,8 @@
+import { inject } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AssignementService } from '../../assignment/assignement.service';
 
 @Component({
   selector: 'app-assignment-form',
@@ -14,6 +16,8 @@ export class AssignmentFormComponent {
     deadline: undefined,
   };
   assignmentForm: FormGroup;
+  assignmentService = inject(AssignementService)
+  @Input() courseId: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +38,8 @@ export class AssignmentFormComponent {
 
   onSubmit() {
     if (this.assignmentForm.valid) {
-      // Handle form submission or emit an event
+      const formValues = this.assignmentForm.value;
+      this.assignmentService.addAssignement(this.courseId, formValues)
     }
   }
   onClose() {

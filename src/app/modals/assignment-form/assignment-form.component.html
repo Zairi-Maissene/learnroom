@@ -1,5 +1,5 @@
-<form [formGroup]="assignmentForm" (ngSubmit)="onSubmit()">
-  <div>
+<form [formGroup]="assignmentForm" class="modal-body" (ngSubmit)="onSubmit()">
+  <div class="form-group">
     <label>Assignment Title</label>
     <input formControlName="name" class="form-control" />
     <div *ngIf="validateField('name', 'required')" class="text-danger">
@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Content</label>
     <textarea formControlName="content" class="form-control"></textarea>
     <div *ngIf="validateField('content', 'required')" class="text-danger">
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Max Points</label>
     <input formControlName="points" type="number" class="form-control" />
     <div *ngIf="validateField('points', 'required')" class="text-danger">
@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div>
+  <div class="form-group">
     <label>Deadline</label>
     <input formControlName="deadline" type="date" class="form-control" />
     <div *ngIf="validateField('deadline', 'required')" class="text-danger">
@@ -35,7 +35,6 @@
     <button
       type="submit"
       class="btn btn-primary"
-      (click)="onSubmit()"
       [disabled]="assignmentForm.invalid"
     >
       Submit

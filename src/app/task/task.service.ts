@@ -32,7 +32,7 @@ export class TaskService {
 
   // Task
   addTask(course_id: string, task: CreateTask) {
-    return this.api.post(`/task/${course_id}`, task);
+    return this.api.post(`/task/${course_id}`, task).subscribe()
   }
   getTask(id: string): Observable<Task> {
     return this.api.get(`/task/${id}`);

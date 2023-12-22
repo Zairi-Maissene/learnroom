@@ -26,3 +26,9 @@
   background-color: #ff796e;
   border: none;
 }
+form,.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+

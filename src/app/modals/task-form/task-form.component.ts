@@ -1,6 +1,9 @@
+import { Input } from '@angular/core';
+import { inject } from '@angular/core';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TaskService } from '../../task/task.service';
 
 @Component({
   selector: 'app-task-form',
@@ -9,6 +12,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class TaskFormComponent {
   taskForm: FormGroup;
+  taskService = inject(TaskService);
+  @Input() courseId: string = '';
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -30,8 +35,9 @@ export class TaskFormComponent {
     if (this.taskForm.valid) {
       // Handle form submission
       const formData = this.taskForm.value;
-      console.log('New Task:', formData);
-      this.activeModal.close();
+      //TODO: get course id
+      console.log('courseId', this.courseId);
+      this.taskService.addTask(this.courseId, formData)
     }
   }
 

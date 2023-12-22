@@ -25,7 +25,7 @@ export class CourseService {
 
   // Course
   addCourse(classroom_id: string, course: CreateCourse) {
-    return this.api.post<Course>(`/course/${classroom_id}`, course);
+    return this.api.post<Course>(`/course/${classroom_id}`, course).subscribe();
   }
   getCourse(id: string) {
     return this.api.get<Course>(`/course/${id}`);

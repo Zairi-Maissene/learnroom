@@ -1,7 +1,9 @@
+import { inject } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CourseService } from '../../course/course.service';
 
 @Component({
   selector: 'app-course-form',
@@ -10,6 +12,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class CourseFormComponent {
   @Input() values = { name: '', content: '' };
   courseForm: FormGroup;
+  courseService = inject(CourseService)
+  @Input() classroomId: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -28,6 +32,8 @@ export class CourseFormComponent {
   onSubmit() {
     if (this.courseForm.valid) {
       // Handle form submission or emit an event
+      const formValues = this.courseForm.value;
+      this.courseService.addCourse(this.classroomId, formValues)
     }
   }
   onClose() {
