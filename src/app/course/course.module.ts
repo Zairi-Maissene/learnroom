@@ -1,26 +1,33 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CourseRoutingModule } from './course-routing.module';
-import { Task_assignmentCardComponent } from './components/task_assignment-card/task_assignment-card.component';
 import { CourseListComponent } from './components/course-list/course-list.component';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { CourseAccordionComponent } from './components/course-accordion/course-accordion.component';
 import { CourseFormComponent } from '../modals/course-form/course-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {CourseDetailsComponent} from "./course-details/course-details.component";
+import {SharedModule} from "../shared/shared.module";
+import {TaskModule} from "../task/task.module";
+import {AssignmentModule} from "../assignment/assignment.module";
 
 @NgModule({
   declarations: [
-    Task_assignmentCardComponent,
     CourseListComponent,
     CourseAccordionComponent,
     CourseFormComponent,
+    CourseDetailsComponent
   ],
   imports: [
     CommonModule,
     CourseRoutingModule,
     NgbAccordionModule,
     ReactiveFormsModule,
+    SharedModule,
+    TaskModule,
+    AssignmentModule
+
   ],
-  exports: [Task_assignmentCardComponent, CourseListComponent],
+  exports: [CourseListComponent],
 })
 export class CourseModule {}

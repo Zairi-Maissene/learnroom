@@ -8,10 +8,11 @@ import {
   NgbDropdownMenu,
   NgbDropdownToggle,
 } from '@ng-bootstrap/ng-bootstrap';
+import {Task_assignmentCardComponent} from "./task_assignment-card/task_assignment-card.component";
 
 @NgModule({
-  declarations: [ElementDetailsComponent],
-  exports: [ElementDetailsComponent],
+  declarations: [ElementDetailsComponent,Task_assignmentCardComponent],
+  exports: [ElementDetailsComponent,Task_assignmentCardComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

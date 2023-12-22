@@ -6,7 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./assignment-list.component.scss'],
 })
 export class AssignmentListComponent implements OnInit {
-  assignments: any = []; // Fictive data, replace with your actual data
+  assignments = [
+    {
+      id: '1',
+      name: 'assignments 1',
+      description: 'Description for assignments 1',
+    },
+    {
+      id: '2',
+      name: 'assignments 2',
+      description: 'Description for assignments 2',
+    },
+    // Add more tasks as needed
+  ];
 
   ngOnInit(): void {
     this.getAssignments();

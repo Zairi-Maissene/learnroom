@@ -19,7 +19,6 @@ import { AssignmentFormComponent } from '../modals/assignment-form/assignment-fo
     CommonModule,
     AssignmentRoutingModule,
     SharedModule,
-    CourseModule,
     ReactiveFormsModule,
     FormsModule,
   ],

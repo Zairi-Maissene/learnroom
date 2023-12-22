@@ -15,7 +15,6 @@ import { TaskFormComponent } from '../modals/task-form/task-form.component';
     TaskRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    CourseModule,
   ],
   exports: [TaskListComponent],
 })
