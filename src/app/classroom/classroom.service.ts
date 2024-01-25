@@ -9,7 +9,7 @@ export type Classroom = {
   id: string;
   name: string;
   description: string;
-  image_id: number;
+  image: string;
   students: Student[];
   teacher: Teacher;
   courses: any[];

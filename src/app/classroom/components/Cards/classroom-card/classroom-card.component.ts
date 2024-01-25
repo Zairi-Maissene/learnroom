@@ -19,7 +19,11 @@ export class ClassroomCardComponent {
     image: 'assets/images/finance.jpg',
     description: 'classroom 1',
   };
-
+  ngOnInit() {
+    if (!this.classroom.image) {
+      this.classroom.image = 'assets/images/finance.jpg';
+    }
+  }
   constructor(private router: Router) {}
 
   navigateToClassroom() {

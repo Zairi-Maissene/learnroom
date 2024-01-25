@@ -7,31 +7,31 @@
   />
 
   <div class="d-flex justify-content-between align-items-center mt-3">
-    <h3 class="text-primary">Classroom Name</h3>
+    <h3 class="text-primary">{{(classroom$ | async)?.name}}</h3>
     <!-- Add the dropdown here -->
   </div>
 
-  <div class="font-weight-light font-size-18 mt-2">Classroom Description</div>
+  <div class="font-weight-light font-size-18 mt-2">{{(classroom$ | async)?.description}}</div>
 
   <hr class="my-4" />
   <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
     <li [ngbNavItem]="1">
       <button ngbNavLink>Courses</button>
       <ng-template ngbNavContent>
-        <app-course-list></app-course-list>
+        <app-course-list [classroomId]="(classroom$ | async)?.id" [courses] ="(courses$ | async) || []"></app-course-list>
       </ng-template>
     </li>
     <li [ngbNavItem]="2">
       <button ngbNavLink>Tasks</button>
       <ng-template ngbNavContent>
-        <app-task-list></app-task-list>
+        <app-task-list [tasks]="(tasks$ | async) || []"></app-task-list>
       </ng-template>
     </li>
     <li [ngbNavItem]="3">
       <button ngbNavLink>Assignments</button>
       <ng-template ngbNavContent>
         <p>
-          <app-assignment-list></app-assignment-list>
+          <app-assignment-list [assignments]="(assignments$ | async)  || []"></app-assignment-list>
         </p>
       </ng-template>
     </li>
@@ -39,6 +39,7 @@
       <button ngbNavLink>Students</button>
       <ng-template ngbNavContent>
         <p>......</p>
+        <button class="btn btn-primary" *ngIf="isTeacher" (click)="onAddStudentClick()">Add Student</button>
       </ng-template>
     </li>
   </ul>

@@ -27,7 +27,7 @@ export class LoginComponent {
       .pipe(
         tap(async (authenticated) => {
           if (authenticated) {
-            await this.router.navigate(['/classroom']);
+            await this.router.navigate(['/home']);
           }
         }),
       )

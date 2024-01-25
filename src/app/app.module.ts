@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ClassroomModule } from './classroom/classroom.module';
 import { FooterComponent } from './components/templates/footer/footer.component';
 import { HeaderComponent } from './components/templates/header/header.component';
 import { CommonModule } from '@angular/common';
@@ -17,6 +18,7 @@ import { TextButtonComponent } from './components/text-button/text-button.compon
 import { PreviewComponent } from './preview/preview.component';
 import { authGuard } from './guards/auth.guard';
 import { loginInterceptorProvider } from './interceptors/login.interceptor';
+import { HomeComponent } from './home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,7 @@ import { loginInterceptorProvider } from './interceptors/login.interceptor';
     StudentFormComponent,
     TextButtonComponent,
     PreviewComponent,
+    HomeComponent,
   ],
   imports: [
     FormsModule,
@@ -40,6 +43,7 @@ import { loginInterceptorProvider } from './interceptors/login.interceptor';
       positionClass: 'toast-top-right',
     }),
     ReactiveFormsModule,
+    ClassroomModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

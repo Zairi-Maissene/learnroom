@@ -40,6 +40,7 @@ export class AssignmentFormComponent {
     if (this.assignmentForm.valid) {
       const formValues = this.assignmentForm.value;
       this.assignmentService.addAssignement(this.courseId, formValues)
+      this.activeModal.close();
     }
   }
   onClose() {

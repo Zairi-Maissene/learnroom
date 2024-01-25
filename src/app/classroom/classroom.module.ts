@@ -27,6 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CourseModule,
     ReactiveFormsModule,
   ],
-  exports: [],
+  exports: [
+    ClassroomCardComponent
+  ],
 })
 export class ClassroomModule {}

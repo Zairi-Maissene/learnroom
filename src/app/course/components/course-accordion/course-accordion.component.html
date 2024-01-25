@@ -1,11 +1,11 @@
 <div ngbAccordion>
   <div ngbAccordionItem>
     <h2 ngbAccordionHeader>
-      <button ngbAccordionButton>First</button>
+      <button ngbAccordionButton>{{course?.name}}</button>
     </h2>
     <div ngbAccordionCollapse>
       <div ngbAccordionBody>
-        <ng-template>Content for the first item</ng-template>
+        <div (click)="onCourseClick()">{{course?.content}}</div>
       </div>
     </div>
   </div>
