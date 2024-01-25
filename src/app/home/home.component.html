@@ -1,0 +1,8 @@
+<div class="d-flex align-items-center justify-content-center m-lg-4 flex-column home-wrapper" >
+  <div class="d-flex align-items-center justify-content-center flex-wrap">
+    <div *ngFor="let classroom of classrooms">
+      <app-classroom-card [classroom]="classroom" />
+    </div>
+  </div>
+<button class="btn btn-primary rounded-2 p-3" (click)="onClick()">{{label}}</button>
+</div>
