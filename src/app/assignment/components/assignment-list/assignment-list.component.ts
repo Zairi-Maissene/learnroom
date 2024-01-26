@@ -1,9 +1,8 @@
-import { inject } from '@angular/core';
-import { Input } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AssignmentFormComponent } from '../../../modals/assignment-form/assignment-form.component';
-import { Assignement } from '../../assignement.service';
+import {Component, inject, Input} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AssignmentFormComponent} from '../../../modals/assignment-form/assignment-form.component';
+import {Assignement} from '../../assignement.service';
+import {AuthService} from "../../../auth/auth.service";
 
 @Component({
   selector: 'app-assignment-list',
@@ -13,10 +12,9 @@ import { Assignement } from '../../assignement.service';
 export class AssignmentListComponent {
   @Input() assignments: Assignement[] = [];
   @Input() courseId: string | undefined;
-  isTeacher = localStorage.getItem('isTeacher');
 
   modalService = inject(NgbModal)
-
+  authService = inject(AuthService)
   onAddAssignmentClick() {
    const modal =  this.modalService.open(AssignmentFormComponent);
    modal.componentInstance.courseId = this.courseId
