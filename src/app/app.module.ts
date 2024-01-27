@@ -19,6 +19,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { authGuard } from './guards/auth.guard';
 import { loginInterceptorProvider } from './interceptors/login.interceptor';
 import { HomeComponent } from './home/home.component';
+import { EditTaskFormComponent } from './modals/edit-task-form/edit-task-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { HomeComponent } from './home/home.component';
     TextButtonComponent,
     PreviewComponent,
     HomeComponent,
+    EditTaskFormComponent,
   ],
   imports: [
     FormsModule,
@@ -47,5 +49,9 @@ import { HomeComponent } from './home/home.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [
+    StudentFormComponent,
+    EditTaskFormComponent
+  ]
 })
 export class AppModule {}

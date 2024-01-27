@@ -7,15 +7,16 @@ import { SharedModule } from '../shared/shared.module';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { CourseModule } from '../course/course.module';
 import { TaskFormComponent } from '../modals/task-form/task-form.component';
+import {AppModule} from "../app.module";
 
 @NgModule({
   declarations: [TaskDetailsComponent, TaskListComponent, TaskFormComponent],
-  imports: [
-    CommonModule,
-    TaskRoutingModule,
-    ReactiveFormsModule,
-    SharedModule,
-  ],
+    imports: [
+        CommonModule,
+        TaskRoutingModule,
+        ReactiveFormsModule,
+        SharedModule,
+    ],
   exports: [TaskListComponent],
 })
 export class TaskModule {}
