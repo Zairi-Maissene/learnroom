@@ -44,4 +44,8 @@ export class CourseService {
   getAssignments(course_id: string) {
     return this.api.get<Assignement[]>(`/course/assignment/${course_id}`);
   }
+  // Search
+  search(searchTerm: string, classroomId: string) {
+    return this.api.get<Course[]>(`/course/search?query=${searchTerm}&classroomId=${classroomId}`);
+  }
 }

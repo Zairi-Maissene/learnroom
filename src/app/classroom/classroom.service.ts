@@ -60,4 +60,11 @@ export class ClassroomService {
   addStudent(classroom_id: string, email: string) {
     return this.api.patch<Student>(`/classroom/${classroom_id}/${email}`, {}).subscribe();
   }
+  search(query: string, userId?: string, isTeacher?: boolean) {
+    if (isTeacher) {
+      console.log('teacher')
+      return this.api.get<Classroom[]>(`/classroom/search?query=${query}&teacherId=${userId}`);
+    }
+    return this.api.get<Classroom[]>(`/classroom/search?query=${query}&studentId=${userId}`);
+  }
 }
