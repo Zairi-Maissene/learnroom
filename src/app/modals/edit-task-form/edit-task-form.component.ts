@@ -1,8 +1,8 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TaskService,Task} from "../../task/task.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {ResponseAssignement} from "../../assignment/assignement.service";
+import {Assignement, ResponseAssignement} from "../../assignment/assignement.service";
 import {CourseService} from "../../course/course.service";
 
 @Component({
@@ -15,6 +15,7 @@ export class EditTaskFormComponent{
   taskService = inject(TaskService);
   @Input() task: Task = {} as Task;
   @Input() taskId:String = "1";
+  @Output() editForm =  new EventEmitter<Assignement>
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -40,7 +41,7 @@ export class EditTaskFormComponent{
     if (this.taskForm.valid) {
       // Handle form submission
       const formData = this.taskForm.value;
-      this.taskService.updateTask(this.task.id, formData)
+      this.editForm.emit(formData)
       this.activeModal.close();
 
     }

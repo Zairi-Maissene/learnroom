@@ -12,12 +12,16 @@ export class ElementDetailsComponent {
   @Input() element$: Observable<any> = new Observable<any>();
   @Input() elementType: string = '';
   @Input() editMode: boolean = false;
-  @Input() deleteElement: any;
 
+  @Output() deleteElement = new EventEmitter();
   @Output() editModeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   toggleEditMode() {
     this.editMode = !this.editMode;
     this.editModeChange.emit(this.editMode);
   }
+  deleteFunction() {
+     this.deleteElement.emit()
+  }
+
   constructor() {}
 }

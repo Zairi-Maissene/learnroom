@@ -1,11 +1,10 @@
-import { inject, Injectable } from '@angular/core';
-import { ApiService } from '../../helpers/helpers';
-import { Classroom } from '../classroom/classroom.service';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
-import { Course } from '../course/course.service';
-import { Task } from '../task/task.service';
-import { Assignement } from '../assignment/assignement.service';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {ApiService} from '../../helpers/helpers';
+import {Classroom} from '../classroom/classroom.service';
+import {BehaviorSubject, map, Observable, tap} from 'rxjs';
+import {CookieService} from "ngx-cookie-service";
+import {catchError} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 export type SignIn = {
   email: string;
@@ -38,48 +37,54 @@ export type User = Teacher | Student;
   providedIn: 'root',
 })
 export class AuthService {
-  private userSubject: BehaviorSubject<User | null>;
-  user$: Observable<User | null>;
-  isAuthenticated$: Observable<boolean>;
-  constructor(private api: ApiService) {
-    this.userSubject = new BehaviorSubject(
-      JSON.parse(localStorage.getItem('user')!),
-    );
+  private userSubject: BehaviorSubject<User>;
+  readonly user$: Observable<User>;
+  readonly isTeacher$: Observable<boolean>;
+  readonly isAuthenticated$: Observable<boolean>;
+
+
+  constructor(private api: ApiService,private readonly CookieService:CookieService,private router:Router) {
+    this.userSubject = new BehaviorSubject({} as User);
     this.user$ = this.userSubject.asObservable();
-    this.isAuthenticated$ = this.userSubject.pipe(map((res) => res != null));
+    this.isTeacher$ = this.userSubject.pipe(map((res) => res.user));
+    this.isAuthenticated$ = this.user$.pipe(map((res) => Boolean(this.CookieService.get('auth') && res.id)));
+    if (this.CookieService.get('auth')) {
+      this.getUser()
+    }
   }
 
   signIn(data: SignIn) {
-    return this.api.post<User>(`/user/signin`, data).pipe(
+    return this.api.post<{token:String}>(`/user/signin`, data).pipe(
       tap((res: any) => {
-        if (this.isUserData(res)) {
-          localStorage.setItem('user', JSON.stringify(res));
-          if (res.user) {
-            localStorage.setItem('isTeacher', JSON.stringify(res.user));
-          }
-          this.userSubject.next(res);
-        }
+        this.CookieService.set('auth', res.token);
+        this.getUser()
       }),
     );
   }
   signUp(data: SignUp) {
-    return this.api.post<User>(`/user/signup`, data);
+    return this.api.post<User>(`/user/signup`, data).pipe(
+      tap((res: any) => {
+        this.CookieService.set('auth', res.token);
+        this.getUser()
+      }),
+    );
   }
-
-  getUserData(id: string, isTeacher: boolean) {
-    return this.api.get<{
-      courses: Course[];
-      tasks: Task[];
-      assignments: Assignement[];
-    }>(`/user/${id}/${isTeacher}`);
-  }
-
-  private isUserData(data: any): data is User {
-    return typeof data === 'object' && 'id' in data;
-  }
-
   logout() {
-    localStorage.clear();
-    this.userSubject.next(null);
+    this.CookieService.deleteAll();
+    this.userSubject.next({} as User);
+  }
+
+  getUser() {
+    return this.api.get<User>(`/user/current`,false,false).pipe(
+      tap((res) => {
+        console.log(res);
+        this.userSubject.next(res);
+        this.router.navigate(['/classroom']);
+      }),
+      catchError((err) => {
+        this.logout();
+        return err;
+      })
+    ).subscribe()
   }
 }

@@ -4,5 +4,5 @@
 <div *ngIf="courses.length === 0">
   <p>No courses found</p>
 </div>
-<button *ngIf="isTeacher" class="btn btn-primary rounded-2 p-3" (click)="onAddCourseClick()">Add course</button>
+<button *ngIf="this.authService.isTeacher$ | async" class="btn btn-primary rounded-2 p-3" (click)="onAddCourseClick()">Add course</button>
 

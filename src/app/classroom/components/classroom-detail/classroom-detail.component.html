@@ -39,7 +39,7 @@
       <button ngbNavLink>Students</button>
       <ng-template ngbNavContent>
         <p>......</p>
-        <button class="btn btn-primary" *ngIf="isTeacher" (click)="onAddStudentClick()">Add Student</button>
+        <button class="btn btn-primary" *ngIf="(this.authService.isTeacher$ | async)" (click)="onAddStudentClick()">Add Student</button>
       </ng-template>
     </li>
   </ul>

@@ -1,7 +1,6 @@
-import { Component, inject, Input } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { AuthService } from '../../../auth/auth.service';
-import { Observable } from 'rxjs';
+import {Component, inject, Input} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,11 +12,6 @@ export class HeaderComponent {
   @Input() isOpen: boolean = false;
   showHeader: boolean = true;
   authService = inject(AuthService);
-  isLoggedIn$: Observable<boolean>;
-  isTeacher = localStorage.getItem('isTeacher') ?? null;
-  constructor() {
-    this.isLoggedIn$ = this.authService.isAuthenticated$;
-  }
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -47,5 +41,4 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
-  protected readonly localStorage = localStorage;
 }

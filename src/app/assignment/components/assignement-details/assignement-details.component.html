@@ -4,9 +4,10 @@
     <app-element-details
             (editModeChange)="toggleEditMode($event)"
             [elementType]="'assignment'"
-            [user]="user" [element$]="assignment$"
+            [user]="user"
+            [element$]="assignment$"
             [editMode]="editMode"
-            [deleteElement]="deleteAssignment"
+            (deleteElement)="deleteAssignment()"
     > </app-element-details>
   </div>
     <ng-container *ngIf=" user.role === 'student'">
@@ -28,7 +29,7 @@
       </form>
     </ng-container>
 
-    <ng-container *ngIf=" responsesAssignment.length > 0 && user.role === 'teacher' ">
+    <ng-container *ngIf=" responsesAssignment.length > 0 &&  (authservice.isAuthenticated$ | async) &&  (authservice.isTeacher$ | async) ">
        <div  *ngFor="let response of responsesAssignment; let i = index" [ngStyle]="{'gap':'10px',width:'100%','align-items':'center',display:'flex','flex-direction':'column'}">
 
          <div [ngStyle]="{'border-radius':'10px',border:'1px black solid',padding:'5px 10px',width:'80%','margin-bottom':'10px'}" >

@@ -1,9 +1,8 @@
-import { inject } from '@angular/core';
-import { Input } from '@angular/core';
-import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CourseFormComponent } from '../../../modals/course-form/course-form.component';
-import { Course } from '../../course.service';
+import {Component, inject, Input} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {CourseFormComponent} from '../../../modals/course-form/course-form.component';
+import {Course} from '../../course.service';
+import {AuthService} from "../../../auth/auth.service";
 
 @Component({
   selector: 'app-course-list',
@@ -14,8 +13,8 @@ export class CourseListComponent {
   @Input() courses: Course[] = []
   @Input() classroomId: string | undefined
 
-  isTeacher = localStorage.getItem('isTeacher');
   modalService = inject(NgbModal)
+  authService = inject(AuthService)
 
   onAddCourseClick() {
     const modal = this.modalService.open(CourseFormComponent)
