@@ -21,17 +21,7 @@ import { StudentFormComponent } from '../../../modals/student-form/student-form.
 import { Task } from '../../../task/task.service';
 import { ClassroomService } from '../../classroom.service';
 import { Classroom } from '../../classroom.service';
-import {Component, inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Observable, switchMap} from 'rxjs';
-import {Assignement} from '../../../assignment/assignement.service';
-import {Course} from '../../../course/course.service';
-import {StudentFormComponent} from '../../../modals/student-form/student-form.component';
-import {Task} from '../../../task/task.service';
-import {Classroom, ClassroomService} from '../../classroom.service';
-import {AuthService} from "../../../auth/auth.service";
-
+import { AuthService } from '../../../auth/auth.service';
 @Component({
   selector: 'app-classroom-detail',
   templateUrl: './classroom-detail.component.html',
