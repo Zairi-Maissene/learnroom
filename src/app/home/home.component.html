@@ -6,20 +6,20 @@
   </form>
   <div *ngIf="searchForm.controls['searchTerm'].value">
     <!-- TODO: handle loading state -->
-    <div class="d-flex align-items-center justify-content-center flex-wrap">
-      <div *ngFor="let result of (searchResults$ | async)">
+      <div class="d-flex align-items-center justify-content-center flex-wrap">
+        <div *ngFor="let result of (searchResults$ | async)">
         <!-- Display your search results here -->
-        <app-classroom-card [classroom]="result" />
-      </div>
-      <div *ngIf="!(searchResults$ | async)?.length">
-        <h3>No results found</h3>
+         <app-classroom-card [classroom]="result" />
+        </div>
+        <div *ngIf="!(searchResults$ | async)?.length">
+          <h3>No results found</h3>
+        </div>
       </div>
     </div>
-  </div>
   <div *ngIf="!searchForm.controls['searchTerm'].value" class="d-flex align-items-center justify-content-center flex-wrap">
     <div *ngFor="let classroom of classrooms">
-      <app-classroom-card [classroom]="classroom" />
+        <app-classroom-card [classroom]="classroom" />
     </div>
   </div>
-  <button class="btn btn-primary rounded-2 p-3" (click)="onClick()">{{label}}</button>
+<button class="btn btn-primary rounded-2 p-3" (click)="onClick()">{{label}}</button>
 </div>

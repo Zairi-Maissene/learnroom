@@ -8,9 +8,10 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 import { CourseModule } from '../course/course.module';
 import { TaskFormComponent } from '../modals/task-form/task-form.component';
 import {AppModule} from "../app.module";
+import {EditTaskFormComponent} from "../modals/edit-task-form/edit-task-form.component";
 
 @NgModule({
-  declarations: [TaskDetailsComponent, TaskListComponent, TaskFormComponent],
+  declarations: [TaskDetailsComponent, EditTaskFormComponent,TaskListComponent, TaskFormComponent],
     imports: [
         CommonModule,
         TaskRoutingModule,

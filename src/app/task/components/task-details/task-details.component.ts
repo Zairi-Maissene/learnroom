@@ -14,13 +14,13 @@ import {ClassroomFormComponent} from "../../../modals/classroom-form/classroom-f
 import {ClassroomIdComponent} from "../../../modals/classroom-id/classroom-id.component";
 import {EditTaskFormComponent} from "../../../modals/edit-task-form/edit-task-form.component";
 import {CourseFormComponent} from "../../../modals/course-form/course-form.component";
+import {AuthService} from "../../../auth/auth.service";
 @Component({
   selector: 'app-task-details',
   templateUrl: './task-details.component.html',
   styleUrls: ['./task-details.component.scss'],
 })
 export class TaskDetailsComponent implements OnInit {
-  user: any = { role: 'teacher' };
   taskId: string = '';
   task$: Observable<Task> = new Observable<Task>();
   task : Task = {} as Task;
@@ -31,8 +31,8 @@ export class TaskDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
     private taskService: TaskService,
+    public authService : AuthService
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class TaskDetailsComponent implements OnInit {
     );
       this.taskIsSubmitted$=this.taskService.getResponseTask("6df4c61d-6081-4124-88ad-0afc0a4b9954",
       "f486be62-384b-4d97-bf42-3fcf98342cb7")
-    if(this.user.role == "student")
+    if(!this.authService.isTeacher$)
     {
       this.taskIsSubmitted$.subscribe(data => {
         if (data && Object.keys(data).length > 0) {
@@ -51,9 +51,7 @@ export class TaskDetailsComponent implements OnInit {
       });
     }
   }
-  getUser: any = () => {
-    return {};
-  };
+
   onSubmit: any = () => {
     this.taskService.toggleResponseTask(this.taskId)
     this.taskIsSubmitted=true
@@ -77,6 +75,7 @@ export class TaskDetailsComponent implements OnInit {
     modal.componentInstance.task = this.task;
     modal.componentInstance.taskId = this.taskId;
     modal.componentInstance.editForm.subscribe((emmitedValue:any) => {
+      this.task=emmitedValue
       this.editTask(emmitedValue)
     });
 

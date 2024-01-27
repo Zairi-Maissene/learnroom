@@ -4,10 +4,10 @@
     <app-element-details
             (editModeChange)="toggleEditMode($event)"
             [elementType]="'assignment'"
-            [user]="user"
-            [element$]="assignment$"
+            [element]="assignment"
             [editMode]="editMode"
             (deleteElement)="deleteAssignment()"
+            [isTeacher]="(this.authservice.isTeacher$ | async) || false "
     > </app-element-details>
   </div>
     <ng-container *ngIf=" user.role === 'student'">

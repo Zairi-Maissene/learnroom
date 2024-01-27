@@ -18,6 +18,11 @@
     <li [ngbNavItem]="1">
       <button ngbNavLink>Courses</button>
       <ng-template ngbNavContent>
+        <form [formGroup]="searchForm" class="form-group">
+          <div class="input-group">
+            <input class="form-control" id="search" formControlName="searchTerm" placeholder="Search a course.."/>
+          </div>
+        </form>
         <app-course-list [classroomId]="(classroom$ | async)?.id" [courses] ="(courses$ | async) || []"></app-course-list>
       </ng-template>
     </li>

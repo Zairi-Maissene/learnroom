@@ -8,8 +8,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./element-details.component.scss'],
 })
 export class ElementDetailsComponent {
-  @Input() user: any;
-  @Input() element$: Observable<any> = new Observable<any>();
+  @Input() isTeacher: boolean=false;
+  @Input() element: any = {};
   @Input() elementType: string = '';
   @Input() editMode: boolean = false;
 
