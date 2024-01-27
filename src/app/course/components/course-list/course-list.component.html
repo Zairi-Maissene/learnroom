@@ -2,7 +2,13 @@
   <app-course-accordion [course]="course"></app-course-accordion>
 </div>
 <div *ngIf="courses.length === 0">
-  <p>No courses found</p>
+  <app-empty-state-placeholder [type]="'course'" [user]="'teacher'"></app-empty-state-placeholder>
 </div>
-<button *ngIf="this.authService.isTeacher$ | async" class="btn btn-primary rounded-2 p-3" (click)="onAddCourseClick()">Add course</button>
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+  <button *ngIf="this.authService.isTeacher$ | async"
+        class="btn btn-primary btn-rounded"
+        style="background-color: #66B0F0;margin-top: 10px;margin-bottom: 10px; border-radius: 20px;"
+        (click)="onAddCourseClick()">Add course
+</button>
+</div>
 
