@@ -56,7 +56,13 @@ export class AuthService {
   signIn(data: SignIn) {
     return this.api.post<{token:String}>(`/user/signin`, data).pipe(
       tap((res: any) => {
-        this.CookieService.set('auth', res.token);
+        this.CookieService.deleteAll("auth")
+        this.CookieService.set('auth', res.token,{
+          expires: 1,
+          path: '/',
+          secure: true,
+          sameSite: 'Strict'
+        });
         this.getUser()
       }),
     );
@@ -64,13 +70,18 @@ export class AuthService {
   signUp(data: SignUp) {
     return this.api.post<User>(`/user/signup`, data).pipe(
       tap((res: any) => {
-        this.CookieService.set('auth', res.token);
-        this.getUser()
+        this.CookieService.deleteAll('auth')
+        this.CookieService.set('auth', res.token,{
+          expires: 1,
+          path: '/',
+          secure: true,
+          sameSite: 'Strict'
+        });
       }),
     );
   }
   logout() {
-    this.CookieService.deleteAll();
+    this.CookieService.deleteAll("auth");
     this.userSubject.next({} as User);
   }
 
