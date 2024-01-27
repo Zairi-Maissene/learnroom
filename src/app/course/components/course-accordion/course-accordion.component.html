@@ -1,0 +1,12 @@
+<div ngbAccordion>
+  <div ngbAccordionItem>
+    <h2 ngbAccordionHeader>
+      <button ngbAccordionButton>{{course?.name}}</button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <div (click)="onCourseClick()">{{course?.content}}</div>
+      </div>
+    </div>
+  </div>
+</div>
