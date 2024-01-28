@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { tap } from 'rxjs';
-import { AuthService, SignUp } from '../auth.service';
+import {Component, inject} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService, SignUp} from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -27,11 +26,6 @@ export class RegisterComponent {
           name: this.formData.name as string,
           user: this.formData.user.toString() === 'true',
         } as SignUp)
-        .pipe(
-          tap(async (authenticated) => {
-            await this.router.navigate(['auth', 'login']);
-          }),
-        )
         .subscribe();
     }
   }
