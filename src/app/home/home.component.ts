@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit {
       (res) => {
         this.label = res ? 'Add a classroom' : 'Enroll in a classroom';
         this.isTeacher = res;
-        console.log("res",res)
       }
     );
 
