@@ -31,7 +31,7 @@ export class CourseService {
     return this.api.get<Course>(`/course/${id}`);
   }
   updateCourse(id: string, course: UpdateCourse) {
-    return this.api.patch<Course>(`/course/${id}`, course);
+    return this.api.patch<Course>(`/course/${id}`, course).subscribe();
   }
   deleteCourse(id: string) {
     return this.api.remove(`/course/${id}`);

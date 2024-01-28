@@ -20,6 +20,8 @@ import {TextButtonComponent} from './components/text-button/text-button.componen
 import {PreviewComponent} from './preview/preview.component';
 import {TokenInterceptor} from "../helpers/token.interceptor";
 import {CookieService} from "ngx-cookie-service";
+import {HomeComponent} from "./home/home.component";
+import {ClassroomModule} from "./classroom/classroom.module";
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import {CookieService} from "ngx-cookie-service";
     StudentFormComponent,
     TextButtonComponent,
     PreviewComponent,
-
+    HomeComponent
   ],
   imports: [
     FormsModule,
@@ -54,6 +56,7 @@ import {CookieService} from "ngx-cookie-service";
       positionClass: 'toast-top-right',
     }),
     ReactiveFormsModule,
+    ClassroomModule,
   ],
   providers: [
     {

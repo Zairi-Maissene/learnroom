@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../helpers/helpers';
-import { Observable } from 'rxjs';
+import {finalize, Observable, tap} from 'rxjs';
 import { Student, Teacher } from '../auth/auth.service';
 
 export type Assignement = {
@@ -49,9 +49,11 @@ export class AssignementService {
     return this.api.get<Assignement>(`/assignment/${id}`);
   }
   updateAssignment(id: string, assignement: UpdateAssignement) {
-    return this.api.patch<Assignement>(`/assignment/${id}`, assignement);
+    return this.api.patch<Assignement>(`/assignment/${id}`, assignement)
+      .subscribe();
   }
   deleteAssignment(id: string) {
+    console.log(id);
     return this.api.remove(`/assignment/${id}`);
   }
 
@@ -67,7 +69,7 @@ export class AssignementService {
     return this.api.patch<ResponseAssignement>(
       `/response-assignment/${id}`,
       response,
-    );
+    ).subscribe();
   }
 
   validateResponseAssignment(
@@ -77,6 +79,6 @@ export class AssignementService {
     return this.api.patch<ResponseAssignement>(
       `/response-assignment/validate/${id}`,
       response,
-    );
+    ).subscribe();
   }
 }

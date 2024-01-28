@@ -35,7 +35,7 @@ export class ClassroomService {
     return this.api.get<Classroom>(`/classroom/${id}`);
   }
   updateClassroom(id: string, classroom: UpdateClassroom) {
-    return this.api.patch<Classroom>(`/classroom/${id}`, classroom);
+    return this.api.patch<Classroom>(`/classroom/${id}`, classroom).subscribe();
   }
   deleteClassroom(id: string) {
     return this.api.remove(`/classroom/${id}`);

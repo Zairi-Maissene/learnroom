@@ -2,7 +2,7 @@
 <div *ngIf="assignments.length > 0; else emptyState">
   <div *ngFor="let assignment of assignments">
     <app-task_assignment-card
-      [path]="'/assignments/' + assignment?.id"
+      [path]="'/assignment/' + assignment?.id"
       [task]="assignment"
     ></app-task_assignment-card>
   </div>

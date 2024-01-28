@@ -1,15 +1,15 @@
 
 
-<div *ngIf="(element$ | async) as element " [ngStyle]="{'width':'100%'}">
+<div *ngIf="element " [ngStyle]="{'width':'100%'}">
     <div [ngStyle]="{'display':'flex','justify-content':'space-between','width':'100%'}">
       <h3 [ngStyle]="{'font-weight': '600', 'font-size': '24px'}">{{ element?.name }}</h3>
-      <div *ngIf="user.role === 'teacher'">
+      <div *ngIf="isTeacher">
         <div ngbDropdown class="d-inline-block">
           <button type="button" class="btn" ngbDropdownToggle [ngStyle]="{'padding':'5px 10px','border':'1px solid grey','border-radius':'10px','cursor':'pointer'}"  >
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
             <button (click)="toggleEditMode()" ngbDropdownItem>Edit</button>
-            <button (click)="deleteElement()" ngbDropdownItem>Delete</button>
+            <button (click)="deleteFunction()" ngbDropdownItem>Delete</button>
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
     <h1 [ngStyle]="{'font-size': '18px',color:'gray' }">
       {{ element?.teacher?.name }}    </h1>
 
-    <ng-container *ngIf="user.role === 'teacher' && editMode">
+    <ng-container *ngIf="(!isTeacher && editMode)">
 
 
 
