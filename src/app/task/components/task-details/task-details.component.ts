@@ -1,20 +1,11 @@
-import {Component, inject, OnInit, ViewChild} from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import {Observable, take, tap, withLatestFrom} from 'rxjs';
+import {Component, inject, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Observable, tap} from 'rxjs';
 import {ResponseTask, Task, TaskService} from '../../task.service';
-import {ResponseAssignement} from "../../../assignment/assignement.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ClassroomFormComponent} from "../../../modals/classroom-form/classroom-form..component";
-import {ClassroomIdComponent} from "../../../modals/classroom-id/classroom-id.component";
 import {EditTaskFormComponent} from "../../../modals/edit-task-form/edit-task-form.component";
-import {CourseFormComponent} from "../../../modals/course-form/course-form.component";
 import {AuthService} from "../../../auth/auth.service";
+
 @Component({
   selector: 'app-task-details',
   templateUrl: './task-details.component.html',
@@ -40,8 +31,7 @@ export class TaskDetailsComponent implements OnInit {
     this.task$ = this.taskService.getTask(this.taskId).pipe(
       tap(task => this.task = task)
     );
-      this.taskIsSubmitted$=this.taskService.getResponseTask("6df4c61d-6081-4124-88ad-0afc0a4b9954",
-      "f486be62-384b-4d97-bf42-3fcf98342cb7")
+      this.taskIsSubmitted$=this.taskService.getResponseTask("6df4c61d-6081-4124-88ad-0afc0a4b9954")
     if(!this.authService.isTeacher$)
     {
       this.taskIsSubmitted$.subscribe(data => {

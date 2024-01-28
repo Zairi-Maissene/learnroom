@@ -1,9 +1,8 @@
-import {Component, inject, OnInit, ViewChild} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Assignement, AssignementService, ResponseAssignement} from "../../assignement.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Observable, switchMap, tap} from "rxjs";
-import {EditTaskFormComponent} from "../../../modals/edit-task-form/edit-task-form.component";
+import {Observable, tap} from "rxjs";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AuthService} from "../../../auth/auth.service";
 import {AssignmentFormComponent} from "../../../modals/assignment-form/assignment-form.component";
@@ -46,7 +45,7 @@ export class AssignementDetailsComponent implements OnInit {
 
     if(this.user.role=="student")
     {
-      this.responseAssignment$=this.assignmentService.getResponseAssignment(this.assignmentId,"f486be62-384b-4d97-bf42-3fcf98342cb7")
+      this.responseAssignment$=this.assignmentService.getResponseAssignment(this.assignmentId)
 
       this.responseAssignment$.subscribe(data => {
         if (data.content) {

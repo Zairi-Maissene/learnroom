@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Course } from '../course/course.service';
-import { ApiService } from '../../helpers/helpers';
-import { Student } from '../auth/auth.service';
+import {Injectable} from '@angular/core';
+import {Course} from '../course/course.service';
+import {ApiService} from '../../helpers/helpers';
+import {Student} from '../auth/auth.service';
 import {Observable, Subscription} from 'rxjs';
 
 export type Task = {
@@ -44,8 +44,8 @@ export class TaskService {
     return this.api.remove(`/task/${id}`);
   }
   // ResponseTask
-  getResponseTask(task_id: string, student_id: string): Observable<any> {
-    return this.api.get(`/response-task/${task_id}/${student_id}`);
+  getResponseTask(task_id: string): Observable<any> {
+    return this.api.get(`/response-task/${task_id}`);
   }
   toggleResponseTask(id: string) {
     return this.api.patch(`/response-task/${id}`, {}).subscribe();
