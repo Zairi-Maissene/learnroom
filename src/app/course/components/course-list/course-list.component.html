@@ -2,7 +2,7 @@
   <app-course-accordion [course]="course"></app-course-accordion>
 </div>
 <div *ngIf="courses.length === 0">
-  <app-empty-state-placeholder [type]="'course'" [user]="'teacher'"></app-empty-state-placeholder>
+  <app-empty-list-placeholder [type]="'course'" [user]="(authService.isTeacher$ | async) ? 'teacher' : 'student'"></app-empty-list-placeholder>
 </div>
 <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
   <button *ngIf="this.authService.isTeacher$ | async"

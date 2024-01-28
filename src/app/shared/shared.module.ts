@@ -9,10 +9,11 @@ import {
   NgbDropdownToggle,
 } from '@ng-bootstrap/ng-bootstrap';
 import {Task_assignmentCardComponent} from "./task_assignment-card/task_assignment-card.component";
+import {EmptyListPlaceholderComponent} from "./empty-list-placeholder/empty-list-placeholder.component";
 
 @NgModule({
-  declarations: [ElementDetailsComponent,Task_assignmentCardComponent],
-  exports: [ElementDetailsComponent,Task_assignmentCardComponent],
+  declarations: [ElementDetailsComponent,Task_assignmentCardComponent,EmptyListPlaceholderComponent],
+  exports: [ElementDetailsComponent,Task_assignmentCardComponent,EmptyListPlaceholderComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -34,7 +34,7 @@ export class ClassroomDetailComponent {
   assignments$: Observable<Assignement[]> = new Observable();
   tasks$: Observable<Task[]> = new Observable()
   router = inject(ActivatedRoute)
-  courses$: Observable<Course[]> | undefined = new Observable<Course[]>()
+  courses$: Observable<Course[]> | undefined = new Observable<Course[]>();
   isTeacher = localStorage.getItem('isTeacher');
   modalService = inject(NgbModal)
   authService = inject(AuthService)
@@ -58,13 +58,13 @@ export class ClassroomDetailComponent {
   }
 
   ngOnInit() {
-
     this.searchForm = this.fb.group({
       searchTerm: [''], // Initial value can be an empty string or any other default value
     });
     this.classroom$ = this.router.params.pipe(
       switchMap(params => this.classroomService.getClassroom(params['id']))
     );
+
     this.classroom$.subscribe(classroom => {
       this.assignments$ = this.classroomService.getAssignments(classroom?.id || '')
     })
@@ -95,6 +95,8 @@ export class ClassroomDetailComponent {
         return [];
       })
     );
+
+
   }
 
   onAddStudentClick() {

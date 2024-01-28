@@ -30,6 +30,7 @@ import {CookieService} from "ngx-cookie-service";
     StudentFormComponent,
     TextButtonComponent,
     PreviewComponent,
+
   ],
   imports: [
     FormsModule,

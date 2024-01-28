@@ -1,4 +1,5 @@
-<div class="d-flex  justify-content-flex-start m-lg-4 flex-column home-wrapper" >
+<div  class="d-flex  justify-content-flex-start m-lg-4 flex-column home-wrapper" >
+  <div *ngIf="classrooms.length>0" >
   <form [formGroup]="searchForm" class="form-group">
     <div class="input-group">
       <input class="form-control" id="search" formControlName="searchTerm" placeholder="Search a classroom.."/>
@@ -20,6 +21,7 @@
     <div *ngFor="let classroom of classrooms">
       <app-classroom-card [classroom]="classroom" />
     </div>
+  </div>
   </div>
   <button class="btn btn-primary rounded-2 p-3" (click)="onClick()">{{label}}</button>
 </div>
