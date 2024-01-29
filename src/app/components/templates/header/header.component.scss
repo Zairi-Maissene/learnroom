@@ -49,6 +49,16 @@
   font-size: 20px;
   font-weight: bolder;
   color: #2d3748;
-  margin-top: 0px;
+  margin-top: 4px;
   margin-bottom: 0px;
 }
+
+/* Add this to your header.component.scss or styles.scss */
+.icon-flag {
+  width: 24px;
+  height: 16px;
+  margin-right: 8px;
+  background-size: contain;
+  display: inline-block;
+}
+

@@ -31,7 +31,7 @@ export class CourseService {
     return this.api.get<Course>(`/course/${id}`);
   }
   updateCourse(id: string, course: UpdateCourse) {
-    return this.api.patch<Course>(`/course/${id}`, course);
+    return this.api.patch<Course>(`/course/${id}`, course).subscribe();
   }
   deleteCourse(id: string) {
     return this.api.remove(`/course/${id}`);
@@ -43,5 +43,9 @@ export class CourseService {
   // Assignment
   getAssignments(course_id: string) {
     return this.api.get<Assignement[]>(`/course/assignment/${course_id}`);
+  }
+  // Search
+  search(searchTerm: string, classroomId: string) {
+    return this.api.get<Course[]>(`/course/search?query=${searchTerm}&classroomId=${classroomId}`);
   }
 }

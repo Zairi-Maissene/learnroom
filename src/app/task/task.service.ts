@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Course } from '../course/course.service';
-import { ApiService } from '../../helpers/helpers';
-import { Student } from '../auth/auth.service';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Course} from '../course/course.service';
+import {ApiService} from '../../helpers/helpers';
+import {Student} from '../auth/auth.service';
+import {Observable, Subscription} from 'rxjs';
 
 export type Task = {
   id: string;
@@ -37,17 +37,17 @@ export class TaskService {
   getTask(id: string): Observable<Task> {
     return this.api.get(`/task/${id}`);
   }
-  updateTask(id: string, task: UpdateTask): Observable<Task> {
-    return this.api.patch(`/task/${id}`, task);
+  updateTask(id: string, task: UpdateTask): Subscription {
+    return this.api.patch(`/task/${id}`, task).subscribe();
   }
   deleteTask(id: string) {
     return this.api.remove(`/task/${id}`);
   }
   // ResponseTask
-  getResponseTask(task_id: string, student_id: string): Observable<any> {
-    return this.api.get(`/response-task/${task_id}/${student_id}`);
+  getResponseTask(task_id: string): Observable<any> {
+    return this.api.get(`/response-task/${task_id}`);
   }
   toggleResponseTask(id: string) {
-    return this.api.patch(`/response-task/${id}`, {});
+    return this.api.patch(`/response-task/${id}`, {}).subscribe();
   }
 }

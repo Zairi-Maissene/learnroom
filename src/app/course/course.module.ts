@@ -16,7 +16,9 @@ import {AssignmentModule} from "../assignment/assignment.module";
     CourseListComponent,
     CourseAccordionComponent,
     CourseFormComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+
+
   ],
   imports: [
     CommonModule,

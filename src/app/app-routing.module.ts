@@ -35,7 +35,6 @@ const routes: Routes = [
     loadChildren: () => import('./task/task.module').then((m) => m.TaskModule),
     canActivate: [authenticatedGuard],
   },
-
   { path: '', component: PreviewComponent , data: { preload: true }},
 ];
 

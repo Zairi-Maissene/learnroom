@@ -1,6 +1,7 @@
-import { Input } from '@angular/core';
+import {inject, Input} from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../task.service';
+import {AuthService} from "../../../auth/auth.service";
 
 @Component({
   selector: 'app-task-list',
@@ -8,5 +9,7 @@ import { Task } from '../../task.service';
   styleUrls: ['./task-list.component.scss'],
 })
 export class TaskListComponent {
-  @Input() tasks : Task[] = []; // Fictive data, replace with your actual data
+  @Input() tasks : Task[] = [];
+  authService = inject(AuthService)// Fictive data, replace with your actual data
+
 }

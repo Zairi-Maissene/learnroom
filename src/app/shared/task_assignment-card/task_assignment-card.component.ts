@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./task_assignment-card.component.scss'],
 })
 export class Task_assignmentCardComponent {
-  @Input() path: string = '/';
+  @Input() path: string = '/task';
   @Input() task: { name: string } = { name: 'nada' };
 
   constructor(private router: Router) {}
