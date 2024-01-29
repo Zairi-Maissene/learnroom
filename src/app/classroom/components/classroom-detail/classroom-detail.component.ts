@@ -35,13 +35,11 @@ export class ClassroomDetailComponent {
   tasks$: Observable<Task[]> = new Observable()
   router = inject(ActivatedRoute)
   courses$: Observable<Course[]> | undefined = new Observable<Course[]>();
-  isTeacher = localStorage.getItem('isTeacher');
   modalService = inject(NgbModal)
   authService = inject(AuthService)
   searchForm: FormGroup = new FormGroup({});
   searchResults$: Observable<Classroom[]> | undefined = new Observable();
   fb = inject(FormBuilder);
-  studentId = JSON.parse(localStorage.getItem("user") ?? '{}')?.id ?? ''
   courseService = inject(CourseService)
 
   initSearch() {
