@@ -1,6 +1,20 @@
-<div>
-  <header *ngIf="showHeader" class="header-container">
-    <div class="hstack-container" (click)="navigateToPreview()">
+  <div  class="pos-f-t">
+  <div *ngIf="this.authService.isAuthenticated$ | async" [ngbCollapse]="isCollapsed" id="navbarToggleExternalContent">
+    <app-sidebar [isCollapsed]="isCollapsed" (toggle)="toggleSidebar()"></app-sidebar>
+  </div>
+  <nav *ngIf="showHeader" class="header-container navbar">
+    <div class="hstack-container" >
+
+    <button  *ngIf="this.authService.isAuthenticated$ | async" class="navbar-toggler " (click)="isCollapsed = !isCollapsed" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarToggleExternalContent"
+            aria-controls="navbarToggleExternalContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+      <div class="hstack-container" (click)="navigateToPreview()">
       <img src="/assets/logo.png" alt="logo" class="logo" />
       <h2 class="title">LearnRoom</h2>
       <div *ngIf="this.authService.isAuthenticated$ | async" class="divider"></div>
@@ -13,11 +27,14 @@
       >
         Teacher
       </p>
-
       <ng-template #studentBlock>
         <p class="role" *ngIf="this.authService.isAuthenticated$ | async">Student</p>
       </ng-template>
+        </div>
+
     </div>
+
+
 
     <div class="button-container">
       <button class="button" *ngIf="!(this.authService.isAuthenticated$ | async)" (click)="signIn()">
@@ -36,6 +53,6 @@
         Sign Out
       </button>
     </div>
-  </header>
+  </nav>
   <div class="header-separator"></div>
 </div>

@@ -10,6 +10,7 @@ import {AuthService} from '../../../auth/auth.service';
 export class HeaderComponent {
   router = inject(Router);
   @Input() isOpen: boolean = false;
+  isCollapsed: boolean = true; // Add or modify this property as needed
   showHeader: boolean = true;
   authService = inject(AuthService);
   ngOnInit() {
@@ -41,4 +42,7 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
+  toggleSidebar(): void {
+    this.isCollapsed = !this.isCollapsed;
+  }
 }

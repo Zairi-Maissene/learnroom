@@ -16,6 +16,11 @@ import {TextButtonComponent} from './components/text-button/text-button.componen
 import {PreviewComponent} from './preview/preview.component';
 import {TokenInterceptor} from "../helpers/token.interceptor";
 import {CookieService} from "ngx-cookie-service";
+import { SidebarComponent } from './components/templates/sideBar/sidebar.component';
+import { AvatarComponent } from './components/templates/avatar/avatar.component';
+import { SpinnerComponent } from './loader/spinner/spinner.component';
+import {LoaderInterceptor} from "./loader/interceptors/loader.interceptor";
+import {LoaderService} from "./loader/loader.service";
 
 @NgModule({
   declarations: [
@@ -26,6 +31,9 @@ import {CookieService} from "ngx-cookie-service";
     StudentFormComponent,
     TextButtonComponent,
     PreviewComponent,
+    SidebarComponent,
+    AvatarComponent,
+    SpinnerComponent,
   ],
   imports: [
     FormsModule,
@@ -47,7 +55,13 @@ import {CookieService} from "ngx-cookie-service";
       useClass: TokenInterceptor,
       multi: true,
     },
-    CookieService
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
+    LoaderService
   ],
   bootstrap: [AppComponent],
 })
