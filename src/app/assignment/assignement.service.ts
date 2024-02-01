@@ -54,7 +54,7 @@ export class AssignementService {
   }
   deleteAssignment(id: string) {
     console.log(id);
-    return this.api.remove(`/assignment/${id}`);
+    return this.api.remove(`/assignment/${id}`).subscribe();
   }
 
   // ResponseAssignment

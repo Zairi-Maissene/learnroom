@@ -10,7 +10,7 @@
             [isTeacher]="(this.authservice.isTeacher$ | async) || false "
     > </app-element-details>
   </div>
-    <ng-container *ngIf=" user.role === 'student'">
+    <ng-container *ngIf="!isTeacher">
       <br />
       <form
         [ngStyle]="{'flex-direction': 'column','display':'flex','gap':'10px',width:'80%'}"
@@ -53,7 +53,7 @@
 
     </div>
   </ng-container>
-    <ng-container *ngIf="isAssignmentSubmited && user.role == 'student' " >
+    <ng-container *ngIf="isAssignmentSubmited && !isTeacher " >
 
     </ng-container>
 

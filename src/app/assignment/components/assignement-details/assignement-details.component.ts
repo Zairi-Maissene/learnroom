@@ -25,59 +25,57 @@ export class AssignementDetailsComponent implements OnInit {
   editMode:boolean=false;
   isAssignmentSubmited:boolean=false;
   modalService = inject(NgbModal);
+  isTeacher : boolean = false;
 
-  constructor(private route: ActivatedRoute,public authservice:AuthService, private router:Router,private formBuilder: FormBuilder,private assignmentService: AssignementService)
+  constructor(private route: ActivatedRoute,
+              public authService : AuthService,
+              public authservice:AuthService, private router:Router,private formBuilder: FormBuilder,private assignmentService: AssignementService)
   {
     this.submitAssignmentForm.controls['description'].setErrors({ 'minLength': 'Min length 5 chars.' });
 
   }
 
   ngOnInit(): void {
-    this.route.params.pipe(tap(param=>{
+    this.route.params.pipe(tap(param => {
       this.assignmentId = param['id']
-    this.assignmentId = this.route.snapshot.params['id'];
-    this.assignmentService.getAssignment(this.assignmentId).pipe(
-      tap(res => {this.assignment = res})
-    ).subscribe()
-    this.assignment$.subscribe(data => {
-      if (data && data.responseAssignments as ResponseAssignement[]) {
-        this.responsesAssignment = [...data.responseAssignments]; // Creating a shallow copy
-      }
-    });
-
-    if(this.user.role=="student")
-    {
-      this.responseAssignment$=this.assignmentService.getResponseAssignment(this.assignmentId)
+      this.assignmentId = this.route.snapshot.params['id'];
+      this.assignmentService.getAssignment(this.assignmentId).pipe(
+        tap(res => {
+          this.assignment = res
+        })
+      ).subscribe()
+      this.assignment$.subscribe(data => {
+        if (data && data.responseAssignments as ResponseAssignement[]) {
+          this.responsesAssignment = [...data.responseAssignments]; // Creating a shallow copy
+        }
+      });
+      this.authService.isTeacher$.subscribe((user) => {
+          this.isTeacher = user;
+        }
+      );
+    })).subscribe();
+    if (!this.isTeacher) {
+      this.responseAssignment$ = this.assignmentService.getResponseAssignment(this.assignmentId)
 
       this.responseAssignment$.subscribe(data => {
         if (data.content) {
           this.isAssignmentSubmited = true
         }
       });
-  
-      if(this.user.role=="student")
-      {
-        this.responseAssignment$=this.assignmentService.getResponseAssignment(this.assignmentId)
-  
+
+      if (!this.isTeacher) {
+        this.responseAssignment$ = this.assignmentService.getResponseAssignment(this.assignmentId)
+
         this.responseAssignment$.subscribe(data => {
           if (data.content) {
             this.isAssignmentSubmited = true
           }
         });
       }
-    }})).subscribe();
-    
-  }
-  getUser: any = () => {
-    return {}
-  }
-  onSubmit: any = () => {
-     this.assignmentService.updateResponseAssignment(this.assignmentId,this.submitAssignmentForm.value)
-      this.isAssignmentSubmited=true;
-  }
 
-  protected readonly Date = Date;
 
+    }
+  }
   deleteAssignment(){
   this.assignmentService.deleteAssignment(this.assignmentId)
   this.router.navigate(['/classroom']);
@@ -88,8 +86,6 @@ export class AssignementDetailsComponent implements OnInit {
     this.assignmentService.updateAssignment(this.assignmentId, formValues)
     this.assignmentService.getAssignment(this.assignmentId).pipe(
       tap(res => {this.assignment = res})).subscribe()
-
-
   }
   toggleEditMode(mode:boolean){
     this.editMode=mode;
@@ -117,7 +113,10 @@ export class AssignementDetailsComponent implements OnInit {
     this.responsesAssignment = updatedResponse
   }
 
-
+onSubmit: any = () => {
+  this.assignmentService.updateResponseAssignment(this.assignmentId,this.submitAssignmentForm?.value)
+  this.isAssignmentSubmited=true;
+}
 
 
 }

@@ -3,7 +3,8 @@
   <div [ngStyle]="{'width':'80%'}">
     <app-element-details
             (editModeChange)="toggleEditMode($event)"
-            [elementType]="'task'" [isTeacher]="isTeacher" [element]="task"  [editMode]="editMode"  (deleteElement)="deleteTask()" ></app-element-details>
+            [elementType]="'task'" [isTeacher]="isTeacher" [element]="task"  [editMode]="editMode"
+            (deleteElement)="deleteTask()" ></app-element-details>
   </div>
   <ng-container *ngIf=!isTeacher>
     <ng-container *ngIf="!taskIsSubmitted">
@@ -13,7 +14,7 @@
       </p>
       <button
               [ngStyle]="{'text-align':'center',color:'white',padding:'15px',width:'200px',backgroundColor:'orange',borderColor:'orange',borderRadius:'12px'}"
-              (click)="submitTask">
+              (click)="submitTask()">
         Mark as Completed
       </button>
     </ng-container>

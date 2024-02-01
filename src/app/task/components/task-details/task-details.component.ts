@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, tap} from 'rxjs';
 import {ResponseTask, Task, TaskService} from '../../task.service';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -23,7 +23,8 @@ export class TaskDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService,
-    public authService : AuthService
+    public authService : AuthService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -46,8 +47,8 @@ export class TaskDetailsComponent implements OnInit {
         }
       );
     })).subscribe();
-    
-    
+
+
 
   }
 
@@ -59,6 +60,8 @@ export class TaskDetailsComponent implements OnInit {
   submitEditTask() {}
   deleteTask() {
     this.taskService.deleteTask(this.taskId);
+    this.router.navigate(['/classroom']);
+
   }
   editTask(formValues : any)
   {
@@ -76,11 +79,13 @@ export class TaskDetailsComponent implements OnInit {
     modal.componentInstance.editForm.subscribe((emmitedValue:any) => {
       this.task=emmitedValue
       this.editTask(emmitedValue)
+
     });
 
     }
   submitTask() {
     this.taskService.toggleResponseTask(this.taskId);
+    this.taskIsSubmitted=true
   }
 
 }
