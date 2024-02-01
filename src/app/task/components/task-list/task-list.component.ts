@@ -1,5 +1,7 @@
 import {inject, Input} from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TaskFormComponent } from '../../../modals/task-form/task-form.component';
 import { Task } from '../../task.service';
 import {AuthService} from "../../../auth/auth.service";
 
@@ -10,6 +12,11 @@ import {AuthService} from "../../../auth/auth.service";
 })
 export class TaskListComponent {
   @Input() tasks : Task[] = [];
+  @Input() courseId: string | undefined;
   authService = inject(AuthService)// Fictive data, replace with your actual data
-
+  modal = inject(NgbModal);
+  onAddTaskClick(): void {
+    const modal = this.modal.open(TaskFormComponent)
+    modal.componentInstance.courseId = this.courseId
+  }
 }
