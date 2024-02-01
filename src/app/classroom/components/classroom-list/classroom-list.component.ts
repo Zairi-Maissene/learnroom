@@ -7,6 +7,7 @@ import {Classroom, ClassroomService} from '../../classroom.service';
 import {ClassroomFormComponent} from '../../../modals/classroom-form/classroom-form..component';
 import {ClassroomIdComponent} from '../../../modals/classroom-id/classroom-id.component';
 import {AuthService} from "../../../auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-classroom-list',
@@ -24,7 +25,7 @@ export class ClassroomListComponent implements OnInit {
   label = 'Enroll in a classroom';
   searchForm: FormGroup = new FormGroup({});
   searchResults$: BehaviorSubject<Classroom[]> = new BehaviorSubject<Classroom[]>([]);
-
+  private router: Router = inject(Router);
   ngOnInit(): void {
     this.searchForm = this.fb.group({
       searchTerm: [''],
@@ -35,6 +36,7 @@ export class ClassroomListComponent implements OnInit {
         return this.classroomService.getClassrooms(searchTerm);
       })
     ).subscribe((classrooms) => {
+        console.log("searchTerm",classrooms)
       this.searchResults$.next(classrooms);
     });
 
@@ -54,4 +56,5 @@ export class ClassroomListComponent implements OnInit {
     const modalComponent = this.isTeacher ? ClassroomFormComponent : ClassroomIdComponent;
     this.modalService.open(modalComponent);
   }
+
 }

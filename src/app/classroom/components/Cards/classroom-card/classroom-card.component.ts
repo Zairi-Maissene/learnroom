@@ -23,10 +23,8 @@ export class ClassroomCardComponent {
     if (!this.classroom.image) {
       this.classroom.image = 'assets/images/finance.jpg';
     }
+    console.log("data",this.classroom)
   }
   constructor(private router: Router) {}
 
-  navigateToClassroom() {
-    this.router.navigate(['/classroom', this.classroom.id]);
-  }
 }

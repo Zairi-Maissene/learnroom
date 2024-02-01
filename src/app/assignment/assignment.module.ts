@@ -7,6 +7,7 @@ import { AssignmentListComponent } from './components/assignment-list/assignment
 import { CourseModule } from '../course/course.module';
 import { SharedModule } from '../shared/shared.module';
 import { AssignmentFormComponent } from '../modals/assignment-form/assignment-form.component';
+import {RouterLink, RouterLinkActive, RouterModule, RouterOutlet} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,9 @@ import { AssignmentFormComponent } from '../modals/assignment-form/assignment-fo
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive
   ],
 })
 export class AssignmentModule {}
