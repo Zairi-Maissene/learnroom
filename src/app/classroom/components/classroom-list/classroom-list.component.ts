@@ -1,12 +1,12 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {BehaviorSubject, switchMap, tap} from 'rxjs';
+import {BehaviorSubject, filter, of, switchMap, tap} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {Classroom, ClassroomService} from '../../classroom.service';
 import {ClassroomFormComponent} from '../../../modals/classroom-form/classroom-form..component';
 import {ClassroomIdComponent} from '../../../modals/classroom-id/classroom-id.component';
-import {AuthService} from "../../../auth/auth.service";
+import {AuthService, User} from "../../../auth/auth.service";
 import {Router} from "@angular/router";
 import {AssignmentFormComponent} from "../../../modals/assignment-form/assignment-form.component";
 
@@ -27,14 +27,14 @@ export class ClassroomListComponent implements OnInit {
   searchForm: FormGroup = new FormGroup({});
   searchResults$: BehaviorSubject<Classroom[]> = new BehaviorSubject<Classroom[]>([]);
   private router: Router = inject(Router);
-  userId:string | undefined=undefined;
+  user:User | undefined;
   ngOnInit(): void {
     this.searchForm = this.fb.group({
       searchTerm: [''],
     });
 
     this.authService.user$.subscribe((user) => {
-      this.userId = user?.id;
+      this.user = user;
     });
     this.searchForm.get('searchTerm')?.valueChanges.pipe(debounceTime(200)).pipe(
       switchMap((searchTerm) => {
@@ -59,36 +59,42 @@ export class ClassroomListComponent implements OnInit {
   }
 
   onClick() {
-    const modalComponent = this.isTeacher ? ClassroomFormComponent : ClassroomIdComponent;
-    if(this.isTeacher)
+    if(this.isTeacher && this.user)
     {
       const modal = this.modalService.open(ClassroomFormComponent)
       modal.componentInstance.submit.subscribe((emmitedValue:any) => {
         this.addClassroom(emmitedValue)
       });
     }
-    else {
-
+    else if(this?.user?.email) {
+      const modal =this.modalService.open(ClassroomIdComponent) ;
+      modal.componentInstance.submit.subscribe((emmitedValue:any) => {
+        this.enrollClassroom(emmitedValue)
+      });
     }
   }
 
   addClassroom(formValues:any)
   {
-    this.classroomService.addClassroom(formValues, this.userId as string)
-    this.searchForm.get('searchTerm')?.valueChanges.pipe(debounceTime(200)).pipe(
-      switchMap((searchTerm) => {
-        return this.classroomService.getClassrooms(searchTerm);
-      })
-    ).subscribe((classrooms) => {
-      this.classrooms = classrooms;
-      this.searchResults$.next(classrooms);
-    });
+    this.classroomService.addClassroom(formValues, this.user?.id as string).subscribe(
+      {
+        complete: () => this.refetchData()
 
+      }    )
+      }
+
+  enrollClassroom(formValues:any){
+    this.classroomService.addStudent(formValues, this.user?.email as string).subscribe(
+      {
+        complete: () => this.refetchData()
+
+      }    )
+
+  }
+  refetchData() {
     this.classroomService.getClassrooms().subscribe((classrooms) => {
       this.classrooms = classrooms;
       this.searchResults$.next(classrooms);
     });
-
   }
-
 }
