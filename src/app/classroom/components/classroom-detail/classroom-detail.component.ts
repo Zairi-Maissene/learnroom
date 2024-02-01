@@ -21,7 +21,7 @@ import { StudentFormComponent } from '../../../modals/student-form/student-form.
 import { Task } from '../../../task/task.service';
 import { ClassroomService } from '../../classroom.service';
 import { Classroom } from '../../classroom.service';
-import { AuthService } from '../../../auth/auth.service';
+import {AuthService, Student, User} from '../../../auth/auth.service';
 @Component({
   selector: 'app-classroom-detail',
   templateUrl: './classroom-detail.component.html',
@@ -33,6 +33,7 @@ export class ClassroomDetailComponent {
   classroomService = inject(ClassroomService)
   assignments$: Observable<Assignement[]> = new Observable();
   tasks$: Observable<Task[]> = new Observable()
+  students$: Observable<User[]> | undefined = new Observable();
   router = inject(ActivatedRoute)
   courses$: Observable<Course[]> | undefined = new Observable<Course[]>();
   modalService = inject(NgbModal)
@@ -69,6 +70,9 @@ export class ClassroomDetailComponent {
     })
     this.classroom$.subscribe(classroom => {
       this.tasks$ = this.classroomService.getTasks(classroom?.id || '')
+    });
+    this.classroom$.subscribe(classroom => {
+      this.students$ = this.classroomService.getUsers(classroom?.id || '')
     });
 
     // Combine observables for search term and classroom ID

@@ -1,0 +1,12 @@
+<!--<img src="avatar.png" alt="Avatar" class="avatar">-->
+<!--<ul class="list-group list-group-flush"*ngFor="let student of students">-->
+<!--  <li class="list-group-item">Premier élément de liste-->
+<!--  &lt;!&ndash; Display student information here &ndash;&gt;-->
+<!--  <p>{{ student.name }}</p>-->
+<!--  <p>{{ student.email }}</p></li>-->
+<!--  &lt;!&ndash; Add more details as needed &ndash;&gt;-->
+<!--</ul>-->
+
+<div class="list-group list-group-flush" *ngFor="let student of students">
+<p>{{ student?.name }}</p>
+</div>
