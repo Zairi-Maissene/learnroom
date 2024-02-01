@@ -11,6 +11,7 @@ import {ClassroomFormComponent} from '../modals/classroom-form/classroom-form..c
 import {ClassroomIdComponent} from '../modals/classroom-id/classroom-id.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ClassroomListComponent} from './components/classroom-list/classroom-list.component';
+import {StudentComponent} from "./components/student/student.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {ClassroomListComponent} from './components/classroom-list/classroom-list
     ClassroomDetailComponent,
     ClassroomFormComponent,
     ClassroomIdComponent,
+    StudentComponent,
     ClassroomListComponent,
   ],
   imports: [

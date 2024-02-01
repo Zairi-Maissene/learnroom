@@ -19,7 +19,7 @@ export class TaskDetailsComponent implements OnInit {
   taskIsSubmitted$:Observable<ResponseTask>= new Observable<ResponseTask>();
   taskIsSubmitted:boolean=false
   modalService = inject(NgbModal);
-
+  isTeacher : boolean = false;
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService,
@@ -29,10 +29,10 @@ export class TaskDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.pipe(tap(param=>{
       this.taskId = param['id']
-      this.task$ = this.taskService.getTask(this.taskId).pipe(
-        tap(task => this.task = task)
-      );
-        this.taskIsSubmitted$=this.taskService.getResponseTask("6df4c61d-6081-4124-88ad-0afc0a4b9954")
+      this.taskService.getTask(this.taskId).pipe(
+        tap(task => {console.log("task",task);this.task = task})
+      ).subscribe();
+      this.taskIsSubmitted$=this.taskService.getResponseTask(this.taskId)
       if(!this.authService.isTeacher$)
       {
         this.taskIsSubmitted$.subscribe(data => {
@@ -41,9 +41,14 @@ export class TaskDetailsComponent implements OnInit {
           }
         });
       }
+      this.authService.isTeacher$.subscribe((user) => {
+        this.isTeacher = user;
+        }
+      );
     })).subscribe();
     
     
+
   }
 
   onSubmit: any = () => {
@@ -58,9 +63,9 @@ export class TaskDetailsComponent implements OnInit {
   editTask(formValues : any)
   {
     this.taskService.updateTask(this.taskId, formValues)
-    this.task$=this.taskService.getTask(this.taskId).pipe(
+    this.taskService.getTask(this.taskId).pipe(
       tap(res => {this.task = res})
-    );
+    ).subscribe()
 
   }
   toggleEditMode(mode: boolean) {

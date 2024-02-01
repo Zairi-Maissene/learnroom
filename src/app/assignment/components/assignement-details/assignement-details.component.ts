@@ -35,12 +35,23 @@ export class AssignementDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.pipe(tap(param=>{
       this.assignmentId = param['id']
-      this.assignment$=this.assignmentService.getAssignment(this.assignmentId).pipe(
-        tap(res => {this.assignment = res})
-      );
-      this.assignment$.subscribe(data => {
-        if (data && data.responseAssignments as ResponseAssignement[]) {
-          this.responsesAssignment = [...data.responseAssignments]; 
+    this.assignmentId = this.route.snapshot.params['id'];
+    this.assignmentService.getAssignment(this.assignmentId).pipe(
+      tap(res => {this.assignment = res})
+    ).subscribe()
+    this.assignment$.subscribe(data => {
+      if (data && data.responseAssignments as ResponseAssignement[]) {
+        this.responsesAssignment = [...data.responseAssignments]; // Creating a shallow copy
+      }
+    });
+
+    if(this.user.role=="student")
+    {
+      this.responseAssignment$=this.assignmentService.getResponseAssignment(this.assignmentId)
+
+      this.responseAssignment$.subscribe(data => {
+        if (data.content) {
+          this.isAssignmentSubmited = true
         }
       });
   
@@ -54,7 +65,7 @@ export class AssignementDetailsComponent implements OnInit {
           }
         });
       }
-    })).subscribe();
+    }})).subscribe();
     
   }
   getUser: any = () => {
@@ -66,9 +77,7 @@ export class AssignementDetailsComponent implements OnInit {
   }
 
   protected readonly Date = Date;
-  submitEditAssignment(){
-    this.assignmentService.updateAssignment(this.assignmentId,this.submitAssignmentForm.value)
-  }
+
   deleteAssignment(){
   this.assignmentService.deleteAssignment(this.assignmentId)
   this.router.navigate(['/classroom']);
@@ -77,9 +86,9 @@ export class AssignementDetailsComponent implements OnInit {
   editAssignement(formValues:any)
   {
     this.assignmentService.updateAssignment(this.assignmentId, formValues)
-    this.assignment$=this.assignmentService.getAssignment(this.assignmentId).pipe(
-      tap(res => {this.assignment = res})
-    );
+    this.assignmentService.getAssignment(this.assignmentId).pipe(
+      tap(res => {this.assignment = res})).subscribe()
+
 
   }
   toggleEditMode(mode:boolean){

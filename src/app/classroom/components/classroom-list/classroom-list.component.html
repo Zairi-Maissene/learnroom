@@ -5,19 +5,19 @@
     </div>
   </form>
     <!-- TODO: handle loading state -->
-  <ng-container *ngIf="(searchResults$ | async) as searchResults">
+  <div class="d-flex flex-wrap" *ngIf="classrooms">
 
-    <div *ngFor="let result of searchResults">
-      <a [routerLink]="['/classroom', result.id]" class="search-result-link">
+    <div *ngFor="let result of classrooms">
+      <a [routerLink]="['/classroom', result.id]" >
         <app-classroom-card [classroom]="result"></app-classroom-card>
       </a>
     </div>
 
-    <div *ngIf="!searchResults?.length">
+    <div *ngIf="!classrooms?.length">
       <h3>No results found</h3>
     </div>
 
-  </ng-container>
+  </div>
   <button class="btn btn-primary rounded-2 p-3" (click)="onClick()">{{label}}</button>
 </div>
 <router-outlet></router-outlet>
