@@ -33,6 +33,7 @@ export class LoaderInterceptor implements HttpInterceptor {
       }),
       finalize(() => {
         this.loaderService.hideLoader();
+        console.log("jjjjjjj")
       })
     );
 

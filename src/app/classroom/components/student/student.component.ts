@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Student, User} from "../../../auth/auth.service";
+import {Student, Teacher, User} from "../../../auth/auth.service";
 
 @Component({
   selector: 'app-students',
@@ -7,6 +7,6 @@ import {Student, User} from "../../../auth/auth.service";
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent {
-  @Input() students!: User[];
+  @Input() users!: {teacher:Teacher,students:Student[]};
 
 }

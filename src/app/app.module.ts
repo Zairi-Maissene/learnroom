@@ -19,11 +19,11 @@ import {PreviewComponent} from './preview/preview.component';
 import {TokenInterceptor} from "../helpers/token.interceptor";
 import {CookieService} from "ngx-cookie-service";
 import { SidebarComponent } from './components/templates/sidebar/sidebar.component';
-import { AvatarComponent } from './components/templates/avatar/avatar.component';
 import { SpinnerComponent } from './loader/spinner/spinner.component';
 import {LoaderInterceptor} from "./loader/interceptors/loader.interceptor";
 import {LoaderService} from "./loader/loader.service";
 import {ClassroomModule} from "./classroom/classroom.module";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -35,7 +35,6 @@ import {ClassroomModule} from "./classroom/classroom.module";
     TextButtonComponent,
     PreviewComponent,
     SidebarComponent,
-    AvatarComponent,
     SpinnerComponent,
   ],
   imports: [
@@ -61,6 +60,7 @@ import {ClassroomModule} from "./classroom/classroom.module";
     }),
     ReactiveFormsModule,
     ClassroomModule,
+    SharedModule,
   ],
   providers: [
     {
