@@ -20,9 +20,9 @@
       'border-width': '2px'
     }" />
 
-
+    <div style="font-size: 18px; margin-top: 20px;margin-bottom: 10px">Tasks:</div>
     <app-task-list [inCard] ="true" [tasks]="(tasks$ | async) || []"></app-task-list>
-
+    <div style="font-size: 18px; margin-top: 20px;margin-bottom: 10px">Assignments:</div>
     <app-assignment-list [inCard] ="true"  [assignments]="(assignments$ | async) || []" [courseId]="selectedCourse.id"></app-assignment-list>
 
 
