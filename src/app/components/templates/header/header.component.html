@@ -65,7 +65,7 @@
             <img width="16px" height="10px" src="assets/flags/en.jpeg" alt="{{ 'flagAltEn' | translate }}" />
           </ng-template>
         </button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <div ngbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownBasic1">
           <button value="fr" ngbDropdownItem (click)="onLanguageChange('fr')">
             <span><img width="16px" height="10px" src="assets/flags/fr.png" alt="{{ 'flagAltFr' | translate }}" /></span> {{ 'menuFrancais' | translate }}
           </button>
