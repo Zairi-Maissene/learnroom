@@ -5,6 +5,9 @@ import {BehaviorSubject, map, Observable, tap} from 'rxjs';
 import {CookieService} from "ngx-cookie-service";
 import {catchError} from "rxjs/operators";
 import {Router} from "@angular/router";
+import { Course } from '../course/course.service';
+import { Task } from '../task/task.service';
+import { Assignement } from '../assignment/assignement.service';
 
 export type SignIn = {
   email: string;
@@ -107,5 +110,9 @@ export class AuthService {
         return err;
       })
     ).subscribe()
+  }
+
+  getAll() {
+    return this.api.get<{courses:Course[][],tasks:Task[][],assignments:Assignement[][]}>(`/user/all`);
   }
 }

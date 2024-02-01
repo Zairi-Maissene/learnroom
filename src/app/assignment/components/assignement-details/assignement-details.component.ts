@@ -33,26 +33,29 @@ export class AssignementDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.assignmentId = this.route.snapshot.params['id'];
-    this.assignment$=this.assignmentService.getAssignment(this.assignmentId).pipe(
-      tap(res => {this.assignment = res})
-    );
-    this.assignment$.subscribe(data => {
-      if (data && data.responseAssignments as ResponseAssignement[]) {
-        this.responsesAssignment = [...data.responseAssignments]; // Creating a shallow copy
-      }
-    });
-
-    if(this.user.role=="student")
-    {
-      this.responseAssignment$=this.assignmentService.getResponseAssignment(this.assignmentId)
-
-      this.responseAssignment$.subscribe(data => {
-        if (data.content) {
-          this.isAssignmentSubmited = true
+    this.route.params.pipe(tap(param=>{
+      this.assignmentId = param['id']
+      this.assignment$=this.assignmentService.getAssignment(this.assignmentId).pipe(
+        tap(res => {this.assignment = res})
+      );
+      this.assignment$.subscribe(data => {
+        if (data && data.responseAssignments as ResponseAssignement[]) {
+          this.responsesAssignment = [...data.responseAssignments]; 
         }
       });
-    }
+  
+      if(this.user.role=="student")
+      {
+        this.responseAssignment$=this.assignmentService.getResponseAssignment(this.assignmentId)
+  
+        this.responseAssignment$.subscribe(data => {
+          if (data.content) {
+            this.isAssignmentSubmited = true
+          }
+        });
+      }
+    })).subscribe();
+    
   }
   getUser: any = () => {
     return {}

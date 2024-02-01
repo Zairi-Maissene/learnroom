@@ -27,19 +27,23 @@ export class TaskDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.taskId = this.route.snapshot.params['id'];
-    this.task$ = this.taskService.getTask(this.taskId).pipe(
-      tap(task => this.task = task)
-    );
-      this.taskIsSubmitted$=this.taskService.getResponseTask("6df4c61d-6081-4124-88ad-0afc0a4b9954")
-    if(!this.authService.isTeacher$)
-    {
-      this.taskIsSubmitted$.subscribe(data => {
-        if (data && Object.keys(data).length > 0) {
-          this.taskIsSubmitted=true
-        }
-      });
-    }
+    this.route.params.pipe(tap(param=>{
+      this.taskId = param['id']
+      this.task$ = this.taskService.getTask(this.taskId).pipe(
+        tap(task => this.task = task)
+      );
+        this.taskIsSubmitted$=this.taskService.getResponseTask("6df4c61d-6081-4124-88ad-0afc0a4b9954")
+      if(!this.authService.isTeacher$)
+      {
+        this.taskIsSubmitted$.subscribe(data => {
+          if (data && Object.keys(data).length > 0) {
+            this.taskIsSubmitted=true
+          }
+        });
+      }
+    })).subscribe();
+    
+    
   }
 
   onSubmit: any = () => {
