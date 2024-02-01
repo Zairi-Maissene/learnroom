@@ -1,9 +1,8 @@
-import {Component, inject, OnInit, ViewChild} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Assignement, AssignementService, ResponseAssignement} from "../../assignement.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Observable, switchMap, tap} from "rxjs";
-import {EditTaskFormComponent} from "../../../modals/edit-task-form/edit-task-form.component";
+import {Observable, tap} from "rxjs";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AuthService} from "../../../auth/auth.service";
 import {AssignmentFormComponent} from "../../../modals/assignment-form/assignment-form.component";
@@ -34,10 +33,12 @@ export class AssignementDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.params.pipe(tap(param=>{
+      this.assignmentId = param['id']
     this.assignmentId = this.route.snapshot.params['id'];
-    this.assignment$=this.assignmentService.getAssignment(this.assignmentId).pipe(
+    this.assignmentService.getAssignment(this.assignmentId).pipe(
       tap(res => {this.assignment = res})
-    );
+    ).subscribe()
     this.assignment$.subscribe(data => {
       if (data && data.responseAssignments as ResponseAssignement[]) {
         this.responsesAssignment = [...data.responseAssignments]; // Creating a shallow copy
@@ -46,14 +47,26 @@ export class AssignementDetailsComponent implements OnInit {
 
     if(this.user.role=="student")
     {
-      this.responseAssignment$=this.assignmentService.getResponseAssignment(this.assignmentId,"f486be62-384b-4d97-bf42-3fcf98342cb7")
+      this.responseAssignment$=this.assignmentService.getResponseAssignment(this.assignmentId)
 
       this.responseAssignment$.subscribe(data => {
         if (data.content) {
           this.isAssignmentSubmited = true
         }
       });
-    }
+  
+      if(this.user.role=="student")
+      {
+        this.responseAssignment$=this.assignmentService.getResponseAssignment(this.assignmentId)
+  
+        this.responseAssignment$.subscribe(data => {
+          if (data.content) {
+            this.isAssignmentSubmited = true
+          }
+        });
+      }
+    }})).subscribe();
+    
   }
   getUser: any = () => {
     return {}
@@ -64,9 +77,7 @@ export class AssignementDetailsComponent implements OnInit {
   }
 
   protected readonly Date = Date;
-  submitEditAssignment(){
-    this.assignmentService.updateAssignment(this.assignmentId,this.submitAssignmentForm.value)
-  }
+
   deleteAssignment(){
   this.assignmentService.deleteAssignment(this.assignmentId)
   this.router.navigate(['/classroom']);
@@ -75,9 +86,9 @@ export class AssignementDetailsComponent implements OnInit {
   editAssignement(formValues:any)
   {
     this.assignmentService.updateAssignment(this.assignmentId, formValues)
-    this.assignment$=this.assignmentService.getAssignment(this.assignmentId).pipe(
-      tap(res => {this.assignment = res})
-    );
+    this.assignmentService.getAssignment(this.assignmentId).pipe(
+      tap(res => {this.assignment = res})).subscribe()
+
 
   }
   toggleEditMode(mode:boolean){

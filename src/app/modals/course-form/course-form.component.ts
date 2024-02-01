@@ -1,9 +1,10 @@
-import { inject } from '@angular/core';
+import {EventEmitter, inject, Output} from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CourseService } from '../../course/course.service';
+import {Classroom} from "../../classroom/classroom.service";
 
 @Component({
   selector: 'app-course-form',
@@ -12,8 +13,7 @@ import { CourseService } from '../../course/course.service';
 export class CourseFormComponent {
   @Input() values = { name: '', content: '' };
   courseForm: FormGroup;
-  courseService = inject(CourseService)
-  @Input() classroomId: string = '';
+  @Output() submit = new EventEmitter<Classroom>
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +33,8 @@ export class CourseFormComponent {
     if (this.courseForm.valid) {
       // Handle form submission or emit an event
       const formValues = this.courseForm.value;
-      this.courseService.addCourse(this.classroomId, formValues)
+      this.submit.emit(formValues)
+      this.modal.dismiss();
     }
   }
   onClose() {

@@ -21,7 +21,7 @@ import { StudentFormComponent } from '../../../modals/student-form/student-form.
 import { Task } from '../../../task/task.service';
 import { ClassroomService } from '../../classroom.service';
 import { Classroom } from '../../classroom.service';
-import { AuthService } from '../../../auth/auth.service';
+import {AuthService, Student, User} from '../../../auth/auth.service';
 @Component({
   selector: 'app-classroom-detail',
   templateUrl: './classroom-detail.component.html',
@@ -33,15 +33,14 @@ export class ClassroomDetailComponent {
   classroomService = inject(ClassroomService)
   assignments$: Observable<Assignement[]> = new Observable();
   tasks$: Observable<Task[]> = new Observable()
+  students$: Observable<User[]> | undefined = new Observable();
   router = inject(ActivatedRoute)
   courses$: Observable<Course[]> | undefined = new Observable<Course[]>();
-  isTeacher = localStorage.getItem('isTeacher');
   modalService = inject(NgbModal)
   authService = inject(AuthService)
   searchForm: FormGroup = new FormGroup({});
   searchResults$: Observable<Classroom[]> | undefined = new Observable();
   fb = inject(FormBuilder);
-  studentId = JSON.parse(localStorage.getItem("user") ?? '{}')?.id ?? ''
   courseService = inject(CourseService)
 
   initSearch() {
@@ -58,6 +57,7 @@ export class ClassroomDetailComponent {
   }
 
   ngOnInit() {
+    console.log("hi")
     this.searchForm = this.fb.group({
       searchTerm: [''], // Initial value can be an empty string or any other default value
     });
@@ -70,6 +70,9 @@ export class ClassroomDetailComponent {
     })
     this.classroom$.subscribe(classroom => {
       this.tasks$ = this.classroomService.getTasks(classroom?.id || '')
+    });
+    this.classroom$.subscribe(classroom => {
+      this.students$ = this.classroomService.getUsers(classroom?.id || '')
     });
 
     // Combine observables for search term and classroom ID

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {Assignement, AssignementService, ResponseAssignement} from "../../assignment/assignement.service";
 import {Task} from "../../task/task.service";
 import {ActivatedRoute} from "@angular/router";
@@ -20,11 +20,12 @@ export class CourseDetailsComponent implements OnInit{
   { }
 
   ngOnInit(): void {
-    this.courseId = this.route.snapshot.params['id'];
-    this.course$=this.courseService.getCourse(this.courseId)
-    this.tasks$=this.courseService.getTasks(this.courseId)
-    this.assignments$=this.courseService.getAssignments(this.courseId)
+    this.route.params.pipe(tap(param=>{
+      this.courseId = param['id']
+      this.course$=this.courseService.getCourse(this.courseId)
+      this.tasks$=this.courseService.getTasks(this.courseId)
+      this.assignments$=this.courseService.getAssignments(this.courseId)
+    })).subscribe();
   }
-
 
 }

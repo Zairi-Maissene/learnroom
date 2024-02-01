@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from '../../helpers/helpers';
-import {finalize, Observable, tap} from 'rxjs';
-import { Student, Teacher } from '../auth/auth.service';
+import {Injectable} from '@angular/core';
+import {ApiService} from '../../helpers/helpers';
+import {Observable} from 'rxjs';
+import {Student, Teacher} from '../auth/auth.service';
 
 export type Assignement = {
   id: string;
@@ -59,9 +59,9 @@ export class AssignementService {
 
   // ResponseAssignment
 
-  getResponseAssignment(assignment_id: string, student_id: string): Observable<ResponseAssignement>  {
+  getResponseAssignment(assignment_id: string): Observable<ResponseAssignement>  {
     return this.api.get<ResponseAssignement>(
-      `/response-assignment/${assignment_id}/${student_id}`,
+      `/response-assignment/${assignment_id}`,
     );
   }
 

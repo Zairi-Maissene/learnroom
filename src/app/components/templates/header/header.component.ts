@@ -11,6 +11,7 @@ import {TranslateService} from "@ngx-translate/core";
 export class HeaderComponent {
   router = inject(Router);
   @Input() isOpen: boolean = false;
+  isCollapsed: boolean = true; // Add or modify this property as needed
   showHeader: boolean = true;
   authService = inject(AuthService);
   translate = inject(TranslateService)
@@ -50,4 +51,7 @@ export class HeaderComponent {
     this.translate.use(language);
   }
 
+  toggleSidebar(): void {
+    this.isCollapsed = !this.isCollapsed;
+  }
 }

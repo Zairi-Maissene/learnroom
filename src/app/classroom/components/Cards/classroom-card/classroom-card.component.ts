@@ -26,7 +26,4 @@ export class ClassroomCardComponent {
   }
   constructor(private router: Router) {}
 
-  navigateToClassroom() {
-    this.router.navigate(['/classroom', this.classroom.id]);
-  }
 }

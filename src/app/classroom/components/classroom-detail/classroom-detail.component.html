@@ -3,7 +3,7 @@
   <img
     src="assets/images/finance.jpg"
     alt="Classroom Image"
-    class="img-fluid"
+    class="img-fluid image"
   />
 
   <div class="d-flex justify-content-between align-items-center mt-3">
@@ -45,7 +45,7 @@
     <li [ngbNavItem]="4">
       <button ngbNavLink>Students</button>
       <ng-template ngbNavContent>
-        <p>......</p>
+        <app-students [students]="(students$ | async)  || []"></app-students>
         <button class="btn btn-primary" *ngIf="(this.authService.isTeacher$ | async)" (click)="onAddStudentClick()">Add Student</button>
       </ng-template>
     </li>

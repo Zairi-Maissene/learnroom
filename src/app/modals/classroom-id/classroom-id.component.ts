@@ -1,9 +1,8 @@
-import { inject } from '@angular/core';
+import {EventEmitter, inject, Output} from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../auth/auth.service';
-import { ClassroomService } from '../../classroom/classroom.service';
 
 @Component({
   selector: 'app-classroom-id',
@@ -12,25 +11,27 @@ import { ClassroomService } from '../../classroom/classroom.service';
 export class ClassroomIdComponent {
   @Input() values = {id: ''};
   classroomForm: FormGroup;
-  classroomService: ClassroomService = inject(ClassroomService)
-  authService = inject(AuthService)
-  userEmail: string | undefined
+  @Output() submit = new EventEmitter<string>
 
-
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private modal: NgbActiveModal,
+              ) {
     this.classroomForm = this.fb.group({
       id: [this.values.id, [Validators.required]],
     });
-    this.authService.user$.subscribe((user) => {
-      this.userEmail = user?.email;
-    });
+
+
   }
 
   onSubmit() {
-    if (this.classroomForm.valid && this.userEmail) {
-      console.log('here', this.userEmail)
+    if (this.classroomForm.valid) {
+      this.submit.emit(this.classroomForm.value.id)
+      this.modal.dismiss();
 
-      this.classroomService.addStudent(this.classroomForm.value.id, this.userEmail)
     }
+  }
+  onClose() {
+    // Handle close modal logic here
+    this.modal.dismiss();
   }
 }
