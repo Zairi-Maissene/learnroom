@@ -1,5 +1,5 @@
 // Import necessary Angular modules
-import { inject } from '@angular/core';
+import {EventEmitter, inject, Output} from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,6 +9,7 @@ import { AuthService } from '../../auth/auth.service';
 import { Classroom } from '../../classroom/classroom.service';
 import { ClassroomService } from '../../classroom/classroom.service';
 import { ErrorService } from '../../error.service';
+import {Assignement, AssignementService} from "../../assignment/assignement.service";
 
 @Component({
   selector: 'app-classroom-form',
@@ -17,13 +18,10 @@ import { ErrorService } from '../../error.service';
 })
 export class ClassroomFormComponent {
   @Input() values = { name: '', description: '' };
-
   classroomForm: FormGroup;
-  errorService = inject(ErrorService);
-  classroomService = inject(ClassroomService);
   authService = inject(AuthService);
   userId: string | undefined;
-
+  @Output() submit = new EventEmitter<Classroom>
   constructor(
     private fb: FormBuilder,
     private modal: NgbActiveModal,
@@ -37,13 +35,15 @@ export class ClassroomFormComponent {
     });
   }
 
+
   onSubmit() {
     // Handle form submission logic here
     const formValues = this.classroomForm.value;
     if (this.classroomForm.valid && this.userId) {
-      this.classroomService.addClassroom(formValues, this.userId)
+        this.submit.emit(formValues)
+         this.modal.dismiss();
+
     }
-    // Call the handleSubmit function or perform your desired actions
   }
   validateField(field: string, code: string) {
     const formControl = this.classroomForm.get(field);

@@ -34,9 +34,9 @@ export class AssignementDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.assignmentId = this.route.snapshot.params['id'];
-    this.assignment$=this.assignmentService.getAssignment(this.assignmentId).pipe(
+    this.assignmentService.getAssignment(this.assignmentId).pipe(
       tap(res => {this.assignment = res})
-    );
+    ).subscribe()
     this.assignment$.subscribe(data => {
       if (data && data.responseAssignments as ResponseAssignement[]) {
         this.responsesAssignment = [...data.responseAssignments]; // Creating a shallow copy
@@ -63,9 +63,7 @@ export class AssignementDetailsComponent implements OnInit {
   }
 
   protected readonly Date = Date;
-  submitEditAssignment(){
-    this.assignmentService.updateAssignment(this.assignmentId,this.submitAssignmentForm.value)
-  }
+
   deleteAssignment(){
   this.assignmentService.deleteAssignment(this.assignmentId)
   this.router.navigate(['/classroom']);
@@ -74,9 +72,9 @@ export class AssignementDetailsComponent implements OnInit {
   editAssignement(formValues:any)
   {
     this.assignmentService.updateAssignment(this.assignmentId, formValues)
-    this.assignment$=this.assignmentService.getAssignment(this.assignmentId).pipe(
-      tap(res => {this.assignment = res})
-    );
+    this.assignmentService.getAssignment(this.assignmentId).pipe(
+      tap(res => {this.assignment = res})).subscribe()
+
 
   }
   toggleEditMode(mode:boolean){

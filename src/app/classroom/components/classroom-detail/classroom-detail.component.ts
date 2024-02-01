@@ -56,6 +56,7 @@ export class ClassroomDetailComponent {
   }
 
   ngOnInit() {
+    console.log("hi")
     this.searchForm = this.fb.group({
       searchTerm: [''], // Initial value can be an empty string or any other default value
     });
