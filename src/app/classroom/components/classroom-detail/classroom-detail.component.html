@@ -45,7 +45,7 @@
     <li [ngbNavItem]="4">
       <button ngbNavLink>Students</button>
       <ng-template ngbNavContent>
-        <app-students [students]="(students$ | async)  || []"></app-students>
+        <app-students [users]="(students$ | async)!"></app-students>
         <button class="btn btn-primary" *ngIf="(this.authService.isTeacher$ | async)" (click)="onAddStudentClick()">Add Student</button>
       </ng-template>
     </li>
