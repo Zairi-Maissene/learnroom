@@ -12,6 +12,7 @@ import {AuthService} from "../../../auth/auth.service";
 export class AssignmentListComponent {
   @Input() assignments: Assignement[] = [];
   @Input() courseId: string | undefined;
+  @Input () inCard:boolean = false;
 
   modalService = inject(NgbModal)
   authService = inject(AuthService)

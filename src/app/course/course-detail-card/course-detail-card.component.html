@@ -20,12 +20,11 @@
       'border-width': '2px'
     }" />
 
-    <div *ngIf="(tasks$ | async)?.length != 0; else emptyTasks">
-    <app-task-list *ngIf="(tasks$ | async) || []!=[] " [tasks]="(tasks$ | async) || []"></app-task-list>
-    </div>
-    <div *ngIf="(tasks$ | async)?.length !=0; else emptyAssignments">
-    <app-assignment-list [assignments]="(assignments$ | async) || []" [courseId]="selectedCourse.id"></app-assignment-list>
-  </div>
+
+    <app-task-list [inCard] ="true" [tasks]="(tasks$ | async) || []"></app-task-list>
+
+    <app-assignment-list [inCard] ="true"  [assignments]="(assignments$ | async) || []" [courseId]="selectedCourse.id"></app-assignment-list>
+
 
     <button
             class="btn btn-primary btn-rounded"
@@ -33,10 +32,6 @@
             (click)="onCourseClick()">View Course Details
     </button>
   </div>
-  <ng-template #emptyTasks>
-    <div>NO Tasks Yet </div>
-  </ng-template> <ng-template #emptyAssignments>
-    <div>NO Assignments Yet </div>
-  </ng-template>
+
 </div>
 
