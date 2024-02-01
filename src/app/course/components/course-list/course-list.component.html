@@ -1,6 +1,18 @@
-<div *ngFor="let course of courses">
-  <app-course-accordion [course]="course"></app-course-accordion>
+<div style="display: flex;padding-top:10px">
+
+  <ul style="list-style-type: none; padding: 0; width: 50%;display: flex; flex-direction: column;">
+    <li *ngFor="let course of courses">
+      <app-course-accordion [course]="course"></app-course-accordion>
+    </li>
+  </ul>
+
+  <div style="width: 50%;">
+    <app-course-detail-card></app-course-detail-card>
+  </div>
+
 </div>
+
+
 <div *ngIf="courses.length === 0">
   <app-empty-list-placeholder [type]="'course'" [user]="(authService.isTeacher$ | async) ? 'teacher' : 'student'"></app-empty-list-placeholder>
 </div>

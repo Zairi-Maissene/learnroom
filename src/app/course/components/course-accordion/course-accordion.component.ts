@@ -1,8 +1,6 @@
-import { inject } from '@angular/core';
-import { Input } from '@angular/core';
-import { Component } from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import { Router } from '@angular/router';
-import { Course } from '../../course.service';
+import { Course, CourseService } from '../../course.service';
 
 @Component({
   selector: 'app-course-accordion',
@@ -11,8 +9,14 @@ import { Course } from '../../course.service';
 })
 export class CourseAccordionComponent {
   @Input() course: Course | undefined;
-  router = inject(Router)
-  onCourseClick() {
-    this.router.navigate(['/course', this.course?.id])
+  router = inject(Router);
+  courseService = inject(CourseService);
+
+
+
+  onSelectCourse(course: Course | undefined) {
+    if (course) {  this.courseService.selectCourse(course);}
+
+
   }
 }

@@ -10,6 +10,7 @@ import {CourseDetailsComponent} from "./course-details/course-details.component"
 import {SharedModule} from "../shared/shared.module";
 import {TaskModule} from "../task/task.module";
 import {AssignmentModule} from "../assignment/assignment.module";
+import { CourseDetailCardComponent } from './course-detail-card/course-detail-card.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {AssignmentModule} from "../assignment/assignment.module";
     CourseAccordionComponent,
     CourseFormComponent,
     CourseDetailsComponent,
+    CourseDetailCardComponent,
 
 
   ],

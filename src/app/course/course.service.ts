@@ -3,6 +3,7 @@ import { Classroom } from '../classroom/classroom.service';
 import { Assignement } from '../assignment/assignement.service';
 import { Task } from '../task/task.service';
 import { ApiService } from '../../helpers/helpers';
+import {BehaviorSubject} from "rxjs";
 
 export type Course = {
   id: string;
@@ -22,7 +23,13 @@ export type UpdateCourse = Partial<CreateCourse>;
 })
 export class CourseService {
   constructor(private api: ApiService) {}
+  private selectedCourseSubject = new BehaviorSubject<Course | null>(null);
+  selectedCourse$ = this.selectedCourseSubject.asObservable();
 
+  selectCourse(course: Course|null) {
+    console.log('course',course);
+    this.selectedCourseSubject.next(course);
+  }
   // Course
   addCourse(classroom_id: string, course: CreateCourse) {
     return this.api.post<Course>(`/course/${classroom_id}`, course).subscribe();
