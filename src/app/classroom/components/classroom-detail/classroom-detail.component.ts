@@ -42,6 +42,7 @@ export class ClassroomDetailComponent {
   searchResults$: Observable<Classroom[]> | undefined = new Observable();
   fb = inject(FormBuilder);
   courseService = inject(CourseService)
+  taskFilter: 'completed' | 'inProgress' | undefined = undefined
 
   initSearch() {
     this.searchForm = this.fb.group({
@@ -67,7 +68,7 @@ export class ClassroomDetailComponent {
 
     this.classroom$.subscribe(classroom => {
       this.assignments$ = this.classroomService.getAssignments(classroom?.id || '')
-      this.tasks$ = this.classroomService.getTasks(classroom?.id || '')
+      this.tasks$ = this.classroomService.getTasks(classroom?.id || '', this.taskFilter)
       this.students$ = this.classroomService.getUsers(classroom?.id || '')
     })
 
@@ -96,9 +97,11 @@ export class ClassroomDetailComponent {
       })
     );
 
-
   }
-
+  onTaskFilterChange(filter: 'completed' | 'inProgress' | undefined) {
+    this.taskFilter = filter
+    this.tasks$ = this.classroomService.getTasks(this.router.snapshot.params['id']|| '', this.taskFilter)
+  }
   onAddStudentClick() {
     const modal = this.modalService.open(StudentFormComponent)
     modal.componentInstance.classroomId = this.router.snapshot.params['id']
