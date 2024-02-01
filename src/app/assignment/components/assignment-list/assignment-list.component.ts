@@ -13,6 +13,7 @@ export class AssignmentListComponent {
   @Input() assignments: Assignement[] = [];
   @Input() courseId: string | undefined;
   @Input () inCard:boolean = false;
+  @Input() withButton:boolean=false;
 
   modalService = inject(NgbModal)
   authService = inject(AuthService)

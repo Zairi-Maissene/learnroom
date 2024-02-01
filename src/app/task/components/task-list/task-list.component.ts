@@ -14,6 +14,7 @@ export class TaskListComponent {
   @Input() tasks : Task[] = [];
   @Input() courseId: string | undefined;
   @Input () inCard:boolean = false;
+  @Input () withButton: boolean=false;
   authService = inject(AuthService)// Fictive data, replace with your actual data
   modal = inject(NgbModal);
   onAddTaskClick(): void {
