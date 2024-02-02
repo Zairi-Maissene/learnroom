@@ -11,7 +11,15 @@ import {ToastrModule} from "ngx-toastr";
 import {CookieService} from "ngx-cookie-service";
 import {ApiService} from "@core/services/api.service";
 import {AppComponent} from "@core/components/_app/app.component";
-import {NgbAccordionDirective, NgbCollapse} from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbAccordionBody,
+  NgbAccordionButton,
+  NgbAccordionCollapse,
+  NgbAccordionDirective,
+  NgbAccordionHeader,
+  NgbAccordionItem,
+  NgbCollapse
+} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "@shared/shared.module";
 import {RouterOutlet} from "@angular/router";
 import {FooterComponent} from "@core/components/footer/footer.component";
@@ -38,10 +46,15 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
       timeOut: 5000,
       positionClass: 'toast-top-right',
     }),
-    NgbAccordionDirective,
     SharedModule,
     RouterOutlet,
     FormsModule,
+    NgbAccordionDirective,
+    NgbAccordionHeader,
+    NgbAccordionItem,
+    NgbAccordionButton,
+    NgbAccordionCollapse,
+    NgbAccordionBody,
     NgbCollapse,
   ],
   providers: [

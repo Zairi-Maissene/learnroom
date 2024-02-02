@@ -36,6 +36,6 @@ export class CourseDetailCardComponent  implements OnDestroy{
     this.subscription.unsubscribe();
   }
   onCourseClick() {
-    this.router.navigate(['/course', this.selectedCourse?.id]);
+    this.router.navigate(['/classroom/course', this.selectedCourse?.id]);
   }
 }

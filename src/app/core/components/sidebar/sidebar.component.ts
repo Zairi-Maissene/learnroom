@@ -57,7 +57,7 @@ export class SidebarComponent {
   navigateToCourse(courseId:string):void{
     this.toggleSidebar();
     console.log(courseId);
-    this.router.navigate([`/course/${courseId}`]);
+    this.router.navigate([`/classroom/course/${courseId}`]);
   }
 
   navigateToTask(taskId:string):void{

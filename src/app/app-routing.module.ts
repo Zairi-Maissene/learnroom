@@ -18,7 +18,7 @@ const routes: Routes = [
     data: { preload: true }
   },
   {
-    path: 'course',
+    path: 'classroom',
     loadChildren: () =>
       import('./features/course/course.module').then((m) => m.CourseModule),
     canActivate: [authenticatedGuard],

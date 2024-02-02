@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CourseRoutingModule} from './course-routing.module';
 import {CourseListComponent} from './components/course-list/course-list.component';
-import {NgbAccordionModule, NgbNav, NgbNavItem, NgbNavOutlet} from '@ng-bootstrap/ng-bootstrap';
+import {NgbNav, NgbNavContent, NgbNavItem, NgbNavLinkBase, NgbNavOutlet} from '@ng-bootstrap/ng-bootstrap';
 import {CourseAccordionComponent} from './components/course-accordion/course-accordion.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CourseDetailsComponent} from "@features/course/pages/course-details/course-details.component";
@@ -33,13 +33,13 @@ import {
   imports: [
     CommonModule,
     CourseRoutingModule,
-    NgbAccordionModule,
-    ReactiveFormsModule,
     SharedModule,
     NgbNavItem,
+    NgbNavOutlet,
+    NgbNavContent,
+    NgbNavLinkBase,
+    ReactiveFormsModule,
     NgbNav,
-    NgbNavOutlet
-
   ],
   exports: [CourseListComponent],
 })

@@ -7,7 +7,7 @@
 
     <div class="hstack-container">
       <app-avatar [name]="(currentUser$ | async)!.name"  [avatarColor]="(currentUser$ | async)!.avatar_color"></app-avatar>
-      <p style="font-size: 1.25rem; margin-bottom: 0rem">{{(currentUser$ | async)!.name}}</p>
+      <p style="font-size: 1.25rem; margin-bottom: 0">{{(currentUser$ | async)!.name}}</p>
     </div>
 
   <p>{{(currentUser$ | async)!.email}}</p>
