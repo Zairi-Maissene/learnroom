@@ -2,6 +2,7 @@ import {Component, inject, Input} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {AuthService} from '../../../auth/auth.service';
 import {TranslateService} from "@ngx-translate/core";
+import {AuthPersistenceService} from "../../../core/services/authPersistence.service";
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ export class HeaderComponent {
   @Input() isOpen: boolean = false;
   isCollapsed: boolean = true; // Add or modify this property as needed
   showHeader: boolean = true;
-  authService = inject(AuthService);
+  authService = inject(AuthPersistenceService);
+  connService = inject(AuthService);
   translate = inject(TranslateService)
   selectedLanguage: string = 'fr'; // Set the default language here
 
@@ -45,7 +47,7 @@ export class HeaderComponent {
 
   signOut(): void {
     this.router.navigate(['']);
-    this.authService.logout();
+    this.connService.logout();
   }
   onLanguageChange(language: string): void {
     this.translate.use(language);

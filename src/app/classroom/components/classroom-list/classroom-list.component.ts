@@ -1,14 +1,14 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {BehaviorSubject, filter, of, switchMap, tap} from 'rxjs';
+import {BehaviorSubject, switchMap} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {Classroom, ClassroomService} from '../../classroom.service';
 import {ClassroomFormComponent} from '../../../modals/classroom-form/classroom-form..component';
 import {ClassroomIdComponent} from '../../../modals/classroom-id/classroom-id.component';
-import {AuthService, User} from "../../../auth/auth.service";
+import {User} from "../../../auth/auth.service";
 import {Router} from "@angular/router";
-import {AssignmentFormComponent} from "../../../modals/assignment-form/assignment-form.component";
+import {AuthPersistenceService} from "../../../core/services/authPersistence.service";
 
 @Component({
   selector: 'app-classroom-list',
@@ -18,7 +18,7 @@ import {AssignmentFormComponent} from "../../../modals/assignment-form/assignmen
 export class ClassroomListComponent implements OnInit {
 
   fb = inject(FormBuilder);
-  authService = inject(AuthService);
+  authService = inject(AuthPersistenceService);
   modalService = inject(NgbModal);
   classroomService = inject(ClassroomService)
   classrooms: Classroom[] = [];

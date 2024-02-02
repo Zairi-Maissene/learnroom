@@ -4,7 +4,7 @@ import {Observable, tap} from 'rxjs';
 import {ResponseTask, Task, TaskService} from '../../task.service';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {EditTaskFormComponent} from "../../../modals/edit-task-form/edit-task-form.component";
-import {AuthService} from "../../../auth/auth.service";
+import {AuthPersistenceService} from "../../../core/services/authPersistence.service";
 
 @Component({
   selector: 'app-task-details',
@@ -23,7 +23,7 @@ export class TaskDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService,
-    public authService : AuthService,
+    public authService : AuthPersistenceService,
     private router:Router
   ) {}
 

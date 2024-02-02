@@ -1,10 +1,9 @@
-import { inject } from '@angular/core';
-import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClassroomFormComponent } from './modals/classroom-form/classroom-form..component';
-import { Observable } from 'rxjs';
-import { AuthService } from './auth/auth.service';
+import {Component, inject} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ClassroomFormComponent} from './modals/classroom-form/classroom-form..component';
+import {Observable} from 'rxjs';
 import {TranslateService} from "@ngx-translate/core";
+import {AuthPersistenceService} from "./core/services/authPersistence.service";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +14,7 @@ export class AppComponent {
   title = 'learnRoom-frontend-angular';
   modalService = inject(NgbModal);
   isLoggedIn$: Observable<boolean>;
-  authService = inject(AuthService);
+  authService = inject(AuthPersistenceService);
   constructor(private translate: TranslateService) {
     this.isLoggedIn$ = this.authService.isAuthenticated$;
       translate.setDefaultLang('fr');

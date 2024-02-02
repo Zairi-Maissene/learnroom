@@ -7,7 +7,7 @@
             [element]="assignment"
             [editMode]="editMode"
             (deleteElement)="deleteAssignment()"
-            [isTeacher]="(this.authservice.isTeacher$ | async) || false "
+            [isTeacher]="(this.authService.isTeacher$ | async) || false "
     > </app-element-details>
   </div>
     <ng-container *ngIf="!isTeacher">
@@ -29,7 +29,7 @@
       </form>
     </ng-container>
 
-    <ng-container *ngIf=" responsesAssignment.length > 0 &&  (authservice.isAuthenticated$ | async) &&  (authservice.isTeacher$ | async) ">
+    <ng-container *ngIf=" responsesAssignment.length > 0 &&  (authService.isAuthenticated$ | async) &&  (authService.isTeacher$ | async) ">
        <div  *ngFor="let response of responsesAssignment; let i = index" [ngStyle]="{'gap':'10px',width:'100%','align-items':'center',display:'flex','flex-direction':'column'}">
 
          <div [ngStyle]="{'border-radius':'10px',border:'1px black solid',padding:'5px 10px',width:'80%','margin-bottom':'10px'}" >

@@ -1,9 +1,8 @@
-import {inject, Input} from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TaskFormComponent } from '../../../modals/task-form/task-form.component';
-import { Task } from '../../task.service';
-import {AuthService} from "../../../auth/auth.service";
+import {Component, inject, Input} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TaskFormComponent} from '../../../modals/task-form/task-form.component';
+import {Task} from '../../task.service';
+import {AuthPersistenceService} from "../../../core/services/authPersistence.service";
 
 @Component({
   selector: 'app-task-list',
@@ -15,7 +14,7 @@ export class TaskListComponent {
   @Input() courseId: string | undefined;
   @Input () inCard:boolean = false;
   @Input () withButton: boolean=false;
-  authService = inject(AuthService)// Fictive data, replace with your actual data
+  authService = inject(AuthPersistenceService)// Fictive data, replace with your actual data
   modal = inject(NgbModal);
   onAddTaskClick(): void {
     const modal = this.modal.open(TaskFormComponent)

@@ -2,8 +2,7 @@ import {Component, inject, Input} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CourseFormComponent} from '../../../modals/course-form/course-form.component';
 import {Course, CourseService} from '../../course.service';
-import {AuthService} from "../../../auth/auth.service";
-import {ClassroomFormComponent} from "../../../modals/classroom-form/classroom-form..component";
+import {AuthPersistenceService} from "../../../core/services/authPersistence.service";
 
 @Component({
   selector: 'app-course-list',
@@ -15,7 +14,7 @@ export class CourseListComponent {
   @Input() classroomId: string | undefined
 
   modalService = inject(NgbModal)
-  authService = inject(AuthService)
+  authService = inject(AuthPersistenceService)
   courseService = inject(CourseService)
 
   onAddCourseClick() {

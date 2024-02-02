@@ -1,27 +1,17 @@
-import { inject } from '@angular/core';
-import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { startWith } from 'rxjs';
-import { of } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs';
-import { map } from 'rxjs';
-import { combineLatest } from 'rxjs';
-import { tap } from 'rxjs';
-import { debounceTime } from 'rxjs';
-import { switchMap } from 'rxjs';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Assignement } from '../../../assignment/assignement.service';
-import { CourseService } from '../../../course/course.service';
-import { Course } from '../../../course/course.service';
-import { StudentFormComponent } from '../../../modals/student-form/student-form.component';
-import { Task } from '../../../task/task.service';
-import { ClassroomService } from '../../classroom.service';
-import { Classroom } from '../../classroom.service';
-import {AuthService, Student, Teacher, User} from '../../../auth/auth.service';
+import {Component, inject} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {combineLatest, debounceTime, distinctUntilChanged, map, Observable, of, startWith, switchMap, tap} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {Assignement} from '../../../assignment/assignement.service';
+import {Course, CourseService} from '../../../course/course.service';
+import {StudentFormComponent} from '../../../modals/student-form/student-form.component';
+import {Task} from '../../../task/task.service';
+import {Classroom, ClassroomService} from '../../classroom.service';
+import {Student, Teacher} from '../../../auth/auth.service';
+import {AuthPersistenceService} from "../../../core/services/authPersistence.service";
+
 @Component({
   selector: 'app-classroom-detail',
   templateUrl: './classroom-detail.component.html',
@@ -37,7 +27,7 @@ export class ClassroomDetailComponent {
   router = inject(ActivatedRoute)
   courses$: Observable<Course[]> | undefined = new Observable<Course[]>();
   modalService = inject(NgbModal)
-  authService = inject(AuthService)
+  authService = inject(AuthPersistenceService)
   searchForm: FormGroup = new FormGroup({});
   searchResults$: Observable<Classroom[]> | undefined = new Observable();
   fb = inject(FormBuilder);
@@ -58,7 +48,6 @@ export class ClassroomDetailComponent {
   }
 
   ngOnInit() {
-    console.log("hi")
     this.searchForm = this.fb.group({
       searchTerm: [''], // Initial value can be an empty string or any other default value
     });

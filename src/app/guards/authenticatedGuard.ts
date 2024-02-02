@@ -1,10 +1,10 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from '@angular/core';
-import {AuthService} from '../auth/auth.service';
+import {AuthPersistenceService} from "../core/services/authPersistence.service";
 
 export const authenticatedGuard: CanActivateFn = (route) => {
   const router = inject(Router);
-  const authService = inject(AuthService);
+  const authService = inject(AuthPersistenceService);
   let authenticated = false;
   authService.isAuthenticated$.subscribe((res) => (authenticated = res));
   if (!authenticated && localStorage.getItem('auth') !== "true"){
@@ -18,7 +18,7 @@ export const authenticatedGuard: CanActivateFn = (route) => {
 
 export const disconnectedGuard: CanActivateFn = (route) => {
   const router = inject(Router);
-  const authService = inject(AuthService);
+  const authService = inject(AuthPersistenceService);
   let authenticated = true;
   authService.isAuthenticated$.subscribe((res) => (authenticated = res));
   if (authenticated && localStorage.getItem('auth') === "true"){

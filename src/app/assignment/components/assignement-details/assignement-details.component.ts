@@ -4,8 +4,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable, tap} from "rxjs";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AuthService} from "../../../auth/auth.service";
 import {AssignmentFormComponent} from "../../../modals/assignment-form/assignment-form.component";
+import {AuthPersistenceService} from "../../../core/services/authPersistence.service";
 
 @Component({
   selector: 'app-assignement-details',
@@ -28,8 +28,7 @@ export class AssignementDetailsComponent implements OnInit {
   isTeacher : boolean = false;
 
   constructor(private route: ActivatedRoute,
-              public authService : AuthService,
-              public authservice:AuthService, private router:Router,private formBuilder: FormBuilder,private assignmentService: AssignementService)
+              public authService : AuthPersistenceService, private router:Router,private formBuilder: FormBuilder,private assignmentService: AssignementService)
   {
     this.submitAssignmentForm.controls['description'].setErrors({ 'minLength': 'Min length 5 chars.' });
 

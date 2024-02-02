@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from '../../helpers/helpers';
 import {Classroom} from '../classroom/classroom.service';
-import {BehaviorSubject, map, Observable, tap} from 'rxjs';
+import {tap} from 'rxjs';
 import {CookieService} from "ngx-cookie-service";
 import {catchError} from "rxjs/operators";
 import {Router} from "@angular/router";
-import { Course } from '../course/course.service';
-import { Task } from '../task/task.service';
-import { Assignement } from '../assignment/assignement.service';
+import {Course} from '../course/course.service';
+import {Task} from '../task/task.service';
+import {Assignement} from '../assignment/assignement.service';
+import {AuthPersistenceService} from "../core/services/authPersistence.service";
 
 export type SignIn = {
   email: string;
@@ -40,17 +41,9 @@ export type User = Teacher | Student;
   providedIn: 'root',
 })
 export class AuthService {
-  private userSubject: BehaviorSubject<User>;
-  readonly user$: Observable<User>;
-  readonly isTeacher$: Observable<boolean>;
-  readonly isAuthenticated$: Observable<boolean>;
 
 
-  constructor(private api: ApiService,private readonly CookieService:CookieService,private router:Router) {
-    this.userSubject = new BehaviorSubject({} as User);
-    this.user$ = this.userSubject.asObservable();
-    this.isTeacher$ = this.userSubject.pipe(map((res) => res.user));
-    this.isAuthenticated$ = this.user$.pipe(map((res) => Boolean(this.CookieService.get('auth') && res.id)));
+  constructor(private api: ApiService,private readonly CookieService:CookieService,private router:Router,private readonly authPersistenceService:AuthPersistenceService) {
     if (this.CookieService.get('auth')) {
       this.getUser()
     } else {
@@ -94,14 +87,14 @@ export class AuthService {
   }
   logout() {
     this.CookieService.deleteAll("auth");
-    this.userSubject.next({} as User);
+    this.authPersistenceService.userSubject.next({} as User);
     localStorage.setItem("auth","true")
   }
 
   getUser() {
     return this.api.get<User>(`/user/current`,false,false).pipe(
       tap((res) => {
-        this.userSubject.next(res);
+        this.authPersistenceService.userSubject.next(res);
         this.router.navigate(['/classroom']);
       }),
       catchError((err) => {

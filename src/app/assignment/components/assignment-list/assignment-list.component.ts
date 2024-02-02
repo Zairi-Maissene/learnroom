@@ -2,7 +2,7 @@ import {Component, inject, Input} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AssignmentFormComponent} from '../../../modals/assignment-form/assignment-form.component';
 import {Assignement} from '../../assignement.service';
-import {AuthService} from "../../../auth/auth.service";
+import {AuthPersistenceService} from "../../../core/services/authPersistence.service";
 
 @Component({
   selector: 'app-assignment-list',
@@ -16,7 +16,7 @@ export class AssignmentListComponent {
   @Input() withButton:boolean=false;
 
   modalService = inject(NgbModal)
-  authService = inject(AuthService)
+  authService = inject(AuthPersistenceService)
   onAddAssignmentClick() {
    const modal =  this.modalService.open(AssignmentFormComponent);
    modal.componentInstance.courseId = this.courseId
