@@ -1,16 +1,20 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {SpinnerComponent} from "@core/components/spinner/spinner.component";
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
-import {LoaderService} from "@core/services/loader.service";
-import {LoaderInterceptor} from "@core/interceptors/loader.interceptor";
-import {SidebarComponent} from "@core/components/sidebar/sidebar.component";
-import {TokenInterceptor} from "@core/interceptors/token.interceptor";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {ToastrModule} from "ngx-toastr";
-import {CookieService} from "ngx-cookie-service";
-import {ApiService} from "@core/services/api.service";
-import {AppComponent} from "@core/components/_app/app.component";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SpinnerComponent } from '@core/components/spinner/spinner.component';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
+import { LoaderService } from '@core/services/loader.service';
+import { LoaderInterceptor } from '@core/interceptors/loader.interceptor';
+import { SidebarComponent } from '@core/components/sidebar/sidebar.component';
+import { TokenInterceptor } from '@core/interceptors/token.interceptor';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ToastrModule } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
+import { ApiService } from '@core/services/api.service';
+import { AppComponent } from '@core/components/_app/app.component';
 import {
   NgbAccordionBody,
   NgbAccordionButton,
@@ -18,19 +22,23 @@ import {
   NgbAccordionDirective,
   NgbAccordionHeader,
   NgbAccordionItem,
-  NgbCollapse
-} from "@ng-bootstrap/ng-bootstrap";
-import {SharedModule} from "@shared/shared.module";
-import {RouterOutlet} from "@angular/router";
-import {FooterComponent} from "@core/components/footer/footer.component";
-import {HeaderComponent} from "@core/components/header/header.component";
-import {FormsModule} from "@angular/forms";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-
+  NgbCollapse,
+} from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '@shared/shared.module';
+import { RouterOutlet } from '@angular/router';
+import { FooterComponent } from '@core/components/footer/footer.component';
+import { HeaderComponent } from '@core/components/header/header.component';
+import { FormsModule } from '@angular/forms';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
-  declarations: [SpinnerComponent,
-    SidebarComponent,AppComponent,FooterComponent,HeaderComponent],
+  declarations: [
+    SpinnerComponent,
+    SidebarComponent,
+    AppComponent,
+    FooterComponent,
+    HeaderComponent,
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -39,8 +47,8 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     ToastrModule.forRoot({
       timeOut: 5000,
@@ -70,13 +78,11 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
     },
     LoaderService,
     CookieService,
-    ApiService
+    ApiService,
   ],
-  exports: [
-    AppComponent
-  ]
+  exports: [AppComponent],
 })
-export class CoreModule { }
+export class CoreModule {}
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);

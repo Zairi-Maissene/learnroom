@@ -1,8 +1,8 @@
-import {Component, inject} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AuthService} from '../auth.service';
-import {SignUp} from "@core/models/user.model";
+import { Component, inject } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { SignUp } from '@core/models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -28,8 +28,6 @@ export class RegisterComponent {
           user: this.formData.user.toString() === 'true',
         } as SignUp)
         .subscribe();
-
-      this.router.navigate(['/classroom'])
     }
   }
 }

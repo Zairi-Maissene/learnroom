@@ -1,9 +1,11 @@
-import {Component, inject, Input} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Assignement} from "@core/models/assignment.model";
-import {AuthPersistence} from "@core/services/auth.persistence";
-import {AssignmentFormComponent} from "@features/assignment/components/assignment-form/assignment-form.component";
-
+import { Component, inject, Input } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Assignement } from '@core/models/assignment.model';
+import { AuthPersistence } from '@core/services/auth.persistence';
+import { AssignmentFormComponent } from '@features/assignment/components/assignment-form/assignment-form.component';
+import { AssignementService } from '@features/assignment/assignement.service';
+import { CourseService } from '@features/course/course.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-assignment-list',
@@ -13,29 +15,25 @@ import {AssignmentFormComponent} from "@features/assignment/components/assignmen
 export class AssignmentListComponent {
   @Input() assignments: Assignement[] = [];
   @Input() courseId: string | undefined;
-  @Input () inCard:boolean = false;
-  @Input() withButton:boolean=false;
+  @Input() inCard: boolean = false;
+  @Input() withButton: boolean = false;
 
-  modalService = inject(NgbModal)
-  authService = inject(AuthPersistence)
+  modalService = inject(NgbModal);
+  authService = inject(AuthPersistence);
+  assignmentService = inject(AssignementService);
+  courseService = inject(CourseService);
   onAddAssignmentClick() {
-   const modal =  this.modalService.open(AssignmentFormComponent);
-   modal.componentInstance.courseId = this.courseId
+    const modal = this.modalService.open(AssignmentFormComponent);
+    modal.componentInstance.submit.subscribe((emittedValue: any) =>
+      this.addAssignment(emittedValue),
+    );
   }
-  /*getAssignments(): void {
-    // Fictive data, replace with your actual service call
-    this.assignments = [
-      {
-        id: '1',
-        name: 'assignments 1',
-        description: 'Description for assignments 1',
-      },
-      {
-        id: '2',
-        name: 'assignments 2',
-        description: 'Description for assignments 2',
-      },
-      // Add more tasks as needed
-    ];
-  }*/
+  addAssignment(data: any) {
+    const courseId = this.courseId as string;
+
+    this.assignmentService
+      .addAssignement(courseId, data)
+      .pipe(switchMap(() => this.courseService.getAssignments(courseId)))
+      .subscribe((assignments) => (this.assignments = assignments));
+  }
 }

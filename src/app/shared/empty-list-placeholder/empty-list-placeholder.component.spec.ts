@@ -8,7 +8,7 @@ describe('EmptyListPlaceholderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EmptyListPlaceholderComponent]
+      declarations: [EmptyListPlaceholderComponent],
     });
     fixture = TestBed.createComponent(EmptyListPlaceholderComponent);
     component = fixture.componentInstance;

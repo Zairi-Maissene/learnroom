@@ -1,9 +1,8 @@
-import {Component, inject, Input} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
-import {AuthPersistence} from "@core/services/auth.persistence";
-import {AuthService} from "@features/auth/auth.service";
-import {TranslateService} from "@ngx-translate/core";
-
+import { Component, inject, Input } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthPersistence } from '@core/services/auth.persistence';
+import { AuthService } from '@features/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +16,7 @@ export class HeaderComponent {
   showHeader: boolean = true;
   authService = inject(AuthPersistence);
   connService = inject(AuthService);
-  translate = inject(TranslateService)
+  translate = inject(TranslateService);
   selectedLanguage: string = 'fr'; // Set the default language here
 
   ngOnInit() {

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from "rxjs";
-import {Course, CreateCourse, UpdateCourse} from "@core/models/course.model";
-import {Assignement} from "@core/models/assignment.model";
-import {Task} from "@core/models/task.model";
-import {ApiService} from "@core/services/api.service";
+import { BehaviorSubject } from 'rxjs';
+import { Course, CreateCourse, UpdateCourse } from '@core/models/course.model';
+import { Assignement } from '@core/models/assignment.model';
+import { Task } from '@core/models/task.model';
+import { ApiService } from '@core/services/api.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,13 +12,16 @@ export class CourseService {
   private selectedCourseSubject = new BehaviorSubject<Course | null>(null);
   selectedCourse$ = this.selectedCourseSubject.asObservable();
 
-  selectCourse(course: Course|null) {
-    console.log('course',course);
+  selectCourse(course: Course | null) {
     this.selectedCourseSubject.next(course);
+  }
+
+  clearSelectedCourse() {
+    this.selectCourse(null);
   }
   // Course
   addCourse(classroom_id: string, course: CreateCourse) {
-    return this.api.post<Course>(`/course/${classroom_id}`, course).subscribe();
+    return this.api.post<Course>(`/course/${classroom_id}`, course);
   }
   getCourse(id: string) {
     return this.api.get<Course>(`/course/${id}`);
@@ -39,6 +42,8 @@ export class CourseService {
   }
   // Search
   search(searchTerm: string, classroomId: string) {
-    return this.api.get<Course[]>(`/course/search?query=${searchTerm}&classroomId=${classroomId}`);
+    return this.api.get<Course[]>(
+      `/course/search?query=${searchTerm}&classroomId=${classroomId}`,
+    );
   }
 }

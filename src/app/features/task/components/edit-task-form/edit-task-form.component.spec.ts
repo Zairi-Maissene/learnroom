@@ -8,7 +8,7 @@ describe('EditTaskFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EditTaskFormComponent]
+      declarations: [EditTaskFormComponent],
     });
     fixture = TestBed.createComponent(EditTaskFormComponent);
     component = fixture.componentInstance;

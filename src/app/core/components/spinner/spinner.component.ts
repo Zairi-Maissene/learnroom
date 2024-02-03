@@ -1,18 +1,16 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {interval, Subscription} from "rxjs";
-import {LoaderService} from "@core/services/loader.service";
+import { Component, ViewEncapsulation } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
+import { LoaderService } from '@core/services/loader.service';
 
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.scss'],
-  encapsulation: ViewEncapsulation.ShadowDom
+  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class SpinnerComponent {
-
   loaderClass!: string;
   private updateClassSubscription!: Subscription;
-
 
   constructor(public loader: LoaderService) {}
 
@@ -34,10 +32,8 @@ export class SpinnerComponent {
   }
 
   private setupClassUpdater(): void {
-
     this.updateClassSubscription = interval(5000).subscribe(() => {
       this.loaderClass = this.assignRandomLoaderClass();
     });
   }
 }
-
