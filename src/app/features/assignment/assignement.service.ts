@@ -17,7 +17,7 @@ export class AssignementService {
   constructor(private api: ApiService) {}
   // Assignment
   addAssignement(course_id: string, assignement: CreateAssignement) {
-    return this.api.post<Assignement>(`/assignment/${course_id}`, assignement).subscribe();
+      return this.api.post<Assignement>(`/assignment/${course_id}`, assignement)
   }
   getAssignment(id: string): Observable<Assignement> {
     return this.api.get<Assignement>(`/assignment/${id}`)
