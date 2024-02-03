@@ -7,15 +7,17 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { PreviewComponent } from '@features/auth/preview/preview.component';
 import { SharedModule } from '@shared/shared.module';
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, PreviewComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterLink,
-    AuthRoutingModule,
-    SharedModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterLink,
+        AuthRoutingModule,
+        SharedModule,
+        TranslateModule,
+    ],
 })
 export class AuthModule {}

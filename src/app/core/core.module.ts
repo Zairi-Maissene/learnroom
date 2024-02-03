@@ -22,7 +22,7 @@ import {
   NgbAccordionDirective,
   NgbAccordionHeader,
   NgbAccordionItem,
-  NgbCollapse,
+  NgbCollapse, NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle,
 } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '@shared/shared.module';
 import { RouterOutlet } from '@angular/router';
@@ -64,6 +64,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     NgbAccordionCollapse,
     NgbAccordionBody,
     NgbCollapse,
+    NgbDropdownToggle,
+    NgbDropdown,
+    NgbDropdownMenu,
+    NgbDropdownItem,
   ],
   providers: [
     {
