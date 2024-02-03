@@ -4,6 +4,12 @@ import { ElementDetailsComponent } from './element-details/element-details.compo
 import { EmptyListPlaceholderComponent } from './empty-list-placeholder/empty-list-placeholder.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { TextButtonComponent } from '@shared/text-button/text-button.component';
+import {
+  NgbDropdown,
+  NgbDropdownItem,
+  NgbDropdownMenu,
+  NgbDropdownToggle,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,6 +24,12 @@ import { TextButtonComponent } from '@shared/text-button/text-button.component';
     EmptyListPlaceholderComponent,
     TextButtonComponent,
   ],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    NgbDropdown,
+    NgbDropdownToggle,
+    NgbDropdownMenu,
+    NgbDropdownItem,
+  ],
 })
 export class SharedModule {}

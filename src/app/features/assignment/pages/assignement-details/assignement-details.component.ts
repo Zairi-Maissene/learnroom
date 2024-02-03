@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   Assignement,
@@ -105,16 +105,18 @@ export class AssignementDetailsComponent implements OnInit {
     this.assignmentService.deleteAssignment(this.assignmentId);
     this.router.navigate(['/classroom']);
   }
+
   editAssignement(formValues: any) {
-    this.assignmentService.updateAssignment(this.assignmentId, formValues);
     this.assignmentService
-      .getAssignment(this.assignmentId)
+      .updateAssignment(this.assignmentId, formValues)
       .pipe(
-        tap((res) => {
-          this.assignment = res;
-        }),
+        switchMap(() =>
+          this.assignmentService.getAssignment(this.assignmentId),
+        ),
       )
-      .subscribe();
+      .subscribe((res) => {
+        this.assignment = res;
+      });
   }
   toggleEditMode(mode: boolean) {
     this.editMode = mode;

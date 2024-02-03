@@ -15,6 +15,10 @@ export class CourseService {
   selectCourse(course: Course | null) {
     this.selectedCourseSubject.next(course);
   }
+
+  clearSelectedCourse() {
+    this.selectCourse(null);
+  }
   // Course
   addCourse(classroom_id: string, course: CreateCourse) {
     return this.api.post<Course>(`/course/${classroom_id}`, course);

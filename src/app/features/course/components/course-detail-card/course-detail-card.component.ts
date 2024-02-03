@@ -32,6 +32,7 @@ export class CourseDetailCardComponent implements OnDestroy {
     );
   }
   ngOnDestroy() {
+    this.courseService.clearSelectedCourse();
     this.subscription.unsubscribe();
   }
   onCourseClick() {
