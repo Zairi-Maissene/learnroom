@@ -24,12 +24,12 @@ export class AuthService {
       this.getUser();
     } else {
       this.logout();
-      router.navigate(['/auth/login']);
+      router.navigate(['/login']);
     }
   }
 
   signIn(data: SignIn) {
-    return this.api.post<{ token: String }>(`/user/signin`, data).pipe(
+    return this.api.post<{token:String}>(`/user/signin`, data,"You are now connected as "+data.email).pipe(
       tap((res: any) => {
         if (res.token) {
           this.CookieService.set('auth', res.token, {
@@ -45,7 +45,7 @@ export class AuthService {
     );
   }
   signUp(data: SignUp) {
-    return this.api.post<User>(`/user/signup`, data).pipe(
+    return this.api.post<User>(`/user/signup`, data,"Account is create successfully").pipe(
       tap((res: any) => {
         if (res.token) {
           this.CookieService.deleteAll('auth');
@@ -55,7 +55,8 @@ export class AuthService {
             secure: true,
             sameSite: 'Strict',
           });
-          localStorage.setItem('auth', 'true');
+          localStorage.setItem("auth", "true")
+          this.getUser()
         }
       }),
     );
@@ -68,24 +69,21 @@ export class AuthService {
   }
 
   getUser() {
-    return this.api
-      .get<User>(`/user/current`, false, false)
-      .pipe(
-        tap((res) => {
-          if (res.id) {
-            this.authPersistenceService.userSubject.next(res);
-            this.router.navigate(['/classroom']);
-            return;
-          }
-          this.logout();
-        }),
-        catchError((err) => {
-          console.log('hi');
-          this.logout();
-          return err;
-        }),
-      )
-      .subscribe();
+    return this.api.get<User>(`/user/current`,undefined,false,false).pipe(
+      tap((res) => {
+        if (res.id) {
+          this.authPersistenceService.userSubject.next(res);
+          this.router.navigate(['/classroom']);
+          return
+        }
+        this.logout();
+      }),
+      catchError((err) => {
+        console.log("hi")
+        this.logout();
+        return err;
+      })
+    ).subscribe()
   }
 
   getAll() {
