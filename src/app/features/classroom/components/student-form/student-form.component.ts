@@ -32,10 +32,7 @@ export class StudentFormComponent {
 
   onSubmit() {
     if (this.studentForm.valid) {
-      this.classroomService.addStudent(
-        this.classroomId,
-        this.studentForm.value.email,
-      );
+      this.classroomService.addStudent(this.classroomId, this.studentForm.value.email).subscribe()
     }
   }
   validateField(field: string, code: string) {

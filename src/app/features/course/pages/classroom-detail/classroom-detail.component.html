@@ -50,8 +50,15 @@
     <li [ngbNavItem]="4">
       <button ngbNavLink>Students</button>
       <ng-template ngbNavContent>
+        <div   style="
+    display: flex;
+    flex-direction: column;
+  ">
         <app-students [users]="(students$ | async)!"></app-students>
-        <button class="btn btn-primary" *ngIf="(this.authService.isTeacher$ | async)" (click)="onAddStudentClick()">Add Student</button>
+        <button  class="btn btn-primary btn-rounded"
+      style=" background-color: #12b7bd;     align-items: center;
+;margin-top: 10px; margin-bottom: 10px; align-self:center;border-radius: 20px;" *ngIf="(this.authService.isTeacher$ | async)" (click)="onAddStudentClick()">Add Student</button>
+        </div>
       </ng-template>
     </li>
   </ul>

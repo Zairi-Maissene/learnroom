@@ -25,20 +25,25 @@ export class EmptyListPlaceholderComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['user']) {
-      console.log('user', this.user.toString());
 
       if (this.user === 'teacher') {
-        this.descriptionText2 = 'Publish one.';
+        this.descriptionText2 = ' Add one .';
       }
       if (this.type === 'task') {
         this.title = 'No Tasks';
-        this.descriptionText1 = 'There are no tasks in this classroom yet.';
+        this.descriptionText1 = 'There are no tasks in this classroom yet. ';
       }
       if (this.type === 'assignment') {
         this.title = 'No Assignments';
         this.descriptionText1 =
-          'There are no assignments in this classroom yet.';
+          'There are no assignments in this classroom yet. ';
       }
+
+    }
+    if (this.type === 'students') {
+      this.title = 'No Students';
+      this.descriptionText1 =
+        'There are no students in this classroom yet. ';
     }
   }
 

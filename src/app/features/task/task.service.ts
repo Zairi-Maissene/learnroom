@@ -16,8 +16,9 @@ export class TaskService {
   getTask(id: string): Observable<Task> {
     return this.api.get(`/task/${id}`);
   }
-  updateTask(id: string, task: UpdateTask): Subscription {
-    return this.api.patch(`/task/${id}`, task).subscribe();
+  updateTask(id: string, task: UpdateTask){
+  return this.api.patch(`/task/${id}`, task);
+
   }
   deleteTask(id: string) {
     return this.api.remove(`/task/${id}`).subscribe();

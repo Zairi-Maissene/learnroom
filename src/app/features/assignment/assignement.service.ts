@@ -26,7 +26,6 @@ export class AssignementService {
     return this.api.patch<Assignement>(`/assignment/${id}`, assignement);
   }
   deleteAssignment(id: string) {
-    console.log(id);
     return this.api.remove(`/assignment/${id}`).subscribe();
   }
 

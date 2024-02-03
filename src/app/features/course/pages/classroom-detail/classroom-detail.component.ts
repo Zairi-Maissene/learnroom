@@ -60,7 +60,7 @@ export class ClassroomDetailComponent {
           this.router.snapshot.params['id'] as string,
         ),
       ),
-      tap((courses) => console.log(courses)),
+      tap((courses) => {}),
       catchError((err) => {
         console.log(err);
         return [];
@@ -86,7 +86,6 @@ export class ClassroomDetailComponent {
       );
       this.students$ = this.classroomService.getUsers(classroom?.id || '');
     });
-
     // Combine observables for search term and classroom ID
     const combinedSearch$ = combineLatest([
       this.searchForm
@@ -102,12 +101,11 @@ export class ClassroomDetailComponent {
     this.courses$ = combinedSearch$.pipe(
       switchMap(([searchTerm, classroomId]: [string, string]) => {
         if (searchTerm) {
-          return this.courseService.search(searchTerm, classroomId);
+          return this.courseService.search(searchTerm, classroomId.toString());
         }
-        return this.classroomService.getCourses(classroomId);
+        return this.classroomService.getCourses(classroomId.toString());
       }),
-      catchError((err) => {
-        console.log(err);
+      catchError(() => {
         return [];
       }),
     );

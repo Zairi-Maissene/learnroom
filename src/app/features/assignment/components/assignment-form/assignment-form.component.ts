@@ -17,7 +17,7 @@ export class AssignmentFormComponent {
   };
   buttonName: string = 'Add';
   assignmentForm: FormGroup = new FormGroup({});
-  assignmentService = inject(AssignementService);
+
   @Input() courseId: string = '';
   @Input() isEditing: boolean = false;
   @Input() assignment: Assignement = {} as Assignement;

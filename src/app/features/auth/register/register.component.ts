@@ -28,8 +28,6 @@ export class RegisterComponent {
           user: this.formData.user.toString() === 'true',
         } as SignUp)
         .subscribe();
-
-      this.router.navigate(['/classroom']);
     }
   }
 }

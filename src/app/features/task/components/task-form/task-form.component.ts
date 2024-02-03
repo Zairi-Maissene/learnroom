@@ -1,6 +1,8 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {Task} from "@core/models/task.model";
+
 
 @Component({
   selector: 'app-task-form',
@@ -8,18 +10,35 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./task-form.component.scss'], // Add your styles if needed
 })
 export class TaskFormComponent {
-  taskForm: FormGroup;
-  @Output() submit = new EventEmitter<any>();
 
+  @Input() isEditing: boolean = false;
+  @Input() task: Task = {} as Task;
+  @Input() taskId: string = '1';
+
+  @Output() submit = new EventEmitter<any>();
+  buttonName: string = 'Add';
+  taskForm: FormGroup= new FormGroup({});
   constructor(
     public modal: NgbActiveModal,
     private fb: FormBuilder,
   ) {
-    this.taskForm = this.fb.group({
+
+  }
+  ngOnInit(){
+    if (this.isEditing){
+      this.buttonName = 'Edit';
+      this.taskForm=this.fb.group({
+        name: [this.task.name, Validators.required],
+        content: [this.task.content, Validators.required],
+        points: [this.task.points, [Validators.required, Validators.min(1)]],
+      })
+    }
+    else
+    {this.taskForm = this.fb.group({
       name: ['', Validators.required],
       content: ['', Validators.required],
       points: [null, [Validators.required, Validators.min(1)]],
-    });
+    });}
   }
 
   validateField(field: string, code: string) {
@@ -29,10 +48,9 @@ export class TaskFormComponent {
 
   onSubmit() {
     if (this.taskForm.valid) {
-      // Handle form submission
       const formData = this.taskForm.value;
       this.submit.emit(formData);
-      this.modal.dismiss();
+      this.modal.close();
     }
   }
 
