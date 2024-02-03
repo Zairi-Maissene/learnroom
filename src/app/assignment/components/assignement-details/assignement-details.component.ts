@@ -20,7 +20,7 @@ export class AssignementDetailsComponent implements OnInit {
   responseAssignment$: Observable<ResponseAssignement> = new Observable<ResponseAssignement>();
   responsesAssignment:ResponseAssignement[]=[]
   submitAssignmentForm: FormGroup = new FormGroup({
-    description: new FormControl('', [Validators.required, Validators.minLength(5)])
+    content: new FormControl('', [Validators.required, Validators.minLength(5)])
   });
   editMode:boolean=false;
   isAssignmentSubmited:boolean=false;

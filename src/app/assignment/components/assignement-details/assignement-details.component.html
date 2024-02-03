@@ -17,7 +17,7 @@
         [formGroup]="submitAssignmentForm"
         (ngSubmit)="onSubmit()">
         <label for="description">Description: </label>
-        <textarea  [ngStyle]="{'border-radius':'10px'}" id="description" type="text" formControlName="description"></textarea>
+        <textarea  [ngStyle]="{'border-radius':'10px'}" id="description" type="text" formControlName="content"></textarea>
         <div [ngStyle]="{'display':'flex','justify-content':'center'}">
           <div *ngIf="submitAssignmentForm.errors?.['minlength']">
             Name must be at least 4 characters long.
