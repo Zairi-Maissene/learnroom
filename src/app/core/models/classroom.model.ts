@@ -1,4 +1,4 @@
-import {Student, Teacher} from "./user.model";
+import { Student, Teacher } from './user.model';
 
 export type Classroom = {
   id: string;

@@ -1,8 +1,7 @@
-import {Component, inject, Input} from '@angular/core';
-import {Router} from '@angular/router';
-import {CourseService} from '../../course.service';
-import {Course} from "@core/models/course.model";
-
+import { Component, inject, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { CourseService } from '../../course.service';
+import { Course } from '@core/models/course.model';
 
 @Component({
   selector: 'app-course-accordion',
@@ -14,11 +13,9 @@ export class CourseAccordionComponent {
   router = inject(Router);
   courseService = inject(CourseService);
 
-
-
   onSelectCourse(course: Course | undefined) {
-    if (course) {  this.courseService.selectCourse(course);}
-
-
+    if (course) {
+      this.courseService.selectCourse(course);
+    }
   }
 }

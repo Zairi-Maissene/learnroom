@@ -30,7 +30,7 @@ import {
     StudentComponent,
     AssignmentListComponent,
     TaskListComponent,
-    Task_assignmentCardComponent
+    Task_assignmentCardComponent,
   ],
   imports: [
     CommonModule,
