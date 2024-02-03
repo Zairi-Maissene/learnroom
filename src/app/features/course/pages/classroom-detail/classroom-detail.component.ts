@@ -113,11 +113,9 @@ export class ClassroomDetailComponent {
     );
   }
   onTaskFilterChange(filter: 'completed' | 'inProgress' | undefined) {
-    this.taskFilter = filter;
-    this.tasks$ = this.classroomService.getTasks(
-      this.router.snapshot.params['id'] || '',
-      this.taskFilter,
-    );
+    if (filter === this.taskFilter) return
+    this.taskFilter = filter
+    this.tasks$ = this.classroomService.getTasks(this.router.snapshot.params['id']|| '', this.taskFilter)
   }
   onAddStudentClick() {
     const modal = this.modalService.open(StudentFormComponent);

@@ -6,7 +6,7 @@ import {
   NgbNav,
   NgbNavContent,
   NgbNavItem,
-  NgbNavLinkBase,
+  NgbNavLinkBase, NgbNavModule,
   NgbNavOutlet,
 } from '@ng-bootstrap/ng-bootstrap';
 import { CourseAccordionComponent } from './components/course-accordion/course-accordion.component';

@@ -1,14 +1,10 @@
-import { Injectable } from '@angular/core';
-import {
-  Classroom,
-  CreateClassroom,
-  UpdateClassroom,
-} from '@core/models/classroom.model';
-import { Course } from '@core/models/course.model';
-import { Assignement } from '@core/models/assignment.model';
-import { Student, Teacher } from '@core/models/user.model';
-import { Task } from '@core/models/task.model';
-import { ApiService } from '@core/services/api.service';
+import {Injectable} from '@angular/core';
+import {Classroom, CreateClassroom, UpdateClassroom} from "@core/models/classroom.model";
+import {Course} from "@core/models/course.model";
+import {Assignement} from "@core/models/assignment.model";
+import {Student, Teacher} from "@core/models/user.model";
+import {Task} from "@core/models/task.model";
+import {ApiService} from "@core/services/api.service";
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +13,7 @@ export class ClassroomService {
   constructor(private api: ApiService) {}
   // Classroom
   getClassrooms(query?: string) {
-    if (!query || query === '') return this.api.get<Classroom[]>(`/classroom`);
+    if (!query || query==="") return this.api.get<Classroom[]>(`/classroom`);
     return this.api.get<Classroom[]>(`/classroom?query=${query}`);
   }
   addClassroom(classroom: CreateClassroom, id: string) {
@@ -39,9 +35,10 @@ export class ClassroomService {
   }
   // Task
   getTasks(classroom_id: string, status?: 'completed' | 'inProgress') {
-    return this.api.get<Task[]>(
-      `/classroom/task/${classroom_id}?status=${status}`,
-    );
+    if (status) {
+      return this.api.get<Task[]>(`/classroom/task/${classroom_id}?status=${status}`);
+    }
+    return this.api.get<Task[]>(`/classroom/task/${classroom_id}`)
   }
   // Assignment
   getAssignments(classroom_id: string) {
@@ -49,13 +46,9 @@ export class ClassroomService {
   }
   // User
   getUsers(classroom_id: string) {
-    return this.api.get<{ teacher: Teacher; students: Student[] }>(
-      `/classroom/users/${classroom_id}`,
-    );
+    return this.api.get<{teacher:Teacher,students:Student[]}>(`/classroom/users/${classroom_id}`);
   }
   addStudent(classroom_id: string, email: string) {
-    return this.api.patch<Student>(`/classroom/${classroom_id}/${email}`, {
-      email,
-    });
+    return this.api.patch<Student>(`/classroom/${classroom_id}/${email}`, {email})
   }
 }
