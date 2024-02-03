@@ -10,7 +10,7 @@
             [isTeacher]="(this.authService.isTeacher$ | async) || false "
     > </app-element-details>
   </div>
-    <ng-container *ngIf="!isTeacher">
+    <ng-container *ngIf="!isTeacher && !studentResponse">
       <br />
       <form
         [ngStyle]="{'flex-direction': 'column','display':'flex','gap':'10px',width:'80%'}"
@@ -28,34 +28,55 @@
 
       </form>
     </ng-container>
+    <ng-container *ngIf=" responsesAssignment.length > 0 &&  isTeacher ">
+      <form [formGroup]="scoreForm" [ngStyle]="{width:'100%',}">
+        <ng-container formArrayName="responses">
+          <div *ngFor="let response of responses.controls; let i = index" [formGroupName]="i"
+               [ngStyle]="{'gap':'10px',width:'100%','align-items':'center',display:'flex','flex-direction':'column'}">
+           <div [ngStyle]="{'border-radius':'10px',border:'1px black solid',padding:'5px 10px',width:'80%','margin-bottom':'10px'}" >
+             <h4>Student Name</h4>
+             <span>{{ response.get('content')?.value }}</span>
+             <div [ngStyle]="{display:'flex', gap:'5px', 'flex-direction':'column', 'align-items':'flex-end'}">
+               <div>
+                 <span>Score:</span>
+                 <ng-container *ngIf="!response.get('validated')" >
+                   <input type="number" placeholder='points'
+                          formControlName="score"
+                          [ngStyle]="{'border-radius':'10px', width:'80px', 'margin-left':'5px', padding:'0px 5px'}"
+                   />
+                   <button
+                     class="btn btn-rounded"
+                     style="background-color: orange;margin-top: 10px;margin-bottom: 10px; border-radius: 20px;width:100px"                       (click)="onScoreChange(i)"
+                   > Validate </button>
+                 </ng-container>
+                 <ng-container *ngIf="response.get('validated')" >
+                   <span>
+                      {{ response.get('score')?.value }}
+                   </span>
 
-    <ng-container *ngIf=" responsesAssignment.length > 0 &&  (authService.isAuthenticated$ | async) &&  (authService.isTeacher$ | async) ">
-       <div  *ngFor="let response of responsesAssignment; let i = index" [ngStyle]="{'gap':'10px',width:'100%','align-items':'center',display:'flex','flex-direction':'column'}">
+                 </ng-container>
 
-         <div [ngStyle]="{'border-radius':'10px',border:'1px black solid',padding:'5px 10px',width:'80%','margin-bottom':'10px'}" >
-        <h4>Student Name</h4>
-        <span>{{response?.content}}</span>
-        <div [ngStyle]="{display:'flex',gap:'5px','flex-direction':'column','align-items':'flex-end'}">
-          <div>
-            <span>Score:</span>
-            <input type="number" placeholder='points'
-                   [ngModel]="response?.score"
-                   (input)="onScoreChange($event, i)"
-                   [ngStyle]="{'border-radius':'10px',width:'80px','margin-left':'5px',padding:'0px 5px'}" />
-          </div>
-          <button [ngStyle]="{width:'100px',}"
-                  (click)="submitResponseAssignment(response.id)"
-          > Validate </button>
 
-        </div>
+               </div>
 
+             </div>
       </div>
 
     </div>
+        </ng-container>
+      </form>
   </ng-container>
-    <ng-container *ngIf="isAssignmentSubmited && !isTeacher " >
+    <div  [ngStyle]="{'width':'80%'}"  *ngIf="studentResponse && !isTeacher " >
+      <h2>Your submission: </h2>
+      <span>{{studentResponse?.content}}</span>
+      <div class="d-flex justify-content-end w-100">
+        <span>
+          score : {{studentResponse?.score}}
+        </span>
+      </div>
 
-    </ng-container>
+
+    </div>
 
 
 </div>

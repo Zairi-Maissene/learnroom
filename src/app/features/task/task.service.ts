@@ -27,6 +27,6 @@ export class TaskService {
     return this.api.get(`/response-task/${task_id}`);
   }
   toggleResponseTask(taskId: string,studentId: string) {
-    return this.api.patch(`/response-task/${taskId}/${studentId}`, {}).subscribe();
+    return this.api.patch(`/response-task/${taskId}/${studentId}`, {})
   }
 }

@@ -13,6 +13,6 @@ export class Task_assignmentCardComponent {
   constructor(private router: Router) {}
 
   navigateToPath() {
-    this.router.navigate([this.path]);
+     this.router.navigate([this.path]);
   }
 }

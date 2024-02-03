@@ -15,7 +15,6 @@ import {User} from "@core/models/user.model";
 })
 export class TaskDetailsComponent implements OnInit {
   taskId: string = '';
-  task$: Observable<Task> = new Observable<Task>();
   task : Task = {} as Task;
   editMode: boolean = false;
   taskIsSubmitted$:Observable<ResponseTask>= new Observable<ResponseTask>();
@@ -38,7 +37,7 @@ export class TaskDetailsComponent implements OnInit {
         tap(task => {this.task = task})
       ).subscribe();
       this.taskService.getResponseTask(this.taskId).pipe(
-        tap(task => {console.log("task",task);this.taskIsSubmitted = task.completed})
+        tap(task => {this.taskIsSubmitted = task.completed})
       ).subscribe();
 
       if(!this.authService.isTeacher$)
@@ -54,6 +53,7 @@ export class TaskDetailsComponent implements OnInit {
         }
       );
     })).subscribe();
+
     this.authService.user$.subscribe((user) => {
         this.user = user;
       }
@@ -88,8 +88,12 @@ export class TaskDetailsComponent implements OnInit {
 
     }
   submitTask() {
-    this.taskService.toggleResponseTask(this.taskId, this.user?.id as string);
-    this.taskIsSubmitted=true
+    this.taskService.toggleResponseTask(this.taskId, this.user?.id as string).subscribe(
+      {complete: () => {
+          this.taskIsSubmitted=!this.taskIsSubmitted
+
+        }}
+    )
   }
 
 }

@@ -99,5 +99,7 @@ export class ClassroomDetailComponent {
     const modal = this.modalService.open(StudentFormComponent)
     modal.componentInstance.classroomId = this.router.snapshot.params['id']
   }
+
+  protected readonly undefined = undefined;
 }
 
