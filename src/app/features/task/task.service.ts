@@ -26,7 +26,7 @@ export class TaskService {
   getResponseTask(task_id: string): Observable<any> {
     return this.api.get(`/response-task/${task_id}`);
   }
-  toggleResponseTask(id: string) {
-    return this.api.patch(`/response-task/${id}`, {}).subscribe();
+  toggleResponseTask(taskId: string,studentId: string) {
+    return this.api.patch(`/response-task/${taskId}/${studentId}`, {})
   }
 }

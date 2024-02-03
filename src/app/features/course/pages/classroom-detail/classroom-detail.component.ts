@@ -116,8 +116,19 @@ export class ClassroomDetailComponent {
     this.taskFilter = filter
     this.tasks$ = this.classroomService.getTasks(this.router.snapshot.params['id']|| '', this.taskFilter)
   }
+
   onAddStudentClick() {
     const modal = this.modalService.open(StudentFormComponent);
+    modal.componentInstance.submit.subscribe((emmitedValue: any) => {
+      this.classroomService.addStudent(this.router.snapshot.params['id'], emmitedValue.email).subscribe(
+        {complete:()=>{this.students$=this.classroomService.getUsers(this.router.snapshot.params['id']) }}
+      )
+    });
     modal.componentInstance.classroomId = this.router.snapshot.params['id'];
+
+
+
   }
+
+  protected readonly undefined = undefined;
 }
