@@ -16,17 +16,6 @@
   <hr class="my-4" />
   <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
     <li [ngbNavItem]="1">
-      <button ngbNavLink>Tasks</button>
-      <ng-template ngbNavContent>
-        <div *ngIf="!(this.authService.isTeacher$ | async)" class="d-flex">
-          <button [className]="taskFilter === undefined ? 'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'" (click)="onTaskFilterChange(undefined)">All</button>
-          <button  [className]="taskFilter === 'inProgress' ?  'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'" (click)="onTaskFilterChange('inProgress')">In Progress</button>
-          <button  [className]="taskFilter === 'completed' ?  'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'"  (click)="onTaskFilterChange('completed')">Completed</button>
-        </div>
-        <app-task-list [tasks]="(tasks$ | async) || []"></app-task-list>
-      </ng-template>
-    </li>
-    <li [ngbNavItem]="2">
       <button ngbNavLink>Courses</button>
       <ng-template ngbNavContent>
         <form *ngIf="courses$ | async as courses; else loadingCourses" [formGroup]="searchForm" class="form-group" style="width: 50%">
@@ -39,6 +28,18 @@
         <app-course-list [classroomId]="(classroom$ | async)?.id" [courses] ="(courses$ | async) || []"></app-course-list>
       </ng-template>
     </li>
+    <li [ngbNavItem]="2">
+      <button ngbNavLink>Tasks</button>
+      <ng-template ngbNavContent>
+        <div *ngIf="!(this.authService.isTeacher$ | async)" class="d-flex">
+          <button [className]="taskFilter === undefined ? 'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'" (click)="onTaskFilterChange(undefined)">All</button>
+          <button  [className]="taskFilter === 'inProgress' ?  'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'" (click)="onTaskFilterChange('inProgress')">In Progress</button>
+          <button  [className]="taskFilter === 'completed' ?  'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'"  (click)="onTaskFilterChange('completed')">Completed</button>
+        </div>
+        <app-task-list [tasks]="(tasks$ | async) || []"></app-task-list>
+      </ng-template>
+    </li>
+
 
     <li [ngbNavItem]="3">
       <button ngbNavLink>Assignments</button>
@@ -51,8 +52,15 @@
     <li [ngbNavItem]="4">
       <button ngbNavLink>Students</button>
       <ng-template ngbNavContent>
+        <div   style="
+    display: flex;
+    flex-direction: column;
+  ">
         <app-students [users]="(students$ | async)!"></app-students>
-        <button class="btn btn-primary" *ngIf="(this.authService.isTeacher$ | async)" (click)="onAddStudentClick()">Add Student</button>
+        <button  class="btn btn-primary btn-rounded"
+      style=" background-color: #12b7bd;     align-items: center;
+;margin-top: 10px; margin-bottom: 10px; align-self:center;border-radius: 20px;" *ngIf="(this.authService.isTeacher$ | async)" (click)="onAddStudentClick()">Add Student</button>
+        </div>
       </ng-template>
     </li>
   </ul>

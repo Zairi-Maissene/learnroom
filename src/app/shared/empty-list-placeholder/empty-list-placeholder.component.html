@@ -6,7 +6,7 @@
     <p class="title">{{ title }}</p>
     <p class="description">{{ descriptionText1 + descriptionText2 }}</p>
     <br />
-    <ng-container *ngIf="user !== 'teacher'">
+    <ng-container *ngIf="user !== 'teacher' && type!=='students'">
       <button class="custom-button" (click)="goHome()">Go home</button>
       <br />
     </ng-container>
