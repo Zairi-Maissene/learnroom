@@ -35,7 +35,10 @@ export class ClassroomService {
   }
   // Task
   getTasks(classroom_id: string, status?: 'completed' | 'inProgress') {
-    return this.api.get<Task[]>(`/classroom/task/${classroom_id}?status=${status}`);
+    if (status) {
+      return this.api.get<Task[]>(`/classroom/task/${classroom_id}?status=${status}`);
+    }
+    return this.api.get<Task[]>(`/classroom/task/${classroom_id}`)
   }
   // Assignment
   getAssignments(classroom_id: string) {
