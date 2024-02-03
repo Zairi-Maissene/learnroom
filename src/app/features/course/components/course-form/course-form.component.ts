@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {Classroom} from "@core/models/classroom.model";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Classroom } from '@core/models/classroom.model';
 
 @Component({
   selector: 'app-course-form',
@@ -10,7 +10,7 @@ import {Classroom} from "@core/models/classroom.model";
 export class CourseFormComponent {
   @Input() values = { name: '', content: '' };
   courseForm: FormGroup;
-  @Output() submit = new EventEmitter<Classroom>
+  @Output() submit = new EventEmitter<Classroom>();
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +30,7 @@ export class CourseFormComponent {
     if (this.courseForm.valid) {
       // Handle form submission or emit an event
       const formValues = this.courseForm.value;
-      this.submit.emit(formValues)
+      this.submit.emit(formValues);
       this.modal.dismiss();
     }
   }

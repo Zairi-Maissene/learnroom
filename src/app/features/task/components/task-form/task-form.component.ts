@@ -1,7 +1,6 @@
-import {Component, inject, Input} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {TaskService} from "@features/task/task.service";
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-task-form',
@@ -10,11 +9,10 @@ import {TaskService} from "@features/task/task.service";
 })
 export class TaskFormComponent {
   taskForm: FormGroup;
-  taskService = inject(TaskService);
-  @Input() courseId: string = '';
+  @Output() submit = new EventEmitter<any>();
 
   constructor(
-    public activeModal: NgbActiveModal,
+    public modal: NgbActiveModal,
     private fb: FormBuilder,
   ) {
     this.taskForm = this.fb.group({
@@ -33,13 +31,12 @@ export class TaskFormComponent {
     if (this.taskForm.valid) {
       // Handle form submission
       const formData = this.taskForm.value;
-      //TODO: get course id
-      console.log('courseId', this.courseId);
-      this.taskService.addTask(this.courseId, formData)
+      this.submit.emit(formData);
+      this.modal.dismiss();
     }
   }
 
   onClose() {
-    this.activeModal.dismiss('Close click');
+    this.modal.dismiss();
   }
 }

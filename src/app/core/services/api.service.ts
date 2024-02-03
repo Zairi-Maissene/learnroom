@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {map, Observable, of} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {ToastrService} from 'ngx-toastr';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',

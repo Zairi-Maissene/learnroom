@@ -1,4 +1,4 @@
-import {Classroom} from "./classroom.model";
+import { Classroom } from './classroom.model';
 
 export type SignIn = {
   email: string;

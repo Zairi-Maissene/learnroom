@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface GridItem {
   image: string;
@@ -41,7 +41,7 @@ export class PreviewComponent {
     },
   ];
   startSignup(): void {
-    this.router.navigate(['auth/login']);
+    this.router.navigate(['/login']);
   }
   goToPreview(): void {
     this.router.navigate(['/preview']);

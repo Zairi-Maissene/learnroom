@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {ClassroomService} from "@features/classroom/classroom.service";
+import { Component, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ClassroomService } from '@features/classroom/classroom.service';
 
 @Component({
   selector: 'app-student-form',
@@ -32,7 +32,10 @@ export class StudentFormComponent {
 
   onSubmit() {
     if (this.studentForm.valid) {
-      this.classroomService.addStudent(this.classroomId, this.studentForm.value.email)
+      this.classroomService.addStudent(
+        this.classroomId,
+        this.studentForm.value.email,
+      );
     }
   }
   validateField(field: string, code: string) {
