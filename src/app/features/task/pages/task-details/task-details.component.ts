@@ -6,6 +6,7 @@ import {EditTaskFormComponent} from "@features/task/components/edit-task-form/ed
 import {AuthPersistence} from "@core/services/auth.persistence";
 import {ResponseTask, Task} from "@core/models/task.model";
 import {TaskService} from "@features/task/task.service";
+import {User} from "@core/models/user.model";
 
 @Component({
   selector: 'app-task-details',
@@ -21,6 +22,8 @@ export class TaskDetailsComponent implements OnInit {
   taskIsSubmitted:boolean=false
   modalService = inject(NgbModal);
   isTeacher : boolean = false;
+  user:User | undefined;
+
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService,
@@ -32,9 +35,12 @@ export class TaskDetailsComponent implements OnInit {
     this.route.params.pipe(tap(param=>{
       this.taskId = param['id']
       this.taskService.getTask(this.taskId).pipe(
-        tap(task => {console.log("task",task);this.task = task})
+        tap(task => {this.task = task})
       ).subscribe();
-      this.taskIsSubmitted$=this.taskService.getResponseTask(this.taskId)
+      this.taskService.getResponseTask(this.taskId).pipe(
+        tap(task => {console.log("task",task);this.taskIsSubmitted = task.completed})
+      ).subscribe();
+
       if(!this.authService.isTeacher$)
       {
         this.taskIsSubmitted$.subscribe(data => {
@@ -48,17 +54,14 @@ export class TaskDetailsComponent implements OnInit {
         }
       );
     })).subscribe();
+    this.authService.user$.subscribe((user) => {
+        this.user = user;
+      }
+    );
 
 
 
   }
-
-  onSubmit: any = () => {
-    this.taskService.toggleResponseTask(this.taskId)
-    this.taskIsSubmitted=true
-  };
-
-  submitEditTask() {}
   deleteTask() {
     this.taskService.deleteTask(this.taskId);
     this.router.navigate(['/classroom']);
@@ -85,7 +88,7 @@ export class TaskDetailsComponent implements OnInit {
 
     }
   submitTask() {
-    this.taskService.toggleResponseTask(this.taskId);
+    this.taskService.toggleResponseTask(this.taskId, this.user?.id as string);
     this.taskIsSubmitted=true
   }
 
