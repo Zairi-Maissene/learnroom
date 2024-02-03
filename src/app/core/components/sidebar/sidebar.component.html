@@ -34,32 +34,51 @@
       </h2>
       <div ngbAccordionCollapse>
         <div ngbAccordionBody>
-          <ng-template>
-            <div *ngFor="let course of (courses$ | async)">
-              <div class="card mb-1" (click)="navigateToCourse(course.id)">
-                <div class="card-body">
-                  {{course.name}}
+          
+          <div *ngIf="!loading; else loadTemplate">
+            <div *ngIf="courses$ | async as courses">
+              <div *ngFor="let course of courses">
+                <div class="card mb-1" (click)="navigateToCourse(course.id)">
+                  <div class="card-body">
+                    {{ course.name }}
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+
+          <ng-template #loadTemplate>
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only"></span>
+                </div>
+            </div>
           </ng-template>
+
         </div>
       </div>
     </div>
+    
     <div ngbAccordionItem="second">
       <h2 ngbAccordionHeader>
         <button ngbAccordionButton>Tasks</button>
       </h2>
       <div ngbAccordionCollapse>
         <div ngbAccordionBody>
-          <ng-template>
-            <div *ngFor="let task of (tasks$ | async)">
-              <div class="card mb-1" (click)="navigateToTask(task.id)">
-                <div class="card-body">
+
+          <div *ngIf="!loading; else loadTemplate">
+            <div *ngIf="tasks$ | async as tasks">
+              <div *ngFor="let task of tasks">
+                <div class="card mb-1" (click)="navigateToCourse(task.id)">
+                  <div class="card-body">
+                    {{ task.name }}
+                  </div>
                 </div>
               </div>
             </div>
-          </ng-template>
+          </div>
+
+          
         </div>
       </div>
     </div>
@@ -69,21 +88,35 @@
       </h2>
       <div ngbAccordionCollapse>
         <div ngbAccordionBody>
+
+
           <ng-template>
             <div *ngFor="let assignment of (assignments$ | async)">
               <div class="card mb-1" (click)="navigateToAssignment(assignment.id)">
                 <div class="card-body">
+                  {{assignment.name}}
                 </div>
               </div>
             </div>
           </ng-template>
+
+
+          <div *ngIf="!loading; else loadTemplate">
+            <div *ngIf="assignments$ | async as assignments">
+              <div *ngFor="let assignment of assignments">
+                <div class="card mb-1" (click)="navigateToCourse(assignment.id)">
+                  <div class="card-body">
+                    {{ assignment.name }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-
-
-
 
 </div>
 </div>
