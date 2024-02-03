@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClassroomService } from '@features/classroom/classroom.service';
+import {Student} from "@core/models/user.model";
 
 @Component({
   selector: 'app-student-form',
@@ -11,7 +12,7 @@ import { ClassroomService } from '@features/classroom/classroom.service';
 export class StudentFormComponent {
   studentForm: FormGroup;
   @Input() classroomId: string = '';
-
+  @Output() submit : EventEmitter<Student> = new EventEmitter<Student>();
   constructor(
     public activeModal: NgbActiveModal,
     private fb: FormBuilder,
@@ -32,8 +33,10 @@ export class StudentFormComponent {
 
   onSubmit() {
     if (this.studentForm.valid) {
-      this.classroomService.addStudent(this.classroomId, this.studentForm.value.email).subscribe()
+     this.submit.emit(this.studentForm.value)
+      this.activeModal.dismiss();
     }
+
   }
   validateField(field: string, code: string) {
     const formControl = this.studentForm.get(field);
