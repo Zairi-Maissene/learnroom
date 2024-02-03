@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Observable, switchMap, tap} from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EditTaskFormComponent } from '@features/task/components/edit-task-form/edit-task-form.component';
 import { AuthPersistence } from '@core/services/auth.persistence';
 import { ResponseTask, Task } from '@core/models/task.model';
 import { TaskService } from '@features/task/task.service';
