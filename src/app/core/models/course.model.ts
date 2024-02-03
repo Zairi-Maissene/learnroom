@@ -1,7 +1,6 @@
-import {Assignement} from "./assignment.model";
-import {Classroom} from "./classroom.model";
-import {Task} from "./task.model";
-
+import { Assignement } from './assignment.model';
+import { Classroom } from './classroom.model';
+import { Task } from './task.model';
 
 export type Course = {
   id: string;

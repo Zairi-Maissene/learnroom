@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {TextButtonComponent} from './text-button.component';
+import { TextButtonComponent } from './text-button.component';
 
 describe('TextButtonComponent', () => {
   let component: TextButtonComponent;

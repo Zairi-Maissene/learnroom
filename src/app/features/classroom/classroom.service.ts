@@ -49,6 +49,6 @@ export class ClassroomService {
     return this.api.get<{teacher:Teacher,students:Student[]}>(`/classroom/users/${classroom_id}`);
   }
   addStudent(classroom_id: string, email: string) {
-    return this.api.patch<Student>(`/classroom/${classroom_id}/${email}`, {email})
+    return this.api.patch<Student>(`/classroom/${classroom_id}/${email}`, {})
   }
 }

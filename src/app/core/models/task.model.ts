@@ -1,5 +1,5 @@
-import {Student} from "./user.model";
-import {Course} from "./course.model";
+import { Student } from './user.model';
+import { Course } from './course.model';
 
 export type Task = {
   id: string;

@@ -1,18 +1,21 @@
-import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,} from '@angular/common/http';
-import {Observable, of, switchMap} from 'rxjs';
-import {finalize} from 'rxjs/operators';
-import {LoaderService} from "@core/services/loader.service";
+import { Injectable } from '@angular/core';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import { Observable, of, switchMap } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { LoaderService } from '@core/services/loader.service';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
-
   constructor(private loaderService: LoaderService) {}
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-
     if (req.method === 'OPTIONS') {
       return next.handle(req);
     }
@@ -28,9 +31,8 @@ export class LoaderInterceptor implements HttpInterceptor {
       }),
       finalize(() => {
         this.loaderService.hideLoader();
-        console.log("jjjjjjj")
-      })
+        console.log('jjjjjjj');
+      }),
     );
-
   }
 }

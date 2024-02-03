@@ -10,10 +10,11 @@
   background-color: #ffffff;
   padding: 20px;
   z-index: 10000;
+  overflow-y: auto;
 }
 
-.sidebar-collapsed{
-  content: '';
+.sidebar-collapsed {
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
@@ -49,18 +50,17 @@
 .custom-btn {
   color: #fff; /* text color */
   background-color: #61cba7; /* background color */
-  border-color: #61CBA7FF; /* border color */
+  border-color: #61cba7ff; /* border color */
 }
 
 .custom-btn:hover {
   color: #fff;
   background-color: #61b79b;
-  border-color: #61B79BFF;
+  border-color: #61b79bff;
 }
 
-.space-between{
+.space-between {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-

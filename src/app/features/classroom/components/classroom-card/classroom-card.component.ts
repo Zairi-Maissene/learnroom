@@ -1,6 +1,6 @@
 // classroom-card.component.ts
-import {Component, Input} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-classroom-card',
@@ -25,5 +25,4 @@ export class ClassroomCardComponent {
     }
   }
   constructor(private router: Router) {}
-
 }

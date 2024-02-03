@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-element-details',
@@ -6,7 +6,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   styleUrls: ['./element-details.component.scss'],
 })
 export class ElementDetailsComponent {
-  @Input() isTeacher: boolean=false;
+  @Input() isTeacher: boolean = false;
   @Input() element: any = {};
   @Input() elementType: string = '';
   @Input() editMode: boolean = false;
@@ -18,7 +18,7 @@ export class ElementDetailsComponent {
     this.editModeChange.emit(this.editMode);
   }
   deleteFunction() {
-     this.deleteElement.emit()
+    this.deleteElement.emit();
   }
 
   constructor() {}
