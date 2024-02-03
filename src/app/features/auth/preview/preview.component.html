@@ -33,9 +33,7 @@
         </h1>
 
         <p style="font-size: 24px; font-weight: normal">
-          Your all-in-one place for teaching and learning. Easy-to-use and
-          secure tool that helps educators manage, measure, and enrich learning
-          experiences.
+         {{ "previewDescription" | translate }}
         </p>
 
         <button
@@ -43,7 +41,7 @@
           class="coral-button button start-button"
           (click)="startSignup()"
         >
-          Start
+          {{"start"|translate}}
         </button>
       </div>
     </div>
@@ -65,8 +63,8 @@
           style="width: 100%; margin-bottom: 10px"
         />
 
-        <h1>{{ item.title }}</h1>
-        <p>{{ item.description }}</p>
+        <h1>{{ item.title |translate }}</h1>
+        <p>{{ item.description |translate }}</p>
       </div>
     </div>
   </div>

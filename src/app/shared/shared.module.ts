@@ -10,6 +10,7 @@ import {
   NgbDropdownMenu,
   NgbDropdownToggle,
 } from '@ng-bootstrap/ng-bootstrap';
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {
     NgbDropdownToggle,
     NgbDropdownMenu,
     NgbDropdownItem,
+    TranslateModule,
   ],
 })
 export class SharedModule {}

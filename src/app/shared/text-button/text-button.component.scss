@@ -4,8 +4,11 @@
   border-radius: 9999px; /* Full rounded */
   font-size: 22px;
   height: 45px;
-  width: 180px;
+  width: fit-content;
+  max-width: 300px;
   margin-right: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
   border: none;
 }
 .for-students-button {
@@ -14,8 +17,11 @@
   border-radius: 9999px; /* Full rounded */
   font-size: 22px;
   height: 45px;
-  width: 180px;
+  width: fit-content;
+  max-width: 300px;
   border: none;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .buttons-container {
   width: 600px;

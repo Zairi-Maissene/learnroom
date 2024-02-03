@@ -17,27 +17,24 @@ export class PreviewComponent {
   gridItems: GridItem[] = [
     {
       image: '../../assets/images/image1.png',
-      title: 'All-in-one place',
+      title:  "title1",
       description:
-        'Bring all your learning tools together and manage multiple classes in one central destination.',
+        "description1",
     },
     {
       image: '../../assets/images/image2.png',
-      title: 'Easy to use',
-      description:
-        'Anyone in your school community can get up and running with Classroom in minutes.',
+      title: "title2",
+      description: "description2",
     },
     {
       image: '../../assets/images/image3.png',
-      title: 'Built for collaboration',
-      description:
-        'Work simultaneously and connect face-to-face with Google Meet.',
+      title:  "title3",
+      description :"description3",
     },
     {
       image: '../../assets/images/image4.png',
-      title: 'Access from anywhere',
-      description:
-        'Empower teaching and learning from anywhere, on any device, and give your class more flexibility.',
+      title:  "title4",
+      description: "description4",
     },
   ];
   startSignup(): void {

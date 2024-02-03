@@ -11,7 +11,7 @@
       #loginForm="ngForm"
     >
       <div class="form-group">
-        <label class="signup-link">Email:</label>
+        <label class="signup-link">{{"email"|translate}}:</label>
         <input
           type="email"
           id="email"
@@ -35,19 +35,20 @@
           role="alert"
           *ngIf="emailInput.errors?.['required']"
         >
-          Email is required.
+          {{"Email is required"|translate}}
         </div>
         <div
           class="alert alert-danger alert-sign"
           role="alert"
           *ngIf="emailInput.errors?.['email']"
         >
-          Invalid email format.
+          {{"Invalid email format"|translate}}.
         </div>
       </div>
 
       <div class="form-group">
-        <label class="signup-link">Password:</label>
+        <label class="signup-link">
+          {{ "password" | translate}}:</label>
         <input
           type="password"
           id="password"
@@ -75,28 +76,29 @@
           role="alert"
           *ngIf="passwordInput.errors?.['required']"
         >
-          Password is required.
+
+          {{"Password is required"|translate}}.
         </div>
         <div
           class="alert alert-danger alert-sign"
           role="alert"
           *ngIf="passwordInput.errors?.['password']"
         >
-          Invalid Password format.
+          {{"Invalid Password format"|translate}}.
         </div>
       </div>
-      <button type="submit" class="coral-button button">Login</button>
+      <button type="submit" class="coral-button button">{{"login"|translate}}</button>
     </form>
     <div
       *ngIf="loginForm.submitted && loginForm.invalid"
       class="alert alert-danger"
       role="alert"
     >
-      Please fill in all required fields correctly.
+      {{"Please fill in all required fields correctly"|translate}}.
     </div>
     <p style="font-size: 14px; margin-top: 20px">
-      Don't have an account?
-      <a routerLink="/register" class="signup-link">Sign up</a>
+     {{"loginMsg"|translate}}
+      <a routerLink="/register" class="signup-link">{{"signUp" | translate}}</a>
     </p>
   </div>
 

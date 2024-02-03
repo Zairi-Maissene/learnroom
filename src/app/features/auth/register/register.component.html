@@ -34,7 +34,7 @@
       #signupForm="ngForm"
     >
       <div>
-        <label class="label" for="name">Name:</label>
+        <label class="label" for="name">{{"name"|translate}}:</label>
         <input
           type="text"
           id="name"
@@ -54,11 +54,11 @@
           role="alert"
           *ngIf="nameInput.errors?.['required']"
         >
-          Name is required.
+          {{"Name is required"|translate}}
         </div>
       </div>
       <div>
-        <label class="label" for="email">Email:</label>
+        <label class="label" for="email">{{"email"|translate}}:</label>
         <input
           type="email"
           id="email"
@@ -82,19 +82,19 @@
           role="alert"
           *ngIf="emailInput.errors?.['required']"
         >
-          Email is required.
+          {{"Email is required"|translate}}
         </div>
         <div
           class="alert alert-danger"
           role="alert"
           *ngIf="emailInput.errors?.['email']"
         >
-          Invalid email format.
+          {{"Invalid email format"|translate}}.
         </div>
       </div>
 
       <div>
-        <label class="label" for="password">Password:</label>
+        <label class="label" for="password"> {{ "Password" | translate}}:</label>
         <input
           type="password"
           id="password"
@@ -122,18 +122,18 @@
           role="alert"
           *ngIf="passwordInput.errors?.['required']"
         >
-          Password is required.
+          {{"Password is required"|translate}}.
         </div>
         <div
           class="alert alert-danger"
           role="alert"
           *ngIf="passwordInput.errors?.['password']"
         >
-          Invalid Password format.
+          {{"Invalid Password format"|translate}}.
         </div>
       </div>
       <div>
-        <label class="label">User Type :</label>
+        <label class="label">{{"userType"|translate}} :</label>
         <div class="radio-button-container">
           <label>
             <input
@@ -144,7 +144,7 @@
               [(ngModel)]="formData.user"
               required
             />
-            Student
+            {{"studentRole"|translate}}
           </label>
           <label style="margin-left: 20px">
             <input
@@ -155,7 +155,7 @@
               [(ngModel)]="formData.user"
               required
             />
-            Teacher
+            {{"teacherRole"|translate}}
           </label>
         </div>
       </div>
@@ -165,7 +165,7 @@
         style="width: 100px; align-self: center"
         type="submit"
       >
-        Signup
+        {{"register"|translate}}
       </button>
     </form>
 
@@ -174,13 +174,13 @@
       class="alert alert-danger"
       role="alert"
     >
-      Please fill in all required fields correctly.
+      {{"Please fill in all required fields correctly"|translate}}.
     </div>
 
     <p>
-      Already have an account?
+      {{"registerMsg"|translate}}
       <a class="sign-link" routerLink="/login" routerLinkActive="active"
-        >Sign in</a
+        >{{"signIn"|translate}}</a
       >
     </p>
   </div>
