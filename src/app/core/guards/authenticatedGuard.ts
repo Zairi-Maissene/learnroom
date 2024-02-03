@@ -8,7 +8,6 @@ export const authenticatedGuard: CanActivateFn = (route) => {
   let authenticated = false;
   authService.isAuthenticated$.subscribe((res) => (authenticated = res));
   if (!authenticated && localStorage.getItem('auth') !== "true"){
-    console.log("hi")
     router.navigate(['/auth/login']);
     return false;
   }
@@ -21,7 +20,7 @@ export const disconnectedGuard: CanActivateFn = (route) => {
   const authService = inject(AuthPersistence);
   let authenticated = true;
   authService.isAuthenticated$.subscribe((res) => (authenticated = res));
-  if (authenticated && localStorage.getItem('auth') === "true"){
+  if (authenticated){
     router.navigate(['/classroom']);
     return false;
   }
