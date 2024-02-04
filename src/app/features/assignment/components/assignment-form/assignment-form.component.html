@@ -25,7 +25,7 @@
 
   <div class="form-group">
     <label>{{"Deadline"|translate}}</label>
-    <input formControlName="deadline" type="date" class="form-control" />
+    <input formControlName="deadline" [min]="todayDate" type="date" class="form-control" />
     <div *ngIf="validateField('deadline', 'required')" class="text-danger">
       {{"Deadline is required"|translate}}
     </div>

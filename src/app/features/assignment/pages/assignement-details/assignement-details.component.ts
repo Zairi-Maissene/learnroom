@@ -31,6 +31,7 @@ export class AssignementDetailsComponent implements OnInit {
       responses: this.formBuilder.array([])
 });
   responses= this.scoreForm.get('responses') as FormArray;
+  isDeadLine: boolean = false;
   constructor(private route: ActivatedRoute,
               public authService : AuthPersistence,
               private router:Router,
@@ -48,6 +49,7 @@ export class AssignementDetailsComponent implements OnInit {
       this.assignmentService.getAssignment(this.assignmentId).pipe(
         tap(res => {
           this.assignment = res
+          this.isDeadLine = new Date(this.assignment.deadline) < new Date()
         })
       ).subscribe()
 
