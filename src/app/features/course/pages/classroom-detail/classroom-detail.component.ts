@@ -54,13 +54,14 @@ export class ClassroomDetailComponent {
 
     this.courses$ = this.searchForm.get('searchTerm')?.valueChanges.pipe(
       debounceTime(200), // wait for 300ms pause in events
+      distinctUntilChanged(), // ignore if next search term is same as previous
       switchMap((searchTerm: string) =>
         this.courseService.search(
           searchTerm,
           this.router.snapshot.params['id'] as string,
         ),
       ),
-      tap((courses) => {}),
+      distinctUntilChanged(),
       catchError((err) => {
         console.log(err);
         return [];

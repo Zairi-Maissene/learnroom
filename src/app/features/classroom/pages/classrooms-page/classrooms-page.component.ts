@@ -53,12 +53,15 @@ export class ClassroomsPageComponent {
 
     this.classrooms$ = this.searchForm
       .get('searchTerm')
-      ?.valueChanges.pipe(debounceTime(200))
+      ?.valueChanges.pipe(
+        debounceTime(200),
+        distinctUntilChanged(),)
       .pipe(
         startWith(''),
         switchMap((searchTerm: string) => {
           return this.classroomService.getClassrooms(searchTerm);
         }),
+        distinctUntilChanged(),
       )
 
     this.authService.isTeacher$.subscribe((user) => {
