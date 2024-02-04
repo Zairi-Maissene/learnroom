@@ -1,16 +1,18 @@
+import { ChangeDetectionStrategy } from '@angular/core';
 import { Component, inject, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Assignement } from '@core/models/assignment.model';
 import { AuthPersistence } from '@core/services/auth.persistence';
-import { AssignmentFormComponent } from '@features/assignment/components/assignment-form/assignment-form.component';
 import { AssignementService } from '@features/assignment/assignement.service';
+import { AssignmentFormComponent } from '@features/assignment/components/assignment-form/assignment-form.component';
 import { CourseService } from '@features/course/course.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-assignment-list',
   templateUrl: './assignment-list.component.html',
   styleUrls: ['./assignment-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssignmentListComponent {
   @Input() assignments: Assignement[] = [];

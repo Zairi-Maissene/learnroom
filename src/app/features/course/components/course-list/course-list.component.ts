@@ -1,3 +1,4 @@
+import { ChangeDetectionStrategy } from '@angular/core';
 import { Component, inject, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Course } from '@core/models/course.model';
@@ -11,6 +12,7 @@ import { switchMap } from 'rxjs';
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseListComponent {
   @Input() courses: Course[] = [];

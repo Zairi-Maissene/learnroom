@@ -1,33 +1,45 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, switchMap } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import { AuthPersistence } from '@core/services/auth.persistence';
-import { Classroom } from '@core/models/classroom.model';
+import { inject } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from '@core/models/user.model';
-import { ClassroomFormComponent } from '@features/classroom/components/classroom-form/classroom-form..component';
-import { ClassroomIdComponent } from '@features/classroom/components/classroom-id/classroom-id.component';
-import { ClassroomService } from '@features/classroom/classroom.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { List } from 'immutable';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs';
+import { map } from 'rxjs';
+import { of } from 'rxjs';
+import { startWith } from 'rxjs';
+import { combineLatest } from 'rxjs';
+import { switchMap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
+import { Classroom } from '../../../../core/models/classroom.model';
+import { Course } from '../../../../core/models/course.model';
+import { User } from '../../../../core/models/user.model';
+import { AuthPersistence } from '../../../../core/services/auth.persistence';
+import { ClassroomService } from '../../classroom.service';
+import { ClassroomFormComponent } from '../../components/classroom-form/classroom-form..component';
+import { ClassroomIdComponent } from '../../components/classroom-id/classroom-id.component';
 
 @Component({
-  selector: 'app-classroom-list',
-  templateUrl: './classroom-list.component.html',
-  styleUrls: ['./classroom-list.component.scss'],
+  selector: 'app-classrooms-page',
+  templateUrl: './classrooms-page.component.html',
+  styleUrls: ['./classrooms-page.component.scss']
 })
-export class ClassroomListComponent implements OnInit {
+export class ClassroomsPageComponent {
   fb = inject(FormBuilder);
   authService = inject(AuthPersistence);
   modalService = inject(NgbModal);
   classroomService = inject(ClassroomService);
-  classrooms: Classroom[] = [];
+  classrooms$: Observable<Classroom []> | undefined = new Observable<Classroom[]>()
   isTeacher: boolean | undefined;
   label = 'Enroll in a classroom';
   searchForm: FormGroup = new FormGroup({});
   searchResults$: BehaviorSubject<Classroom[]> = new BehaviorSubject<
     Classroom[]
-  >([]);
+    >([]);
   private router: Router = inject(Router);
   user: User | undefined;
   ngOnInit(): void {
@@ -38,25 +50,16 @@ export class ClassroomListComponent implements OnInit {
     this.authService.user$.subscribe((user) => {
       this.user = user;
     });
-    this.searchForm
+
+    this.classrooms$ = this.searchForm
       .get('searchTerm')
       ?.valueChanges.pipe(debounceTime(200))
       .pipe(
-        switchMap((searchTerm) => {
+        startWith(''),
+        switchMap((searchTerm: string) => {
           return this.classroomService.getClassrooms(searchTerm);
         }),
       )
-      .subscribe((classrooms) => {
-        this.classrooms = classrooms;
-        this.searchResults$.next(classrooms);
-      });
-
-    this.classroomService
-      .getClassrooms()
-      .subscribe((classrooms: Classroom[]) => {
-        this.classrooms = classrooms;
-        this.searchResults$.next(classrooms);
-      });
 
     this.authService.isTeacher$.subscribe((user) => {
       this.isTeacher = user;
@@ -96,11 +99,6 @@ export class ClassroomListComponent implements OnInit {
       });
   }
   refetchData() {
-    this.classroomService
-      .getClassrooms()
-      .subscribe((classrooms: Classroom[]) => {
-        this.classrooms = classrooms;
-        this.searchResults$.next(classrooms);
-      });
+    this.classrooms$ = this.classroomService.getClassrooms();
   }
 }

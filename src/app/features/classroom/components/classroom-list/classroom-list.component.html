@@ -1,0 +1,17 @@
+ <div
+    class="d-flex flex-wrap"
+    style="justify-content: space-around"
+    *ngIf="classrooms"
+  >
+    <div *ngFor="let result of classrooms">
+      <a [routerLink]="['/classroom', result.id]">
+        <app-classroom-card [classroom]="result"></app-classroom-card>
+      </a>
+    </div>
+
+    <div *ngIf="!classrooms?.length">
+      <h3>No results found</h3>
+    </div>
+
+ </div>
+

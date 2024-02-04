@@ -1,16 +1,12 @@
-import {
-  Component,
-  inject,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, Input, OnChanges, SimpleChanges, } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-empty-list-placeholder',
   templateUrl: './empty-list-placeholder.component.html',
   styleUrls: ['./empty-list-placeholder.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmptyListPlaceholderComponent implements OnChanges {
   @Input() type: string = '';

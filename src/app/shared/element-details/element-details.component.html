@@ -39,7 +39,7 @@
   <li *ngIf="elementType === 'assignment'" [ngStyle]="{ 'font-size': '16px' }">
     {{ element.deadline | date: "dd-MM-yyyy" }}
   </li>
-  <li [ngStyle]="{ 'font-size': '16px', 'font-weight': '600' }">
+  <li *ngIf="elementType === 'assignment'" [ngStyle]="{ 'font-size': '16px', 'font-weight': '600' }">
     {{ element.points ?? 100 }} points
   </li>
   <hr

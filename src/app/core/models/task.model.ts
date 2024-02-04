@@ -5,7 +5,6 @@ export type Task = {
   id: string;
   name: string;
   content: string;
-  points: number;
   course: Course;
   responseTasks: ResponseTask[];
 };

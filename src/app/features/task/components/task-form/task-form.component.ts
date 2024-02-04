@@ -30,14 +30,12 @@ export class TaskFormComponent {
       this.taskForm=this.fb.group({
         name: [this.task.name, Validators.required],
         content: [this.task.content, Validators.required],
-        points: [this.task.points, [Validators.required, Validators.min(1)]],
       })
     }
     else
     {this.taskForm = this.fb.group({
       name: ['', Validators.required],
       content: ['', Validators.required],
-      points: [null, [Validators.required, Validators.min(1)]],
     });}
   }
 

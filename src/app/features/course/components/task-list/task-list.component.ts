@@ -1,3 +1,4 @@
+import { ChangeDetectionStrategy } from '@angular/core';
 import { Component, inject, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Task } from '@core/models/task.model';
@@ -11,6 +12,7 @@ import { switchMap } from 'rxjs';
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListComponent {
   @Input() tasks: Task[] = [];
