@@ -17,7 +17,7 @@ export class RegisterComponent {
   constructor() {}
 
   onSubmit(form: NgForm) {
-    if (form.value !== null && form.value !== undefined) {
+    if (form.valid) {
       this.formData = { ...this.formData, ...form.value };
 
       this.authService

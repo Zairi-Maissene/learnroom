@@ -43,6 +43,7 @@
           class="form-control"
           #nameInput="ngModel"
           required
+          minlength="4"
           [ngClass]="{
             invalid: nameInput.invalid && (nameInput.dirty || nameInput.touched)
           }"
@@ -55,6 +56,13 @@
           *ngIf="nameInput.errors?.['required']"
         >
           {{"Name is required"|translate}}
+        </div>
+        <div
+          class="alert alert-warning"
+          role="alert"
+          *ngIf="nameInput.errors?.['minlength']"
+        >
+          {{"Name must be at least 4 characters long"|translate}}.
         </div>
       </div>
       <div>
@@ -85,7 +93,7 @@
           {{"Email is required"|translate}}
         </div>
         <div
-          class="alert alert-danger"
+          class="alert alert-warning"
           role="alert"
           *ngIf="emailInput.errors?.['email']"
         >
@@ -125,11 +133,11 @@
           {{"Password is required"|translate}}.
         </div>
         <div
-          class="alert alert-danger"
+          class="alert alert-warning"
           role="alert"
-          *ngIf="passwordInput.errors?.['password']"
+          *ngIf="passwordInput.errors?.['minlength']"
         >
-          {{"Invalid Password format"|translate}}.
+          {{"Password must be at least 6 characters long"|translate}}.
         </div>
       </div>
       <div>
