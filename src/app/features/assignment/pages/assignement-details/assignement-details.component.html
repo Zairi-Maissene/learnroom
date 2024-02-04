@@ -41,12 +41,14 @@
                  <span>Score:</span>
                  <ng-container *ngIf="!response.get('validated')" >
                    <input type="number" placeholder='points'
+                          [max]="assignment.points"
                           formControlName="score"
                           [ngStyle]="{'border-radius':'10px', width:'80px', 'margin-left':'5px', padding:'0px 5px'}"
                    />
                    <button
                      class="btn btn-rounded"
-                     style="background-color: orange;margin-top: 10px;margin-bottom: 10px; border-radius: 20px;width:100px"                       (click)="onScoreChange(i)"
+                     style="background-color: orange;margin-top: 10px;margin-bottom: 10px; border-radius: 20px;width:100px"
+                     (click)="onScoreChange(i)"
                    > Validate </button>
                  </ng-container>
                  <ng-container *ngIf="response.get('validated')" >

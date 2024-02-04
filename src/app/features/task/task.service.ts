@@ -21,7 +21,7 @@ export class TaskService {
 
   }
   deleteTask(id: string) {
-    return this.api.remove(`/task/${id}`).subscribe();
+    return this.api.remove(`/task/${id}`)
   }
   // ResponseTask
   getResponseTask(task_id: string): Observable<any> {

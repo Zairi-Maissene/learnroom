@@ -68,8 +68,11 @@ export class TaskDetailsComponent implements OnInit {
 
   }
   deleteTask() {
-    this.taskService.deleteTask(this.taskId);
-    this.router.navigate(['/classroom']);
+    this.taskService.deleteTask(this.taskId).subscribe(
+      {complete: () => {
+          this.router.navigate(['/classroom']);
+        }}
+    )
 
   }
   editTask(formValues: any) {
@@ -93,6 +96,7 @@ export class TaskDetailsComponent implements OnInit {
     modal.componentInstance.submit.subscribe((emittedValue: any) => {
       this.editTask(emittedValue);
     });
+
 
     }
   submitTask() {
