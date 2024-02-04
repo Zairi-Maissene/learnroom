@@ -25,7 +25,7 @@ export type CreateAssignement = {
 };
 export type UpdateAssignement = Partial<CreateAssignement>;
 
-export type UpdateResponseAssignement = {
+export type CreateResponseAssignement = {
   content: string;
 };
 

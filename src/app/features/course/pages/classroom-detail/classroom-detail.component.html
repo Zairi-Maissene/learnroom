@@ -29,16 +29,18 @@
       </ng-template>
     </li>
     <li [ngbNavItem]="2">
-    <button ngbNavLink>Tasks</button>
-    <ng-template ngbNavContent>
-      <div *ngIf="!(this.authService.isTeacher$ | async)" class="d-flex">
-        <button [className]="taskFilter === undefined ? 'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'" (click)="onTaskFilterChange(undefined)">All</button>
-        <button  [className]="taskFilter === 'inProgress' ?  'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'" (click)="onTaskFilterChange('inProgress')">In Progress</button>
-        <button  [className]="taskFilter === 'completed' ?  'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'"  (click)="onTaskFilterChange('completed')">Completed</button>
-      </div>
-      <app-task-list [tasks]="(tasks$ | async) || []"></app-task-list>
-    </ng-template>
+      <button ngbNavLink>Tasks</button>
+      <ng-template ngbNavContent>
+        <div *ngIf="!(this.authService.isTeacher$ | async)" class="d-flex">
+          <button [className]="taskFilter === undefined ? 'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'" (click)="onTaskFilterChange(undefined)">All</button>
+          <button  [className]="taskFilter === 'inProgress' ?  'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'" (click)="onTaskFilterChange('inProgress')">In Progress</button>
+          <button  [className]="taskFilter === 'completed' ?  'btn btn-primary btn-rounded m-3' : 'btn btn-secondary btn-rounded m-3'"  (click)="onTaskFilterChange('completed')">Completed</button>
+        </div>
+        <app-task-list [tasks]="(tasks$ | async) || []"></app-task-list>
+      </ng-template>
     </li>
+
+
     <li [ngbNavItem]="3">
       <button ngbNavLink>Assignments</button>
       <ng-template ngbNavContent>

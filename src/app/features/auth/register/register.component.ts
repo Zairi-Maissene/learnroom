@@ -30,4 +30,9 @@ export class RegisterComponent {
         .subscribe();
     }
   }
+
+  goToPreview(): void {
+    this.router.navigate(['']);
+  }
+  
 }

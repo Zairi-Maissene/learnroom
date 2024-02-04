@@ -1,0 +1,9 @@
+.task-hover {
+  font-size:12px;
+  color:blue;
+  cursor:pointer;
+  height: 20px;
+  &:hover {
+    font-size: 14px;
+  }
+}

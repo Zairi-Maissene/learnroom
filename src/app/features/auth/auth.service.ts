@@ -23,8 +23,8 @@ export class AuthService {
     if (this.CookieService.get('auth')) {
       this.getUser();
     } else {
-      this.logout();
-      router.navigate(['/login']);
+       this.logout();
+      // router.navigate(['/login']);
     }
   }
 
@@ -39,7 +39,7 @@ export class AuthService {
             sameSite: 'Strict',
           });
           localStorage.setItem('auth', 'true');
-          this.getUser();
+          this.getUser(true);
         }
       }),
     );
@@ -56,7 +56,7 @@ export class AuthService {
             sameSite: 'Strict',
           });
           localStorage.setItem("auth", "true")
-          this.getUser()
+          this.getUser(true)
         }
       }),
     );
@@ -68,13 +68,14 @@ export class AuthService {
     localStorage.setItem('auth', 'true');
   }
 
-  getUser() {
+  getUser(navigateToClassroom: boolean = false) {
     return this.api.get<User>(`/user/current`,undefined,false,false).pipe(
       tap((res) => {
         if (res.id) {
           this.authPersistenceService.userSubject.next(res);
-          this.router.navigate(['/classroom']);
-          return
+          if (navigateToClassroom) {
+            this.router.navigate(['/classroom']);
+          }          return
         }
         this.logout();
       }),

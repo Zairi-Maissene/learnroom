@@ -24,4 +24,8 @@ export class LoginComponent {
       .signIn({ email: this.email, password: this.password })
       .subscribe();
   }
+
+  goToPreview(): void {
+    this.router.navigate(['']);
+  }
 }

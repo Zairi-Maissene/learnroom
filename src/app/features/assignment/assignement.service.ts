@@ -3,12 +3,12 @@ import { Observable } from 'rxjs';
 import {
   Assignement,
   CreateAssignement,
+  CreateResponseAssignement,
   ResponseAssignement,
   UpdateAssignement,
-  UpdateResponseAssignement,
-  ValidateResponseAssignement,
-} from '@core/models/assignment.model';
-import { ApiService } from '@core/services/api.service';
+  ValidateResponseAssignement
+} from "@core/models/assignment.model";
+import {ApiService} from "@core/services/api.service";
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +17,10 @@ export class AssignementService {
   constructor(private api: ApiService) {}
   // Assignment
   addAssignement(course_id: string, assignement: CreateAssignement) {
-    return this.api.post<Assignement>(`/assignment/${course_id}`, assignement);
+      return this.api.post<Assignement>(`/assignment/${course_id}`, assignement)
   }
   getAssignment(id: string): Observable<Assignement> {
-    return this.api.get<Assignement>(`/assignment/${id}`);
+    return this.api.get<Assignement>(`/assignment/${id}`)
   }
   updateAssignment(id: string, assignement: UpdateAssignement) {
     return this.api.patch<Assignement>(`/assignment/${id}`, assignement);
@@ -38,22 +38,24 @@ export class AssignementService {
       `/response-assignment/${assignment_id}`,
     );
   }
+  getAssignmentResponses(assignment_id: string): Observable<ResponseAssignement[]>  {
+    return this.api.get<ResponseAssignement[]>(
+      `/response-assignment/all/${assignment_id}`,
+    );
+  }
 
-  updateResponseAssignment(id: string, response: UpdateResponseAssignement) {
-    return this.api
-      .patch<ResponseAssignement>(`/response-assignment/${id}`, response)
-      .subscribe();
+  createResponseAssignment(assignmentId: string, response: CreateResponseAssignement) {
+    return this.api.post<ResponseAssignement>(
+      `/response-assignment/${assignmentId}`, response )
   }
 
   validateResponseAssignment(
     id: string,
     response: ValidateResponseAssignement,
   ) {
-    return this.api
-      .patch<ResponseAssignement>(
-        `/response-assignment/validate/${id}`,
-        response,
-      )
-      .subscribe();
+    return this.api.patch<ResponseAssignement>(
+      `/response-assignment/validate/${id}`,
+      response,
+    )
   }
 }
