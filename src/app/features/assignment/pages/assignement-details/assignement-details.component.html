@@ -16,13 +16,15 @@
         [ngStyle]="{'flex-direction': 'column','display':'flex','gap':'10px',width:'80%'}"
         [formGroup]="submitAssignmentForm"
         (ngSubmit)="onSubmit()">
-        <label for="description">Description: </label>
+        <label for="description"> {{"Description:"|translate}}
+           </label>
         <textarea  [ngStyle]="{'border-radius':'10px'}" id="description" type="text" formControlName="content"></textarea>
         <div [ngStyle]="{'display':'flex','justify-content':'center'}">
           <div *ngIf="submitAssignmentForm.errors?.['minlength']">
-            Name must be at least 4 characters long.
+            {{"Name must be at least 4 characters long."|translate}}
           </div>
-          <button [ngStyle]="{'border-radius':'10px'}" type="submit" [disabled]="!submitAssignmentForm.valid">Submit</button>
+          <button [ngStyle]="{'border-radius':'10px'}" type="submit" [disabled]="!submitAssignmentForm.valid">
+            {{"Submit"|translate}}</button>
 
         </div>
 
@@ -34,11 +36,11 @@
           <div *ngFor="let response of responses.controls; let i = index" [formGroupName]="i"
                [ngStyle]="{'gap':'10px',width:'100%','align-items':'center',display:'flex','flex-direction':'column'}">
            <div [ngStyle]="{'border-radius':'10px',border:'1px black solid',padding:'5px 10px',width:'80%','margin-bottom':'10px'}" >
-             <h4>Student Name</h4>
+             <h4>{{"Student Name"|translate}}</h4>
              <span>{{ response.get('content')?.value }}</span>
              <div [ngStyle]="{display:'flex', gap:'5px', 'flex-direction':'column', 'align-items':'flex-end'}">
                <div>
-                 <span>Score:</span>
+                 <span>{{"Score:"|translate}}</span>
                  <ng-container *ngIf="!response.get('validated')" >
                    <input type="number" placeholder='points'
                           formControlName="score"
@@ -47,7 +49,7 @@
                    <button
                      class="btn btn-rounded"
                      style="background-color: orange;margin-top: 10px;margin-bottom: 10px; border-radius: 20px;width:100px"                       (click)="onScoreChange(i)"
-                   > Validate </button>
+                   >{{"Validate"|translate}}  </button>
                  </ng-container>
                  <ng-container *ngIf="response.get('validated')" >
                    <span>
@@ -67,11 +69,11 @@
       </form>
   </ng-container>
     <div  [ngStyle]="{'width':'80%'}"  *ngIf="studentResponse && !isTeacher " >
-      <h2>Your submission: </h2>
+      <h2>{{"Your submission:"|translate}} </h2>
       <span>{{studentResponse?.content}}</span>
       <div class="d-flex justify-content-end w-100">
         <span>
-          score : {{studentResponse?.score}}
+          {{"Score :"|translate}} {{studentResponse?.score}}
         </span>
       </div>
 

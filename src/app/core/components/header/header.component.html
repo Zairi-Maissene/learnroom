@@ -1,6 +1,6 @@
 <div class="pos-f-t">
   <div
-    *ngIf="this.authService.isAuthenticated$ | async"
+    *ngIf="authService.isAuthenticated$ | async as isAuthenticated"
     [ngbCollapse]="isCollapsed"
     id="navbarToggleExternalContent"
   >
@@ -12,7 +12,7 @@
   <nav *ngIf="showHeader" class="header-container navbar">
     <div class="hstack-container">
       <button
-        *ngIf="this.authService.isAuthenticated$ | async"
+        *ngIf="authService.isAuthenticated$ | async"
         class="navbar-toggler"
         (click)="isCollapsed = !isCollapsed"
         type="button"

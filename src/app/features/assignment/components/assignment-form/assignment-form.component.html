@@ -1,33 +1,33 @@
 <form [formGroup]="assignmentForm" class="modal-body" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label>Assignment Title</label>
+    <label>{{"Assignment Title"|translate}}</label>
     <input formControlName="name" class="form-control" />
     <div *ngIf="validateField('name', 'required')" class="text-danger">
-      Assignment Title is required
+      {{"Assignment Title is required"|translate}}
     </div>
   </div>
 
   <div class="form-group">
-    <label>Content</label>
+    <label>{{"Content"|translate}}</label>
     <textarea formControlName="content" class="form-control"></textarea>
     <div *ngIf="validateField('content', 'required')" class="text-danger">
-      Content is required
+      {{"Content is required"|translate}}
     </div>
   </div>
 
   <div class="form-group">
-    <label>Max Points</label>
+    <label>{{"Max Points"|translate}}</label>
     <input formControlName="points" type="number" class="form-control" />
     <div *ngIf="validateField('points', 'required')" class="text-danger">
-      Assignment points is required
+      {{"Assignment points is required"|translate}}
     </div>
   </div>
 
   <div class="form-group">
-    <label>Deadline</label>
+    <label>{{"Deadline"|translate}}</label>
     <input formControlName="deadline" type="date" class="form-control" />
     <div *ngIf="validateField('deadline', 'required')" class="text-danger">
-      Deadline is required
+      {{"Deadline is required"|translate}}
     </div>
   </div>
 
@@ -37,10 +37,10 @@
       class="btn btn-primary"
       [disabled]="assignmentForm.invalid"
     >
-      {{ buttonName }}
+      {{ buttonName |translate  }}
     </button>
     <button type="button" class="btn btn-secondary" (click)="onClose()">
-      Cancel
+      {{"Cancel"|translate}}
     </button>
   </div>
 </form>

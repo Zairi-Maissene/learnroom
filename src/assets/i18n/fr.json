@@ -53,5 +53,31 @@
   "Invalid email format": "Format d'email invalide",
   "Password is required": "Le mot de passe est requis",
   "Invalid Password format": "Format de mot de passe invalide",
-  "Please fill in all required fields correctly": "Veuillez remplir correctement tous les champs obligatoires"
+  "Please fill in all required fields correctly": "Veuillez remplir correctement tous les champs obligatoires",
+  "Home": "Accueil",
+  "Expand all": "Développer tout",
+  "Collapse all": "Réduire tout",
+  "Courses": "Cours",
+  "Tasks": "Tâches",
+  "Assignments": "Devoirs",
+  "Cancel": "Annuler",
+  "Deadline is required": "La date limite est requise",
+  "Content is required": "Le contenu est requis",
+  "Assignment Title is required": "Le titre de l'assignation est requis",
+  "Assignment Title": "Titre de l'assignation",
+  "Assignment points is required": "Les points de l'assignation sont requis",
+  "Add": "Ajouter",
+  "Edit": "Modifier",
+  "Description:": "Description :",
+  "Name must be at least 4 characters long.": "Le nom doit contenir au moins 4 caractères.",
+  "Submit": "Soumettre",
+  "Student Name": "Nom de l'étudiant",
+  "Score :": "Note :",
+  "Validate": "Valider",
+  "Your submission:": "Votre soumission :",
+  "Deadline": "Date limite",
+  "Max Points": "Points max",
+  "Content": "Contenu"
+
+
 }

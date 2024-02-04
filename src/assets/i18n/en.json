@@ -53,7 +53,31 @@
   "Invalid email format": "Invalid email format",
   "Password is required": "Password is required",
   "Invalid Password format": "Invalid Password format",
-  "Please fill in all required fields correctly": "Please fill in all required fields correctly"
+  "Please fill in all required fields correctly": "Please fill in all required fields correctly",
+  "Home": "Home",
+  "Expand all": "Expand all",
+  "Collapse all": "Collapse all",
+  "Courses": "Courses",
+  "Tasks": "Tasks",
+  "Assignments": "Assignments",
+  "Cancel": "Cancel",
+  "Deadline is required": "Deadline is required",
+  "Content is required": "Content is required",
+  "Assignment Title is required": "Assignment Title is required",
+  "Assignment Title": "Assignment Title",
+  "Assignment points is required": "Assignment points is required",
+  "Add": "Add",
+  "Edit": "Edit",
+  "Description:": "Description:",
+  "Name must be at least 4 characters long.": "Name must be at least 4 characters long.",
+   "Submit": "Submit",
+  "Student Name": "Student Name",
+  "Score :": "Score :",
+  "Validate": "Validate",
+  "Your submission:": "Your submission :",
+  "Deadline": "Deadline",
+  "Max Points": "Max Points",
+  "Content": "Content"
 
 
 }

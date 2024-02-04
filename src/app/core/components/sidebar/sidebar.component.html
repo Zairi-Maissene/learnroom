@@ -20,7 +20,7 @@
     <p>{{ (currentUser$ | async)!.email }}</p>
 
     <div class="hstack-container space-between">
-      <h3>Home</h3>
+      <h3>{{"Home"|translate}}</h3>
       <button
         type="button"
         class="btn btn-sm custom-btn"
@@ -37,13 +37,13 @@
           class="btn btn-sm btn-light me-2"
           (click)="accordion.expandAll()"
         >
-          Expand all
+          {{"Expand all"|translate}}
         </button>
         <button
           class="btn btn-sm btn-light me-2 ms-auto"
           (click)="accordion.collapseAll()"
         >
-          Collapse all
+          {{"Collapse all"|translate}}
         </button>
         <!-- ms-auto pushes it to the right -->
       </div>
@@ -52,7 +52,8 @@
   <div ngbAccordion #accordion="ngbAccordion">
     <div ngbAccordionItem="first">
       <h2 ngbAccordionHeader>
-        <button ngbAccordionButton>Courses</button>
+        <button ngbAccordionButton>{{"Courses"|translate}}
+          </button>
       </h2>
       <div ngbAccordionCollapse>
         <div ngbAccordionBody>
@@ -83,7 +84,7 @@
 
     <div ngbAccordionItem="second">
       <h2 ngbAccordionHeader>
-        <button ngbAccordionButton>Tasks</button>
+        <button ngbAccordionButton>{{"Tasks"|translate}}</button>
       </h2>
       <div ngbAccordionCollapse>
         <div ngbAccordionBody>
@@ -106,7 +107,7 @@
     </div>
     <div ngbAccordionItem="third">
       <h2 ngbAccordionHeader>
-        <button ngbAccordionButton>Assignments</button>
+        <button ngbAccordionButton>{{"Assignments"|translate}}</button>
       </h2>
       <div ngbAccordionCollapse>
         <div ngbAccordionBody>

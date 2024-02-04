@@ -6,18 +6,20 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AssignmentFormComponent } from '@features/assignment/components/assignment-form/assignment-form.component';
 import { SharedModule } from '@shared/shared.module';
 import { AssignementDetailsComponent } from '@features/assignment/pages/assignement-details/assignement-details.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [AssignmentFormComponent, AssignementDetailsComponent],
-  imports: [
-    CommonModule,
-    AssignmentRoutingModule,
-    SharedModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
-  ],
+    imports: [
+        CommonModule,
+        AssignmentRoutingModule,
+        SharedModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RouterOutlet,
+        RouterLink,
+        RouterLinkActive,
+        TranslateModule,
+    ],
 })
 export class AssignmentModule {}

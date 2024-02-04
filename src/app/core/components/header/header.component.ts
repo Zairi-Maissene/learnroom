@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { AuthPersistence } from '@core/services/auth.persistence';
 import { AuthService } from '@features/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,7 @@ export class HeaderComponent {
   selectedLanguage: string = 'fr'; // Set the default language here
 
   ngOnInit() {
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const urlWithoutQueryParams = event.url.split('?')[0];
