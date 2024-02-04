@@ -10,7 +10,7 @@
             [isTeacher]="(this.authService.isTeacher$ | async) || false "
     > </app-element-details>
   </div>
-    <ng-container *ngIf="!isTeacher && !studentResponse">
+  <ng-container *ngIf="!isTeacher && !studentResponse && !isDeadLine">
       <br />
       <form
         [ngStyle]="{'flex-direction': 'column','display':'flex','gap':'10px',width:'80%'}"
@@ -28,7 +28,10 @@
 
       </form>
     </ng-container>
-    <ng-container *ngIf=" responsesAssignment.length > 0 &&  isTeacher ">
+  <ng-container *ngIf="isDeadLine && !studentResponse && isTeacher">
+    <h2>Deadline passed</h2>
+  </ng-container>
+  <ng-container *ngIf=" responsesAssignment.length > 0 &&  isTeacher ">
       <form [formGroup]="scoreForm" [ngStyle]="{width:'100%',}">
         <ng-container formArrayName="responses">
           <div *ngFor="let response of responses.controls; let i = index" [formGroupName]="i"
@@ -68,7 +71,7 @@
         </ng-container>
       </form>
   </ng-container>
-    <div  [ngStyle]="{'width':'80%'}"  *ngIf="studentResponse && !isTeacher " >
+  <div  [ngStyle]="{'width':'80%'}"  *ngIf="studentResponse && !isTeacher " >
       <h2>Your submission: </h2>
       <span>{{studentResponse?.content}}</span>
       <div class="d-flex justify-content-end w-100">

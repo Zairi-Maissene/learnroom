@@ -17,7 +17,7 @@ export class AssignmentFormComponent {
   };
   buttonName: string = 'Add';
   assignmentForm: FormGroup = new FormGroup({});
-
+  todayDate = new Date().toISOString().split('T')[0];
   @Input() courseId: string = '';
   @Input() isEditing: boolean = false;
   @Input() assignment: Assignement = {} as Assignement;
