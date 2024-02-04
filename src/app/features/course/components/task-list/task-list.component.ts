@@ -12,7 +12,6 @@ import { switchMap } from 'rxjs';
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListComponent {
   @Input() tasks: Task[] = [];

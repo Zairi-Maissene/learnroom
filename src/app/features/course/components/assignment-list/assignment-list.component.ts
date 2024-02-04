@@ -12,7 +12,6 @@ import { switchMap } from 'rxjs';
   selector: 'app-assignment-list',
   templateUrl: './assignment-list.component.html',
   styleUrls: ['./assignment-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssignmentListComponent {
   @Input() assignments: Assignement[] = [];
