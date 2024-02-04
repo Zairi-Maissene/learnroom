@@ -5,12 +5,14 @@ import {AuthPersistence} from "@core/services/auth.persistence";
 export const authenticatedGuard: CanActivateFn = (route) => {
   const router = inject(Router);
   const authService = inject(AuthPersistence);
-  let authenticated = false;
-  authService.isAuthenticated$.subscribe((res) => (authenticated = res));
-  if (!authenticated && localStorage.getItem('auth') !== "true"){
-    router.navigate(['/login']);
-    return false;
-  }
+  authService.isAuthenticated$.subscribe((res) => {
+    if (!res && localStorage.getItem('auth') !== "true"){
+      router.navigate(['/login']);
+      return false;
+    }
+    return true;
+  });
+
 
   return true;
 };
@@ -18,12 +20,14 @@ export const authenticatedGuard: CanActivateFn = (route) => {
 export const disconnectedGuard: CanActivateFn = (route) => {
   const router = inject(Router);
   const authService = inject(AuthPersistence);
-  let authenticated = true;
-  authService.isAuthenticated$.subscribe((res) => (authenticated = res));
-  if (authenticated){
-    router.navigate(['/classroom']);
-    return false;
-  }
+  authService.isAuthenticated$.subscribe((res) => {
+    if (res){
+      router.navigate(['/classroom']);
+      return false;
+    }
+    return true;
+  });
+
 
   return true;
 };

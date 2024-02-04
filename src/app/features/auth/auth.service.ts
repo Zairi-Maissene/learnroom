@@ -1,14 +1,14 @@
-import { tap } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
-import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
-import { ApiService } from '@core/services/api.service';
-import { SignIn, SignUp, User } from '@core/models/user.model';
-import { Course } from '@core/models/course.model';
-import { Assignement } from '@core/models/assignment.model';
-import { Task } from '@core/models/task.model';
-import { AuthPersistence } from '@core/services/auth.persistence';
+import {tap} from 'rxjs';
+import {CookieService} from 'ngx-cookie-service';
+import {catchError} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {Injectable} from '@angular/core';
+import {ApiService} from '@core/services/api.service';
+import {SignIn, SignUp, User} from '@core/models/user.model';
+import {Course} from '@core/models/course.model';
+import {Assignement} from '@core/models/assignment.model';
+import {Task} from '@core/models/task.model';
+import {AuthPersistence} from '@core/services/auth.persistence';
 
 @Injectable({
   providedIn: 'root',
@@ -65,7 +65,7 @@ export class AuthService {
 
     this.CookieService.deleteAll('auth');
     this.authPersistenceService.userSubject.next({} as User);
-    localStorage.setItem('auth', 'true');
+    localStorage.setItem('auth', 'false');
   }
 
   getUser(navigateToClassroom: boolean = false) {
