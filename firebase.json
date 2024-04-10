@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/learnroom-frontend-angular",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
