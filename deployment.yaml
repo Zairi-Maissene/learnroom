@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: learn-room
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: learn-room
+  template:
+    metadata:
+      labels:
+        app: learn-room
+    spec:
+      containers:
+        - name: learn-room
+          image: maissene/learn-room
+          ports:
+            - containerPort: 80

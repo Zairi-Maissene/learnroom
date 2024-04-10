@@ -41,4 +41,4 @@ jobs:
           docker tag maissene/learn-room:latest learn-room:latest
 
       - name: Deploy to Minikube
-        run: kubectl apply -f kubernetes/deployment.yaml -f kubernetes/service.yaml
+        run: kubectl apply -f deployment.yaml -f service.yaml
