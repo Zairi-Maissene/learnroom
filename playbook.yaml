@@ -1,0 +1,13 @@
+---
+- name: Deploy Angular application to Minikube
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Apply Kubernetes manifests
+      k8s:
+        state: present
+        definition: "{{ lookup('file', item) }}"
+      with_items:
+        - deployment.yaml
+        - service.yaml

@@ -41,6 +41,10 @@ jobs:
           eval $(minikube docker-env)
           docker pull maissene/learn-room:latest
           docker tag maissene/learn-room:latest learn-room:latest
-
-      - name: Deploy to Minikube
-        run: kubectl apply -f deployment.yaml -f service.yaml
+      - name: Run Ansible playbook
+        uses: ansible/ansible-playbook-action@v2
+        with:
+          playbook: deploy.yml
+          inventory: hosts.yml
+          become: yes
+          become-user: root
