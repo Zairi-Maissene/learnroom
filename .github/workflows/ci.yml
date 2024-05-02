@@ -2,6 +2,8 @@ name: CI/CD Pipeline
 
 on:
   push:
+    branches:
+      - test
 
 jobs:
   build:
@@ -44,7 +46,7 @@ jobs:
       - name: Run Ansible playbook
         uses: ansible/ansible-playbook-action@v2
         with:
-          playbook: deploy.yml
-          inventory: hosts.yml
+          playbook: playbook.yaml
+          inventory: hosts.yaml
           become: yes
           become-user: root
