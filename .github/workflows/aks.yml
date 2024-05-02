@@ -6,10 +6,11 @@ on:
   workflow_dispatch:
 
 env:
+  AZURE_CONTAINER_REGISTRY: "learnroom"
   CONTAINER_NAME: "learn-room"
   RESOURCE_GROUP: "aks-learn-room"
   CLUSTER_NAME: "aks-learn-room"
-  DEPLOYMENT_MANIFEST_PATH: "your-deployment-manifest-path"
+  DEPLOYMENT_MANIFEST_PATH: "~/learn-room-deployment.yml"
 
 jobs:
   buildImage:
@@ -30,11 +31,9 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       # Builds and pushes an image up to your Docker Hub
-      - name: Build And Push Docker image
-        run:
-            docker build -t maissene/learn-room:latest .
-            docker login -u maissene -p ${{ secrets.DOCKERHUB_TOKEN }}
-            docker push maissene/learn-room:latest
+      - name: Build and push image to ACR
+        run: |
+            az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
   deploy:
     permissions:
       actions: read
@@ -74,6 +73,6 @@ jobs:
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
-          images:
-            - repository: maissene/learn-room
-              tag: latest
+          manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
+          images: |
+            ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
