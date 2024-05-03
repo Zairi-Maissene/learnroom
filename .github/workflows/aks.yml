@@ -19,7 +19,7 @@ jobs:
       id-token: write
     runs-on: ubuntu-latest
     steps:
-      # Checks out the repository this file is in
+      # Checks out the repository
       - uses: actions/checkout@v4
 
       # Logs in with your Azure credentials
