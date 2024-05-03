@@ -21,8 +21,6 @@ jobs:
     steps:
       # Checks out the repository this file is in
       - uses: actions/checkout@v4
-      - name: echo secrets
-        run: echo ${{ secrets.AZURE_CLIENT_ID }}
 
       # Logs in with your Azure credentials
       - name: Azure login
