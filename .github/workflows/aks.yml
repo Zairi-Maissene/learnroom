@@ -34,8 +34,8 @@ jobs:
       - name: Build and push image to ACR
         run: |
           az acr login -n ${{ env.AZURE_CONTAINER_REGISTRY }} -p ${{ secrets.AZURE_ACR_PASSWORD }} -u learnroom
-          docker tag maissene/learn-room:latest ${{env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{env.CONTAINER_NAME}}
-          docker push ${{env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{env.CONTAINER_NAME}}
+          az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
+
   deploy:
     permissions:
       actions: read
