@@ -9,7 +9,7 @@ env:
   AZURE_CONTAINER_REGISTRY: "learnroom"
   CONTAINER_NAME: "learn-room"
   RESOURCE_GROUP: "aks-learn-room"
-  CLUSTER_NAME: "aks-learn-room"
+  CLUSTER_NAME: "learn-room-cluster"
   DEPLOYMENT_MANIFEST_PATH: "deployment.yaml"
 
 jobs:

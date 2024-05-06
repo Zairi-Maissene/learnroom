@@ -17,3 +17,35 @@ spec:
           image: maissene/learn-room
           ports:
             - containerPort: 80
+        - name: learn-room-backend
+          image: maissene/learn-room-backend
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-end-service
+  labels:
+    app: learn-room
+spec:
+  selector:
+    app: learn-room
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: learn-room
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
