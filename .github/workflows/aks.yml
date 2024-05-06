@@ -10,7 +10,7 @@ env:
   CONTAINER_NAME: "learn-room"
   RESOURCE_GROUP: "aks-learn-room"
   CLUSTER_NAME: "aks-learn-room"
-  DEPLOYMENT_MANIFEST_PATH: "~/learn-room-deployment.yml"
+  DEPLOYMENT_MANIFEST_PATH: "deployment.yaml"
 
 jobs:
   buildImage:
