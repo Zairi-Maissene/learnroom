@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class ApiService {
-  private BASE_URL = "http://20.19.114.142";
+  private BASE_URL = "http://backend-service";
   private init = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
