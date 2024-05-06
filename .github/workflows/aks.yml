@@ -30,10 +30,11 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Builds and pushes an image up to your Docker Hub
+      # Builds and pushes an image up to ACR
       - name: Build and push image to ACR
         run: |
-            az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
+          docker tag ${{env.CONTAINER_NAME}} ${{env.AZURE_CONTAINER_REGISTRY}}.azurecr.io/${{env.CONTAINER_NAME}}
+          docker push ${{env.AZURE_CONTAINER_REGISTRY}}.azurecr.io/${{env.CONTAINER_NAME}}
   deploy:
     permissions:
       actions: read
