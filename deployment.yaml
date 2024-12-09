@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: learn-room
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: learn-room
+  template:
+    metadata:
+      labels:
+        app: learn-room
+    spec:
+      containers:
+        - name: learn-room
+          image: maissene/learn-room
+          ports:
+            - containerPort: 80
+          env:
+            - name: API_BASE_URL
+              value: http://backend-service.default.svc.cluster.local
+        - name: learn-room-backend
+          image: maissene/learn-room-backend
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-end-service
+  labels:
+    app: learn-room
+spec:
+  selector:
+    app: learn-room
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: learn-room
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: ClusterIP
